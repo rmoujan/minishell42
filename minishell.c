@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 14:40:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:26:20 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ int main(int argc, char *argv[], char *const envp[])
   t_cmdfinal *cmd_final;
   while (1)
   {
-     printf("\033[0;35m");
-    // printf("\033[0;35m");
+     printf("\033[32;1m");
+    //printf("\033[0;35m");
     input_user = readline("$ minishell ");
+    printf("\033[0m");
     if (input_user[0] != '\0')
       add_history(input_user);
-    printf("\033[0m");
     if(input_user[0] != '\0')
     {
-      // if (ft_check(input_user))//check errors still not finish
-      // {
+      if (ft_check(input_user))//check errors still not finish
+      {
             str = ft_addspace(input_user);//!!
             data = ft_bring_data(str);// in this step there is no leaks !!!!
             printf("after bring data\n");
@@ -49,7 +49,7 @@ int main(int argc, char *argv[], char *const envp[])
             // free_node(data);//
             // free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             free(str);
-      // }
+      }
     }
     free(input_user);
   }

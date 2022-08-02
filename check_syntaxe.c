@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 14:42:06 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 15:30:10 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,37 @@
 #include "libft/libft.h"
 
 
-
+//had case makhedmash :: !!!!! """'''"''""''"'"'"""' ls
 //// NOTE :: most of this functions are not working well 
 //// WHEN :: I add many dq and sq !!!!!
 int ft_errno(int code)
 {
     if (code == 1)
     {
+        printf("\033[0;31m");
         printf("minishell: syntax error near unexpected token '\n");
+        printf("\033[0m");
         return(0);
     }
     if (code == 2)
     {
+        printf("\033[0;31m");
         printf("minishell: syntax error near unexpected token '|'\n");
+        printf("\033[0m");
         return(0);
     }
      if (code == 3)
     {
+        printf("\033[0;31m");
         printf("minishell: syntax error near unexpected token '<'\n");
+        printf("\033[0m");
         return(0);
     }
      if (code == 4)
     {
+        printf("\033[0;31m");
         printf("minishell: syntax error near unexpected token '\n");
+        printf("\033[0m");
         return(0);
     }
      if (code == 5)
