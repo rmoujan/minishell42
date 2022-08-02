@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/01 18:04:35 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 19:19:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,13 +223,28 @@ void expand_cmd(char ***tab, char *const envp[], char *argv[])
     {
         if (check_dollar(cmd[i]) != 0)
         {
+            printf("inside check dollar \n");
             ptr = cmd[i];
             cmd[i] =  expand_dollar(cmd[i], envp, argv);
             if (cmd[i][0] == '\0')
                 {
+                    printf(" 2 0 2 2 \n");
                     free(cmd[i]);
                     cmd[i] = ft_itoa(-1);
                 }
+            else  if (cmd[i][0] == '"' && cmd[i][1] == '"' && cmd[i][2] == '\0')
+                {
+                    printf(" 2 0 2 2 \n");
+                    free(cmd[i]);
+                    cmd[i] = ft_itoa(-1);
+                }
+            else  if (cmd[i][0] == '\'' && cmd[i][1] == '\'' && cmd[i][2] == '\0')
+                {
+                    printf(" 2 0 2 2 \n");
+                    free(cmd[i]);
+                    cmd[i] = ft_itoa(-1);
+                }
+            printf("====>> %s\n", cmd[i]);
             free(ptr);   
         }
         i++;

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/01 16:07:10 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 19:07:26 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void free_cmdfinal(t_cmdfinal *cmd);
 void ft_expand(t_cmdfinal *cmd,char *const envp[], char *argv[]);
 void ft_remove(t_cmdfinal *cmd);
 void check_emptystr(t_command *data);
+void  edit_cmd(t_cmdfinal *cmd);
 //int ft_counterspace_back(char *ptr);
 //void add_space(char *str, int *i);
 #endif

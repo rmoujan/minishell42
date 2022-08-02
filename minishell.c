@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 15:26:20 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 19:49:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,27 @@ int main(int argc, char *argv[], char *const envp[])
       add_history(input_user);
     if(input_user[0] != '\0')
     {
-      if (ft_check(input_user))//check errors still not finish
-      {
+      // if (ft_check(input_user))//check errors still not finish
+      // {
             str = ft_addspace(input_user);//!!
-            data = ft_bring_data(str);// in this step there is no leaks !!!!
+           data = ft_bring_data(str);// in this step there is no leaks !!!!
             printf("after bring data\n");
             //printf("BEFORE PARSER\n");;
-            cmd_final = ft_parser(data);// in this step there is no leaks !!
+           cmd_final = ft_parser(data);// in this step there is no leaks !!
             //printf("AFTER PARSER\n");
-           // printf("starting expand !!\n");
+            // printf("starting expand !!\n");
            ft_expand(cmd_final, envp, argv);//in this step there is no leaks !!
             //printf("END expand !!\n");
-            ft_remove(cmd_final);//!!in this step there is no leaks !!
+          ft_remove(cmd_final);//!!in this step there is no leaks !!
             //printf("after remove\n");
+            edit_cmd(cmd_final);
             ft_outputcmdfinal(cmd_final);//!!
             // ft_output(data);//++ had ft_output hiya li fiha leaks au niveau de nodes!!!
             // ft_executor();
-            // free_node(data);//
-            // free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
+            free_node(data);//
+             free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             free(str);
-      }
+      // }
     }
     free(input_user);
   }
@@ -59,3 +60,4 @@ int main(int argc, char *argv[], char *const envp[])
 //echo 'dhhbhv $USER njkndv'
 
 
+// "" "'''" '' "" '' "'" '"""' ::  not working in check syntaxe error !!!!

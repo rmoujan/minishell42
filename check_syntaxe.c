@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 15:30:10 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 16:21:45 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,29 +132,64 @@ int cheak_pipes(char *str)
 //     return 0;
 // }
 
+//old vers
+// //I think this vers is working !!
+// int cheak_sq(char *input_user)
+// {
+//     int i;
+//     int count;
+
+//     i = 0;
+//     count = 0;
+//     while (input_user[i] != '\0')
+//     {
+//         if (input_user[i] == '"' && count == 0)
+//         {
+//             i++;
+//             while (input_user[i] != '\0' && (input_user[i] != '"'))
+//             {
+//                 i++;
+//             }
+//             // if (input_user[i] == '"')
+//             //      i++;
+//         }
+//         else{
+            
+//             if (input_user[i] == '\'')
+//                 count++; 
+//         }
+//         i++;
+//     }
+//     // printf("count is %d\n", count);
+//     if (count % 2 != 0)
+//         return 1;
+//     return 0;
+// }
+
+//new vers
 //I think this vers is working !!
-int cheak_sq(char *input_user)
+int cheak_sq(char *str)
 {
     int i;
     int count;
 
     i = 0;
     count = 0;
-    while (input_user[i] != '\0')
+    while (str[i] != '\0')
     {
-        if (input_user[i] == '"' && count == 0)
+        if (str[i] == '"' && count == 0)
         {
             i++;
-            while (input_user[i] != '\0' && (input_user[i] != '"'))
+            while (str[i] != '\0' && (str[i] != '"'))
             {
                 i++;
             }
-            // if (input_user[i] == '"')
-            //      i++;
+            //if (input_user[i] == '"')
+            //i++;
         }
         else{
             
-            if (input_user[i] == '\'')
+            if (str[i] == '\'')
                 count++; 
         }
         i++;
@@ -164,7 +199,6 @@ int cheak_sq(char *input_user)
         return 1;
     return 0;
 }
-
 
 //I think this vers is working !!
 int cheak_dq(char *input_user)
@@ -214,9 +248,6 @@ int cheak_space(char *str)
     }
     return counter;
 }
-
-
-
 
 int ft_check(char *str)
 {
