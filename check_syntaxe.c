@@ -6,35 +6,40 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/01 13:08:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 13:05:42 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
-void ft_errno(int code)
+int ft_errno(int code)
 {
     if (code == 1)
     {
         printf("minishell: syntax error near unexpected token '\n");
-        exit(0);
+        return(0);
     }
     if (code == 2)
     {
         printf("minishell: syntax error near unexpected token '|'\n");
-        exit(0);
+        return(0);
     }
      if (code == 3)
     {
         printf("minishell: syntax error near unexpected token '<'\n");
-        exit(0);
+        return(0);
     }
      if (code == 4)
     {
         printf("minishell: syntax error near unexpected token '\n");
-        exit(0);
+        return(0);
     }
+     if (code == 5)
+    {
+        return(0);
+    }
+    return (1);
 }
 
 
@@ -142,7 +147,7 @@ int cheak_sq(char *input_user)
         }
         i++;
     }
-    printf("count is %d\n", count);
+    // printf("count is %d\n", count);
     if (count % 2 != 0)
         return 1;
     return 0;
@@ -174,11 +179,32 @@ int cheak_dq(char *input_user)
         }
         i++;
     }
-    printf("count is %d\n", count);
+    // printf("count is %d\n", count);
     if (count % 2 != 0)
         return 4;
     return 0;
 }
+
+int cheak_space(char *str)
+{
+    int i;
+    int counter;
+    
+    i = 0;
+    counter = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] != ' ')
+        {
+            counter++;
+        }
+        i++;
+    }
+    return counter;
+}
+
+
+
 
 int ft_check(char *str)
 {
@@ -188,23 +214,27 @@ int ft_check(char *str)
     if (cheak_pipes(str) == 2)
     {
         printf("pipes\n");
-        ft_errno(2);
+        return (ft_errno(2));
     }
     if (cheak_redrections(str) == 3)
     {
         printf("red\n");
-        ft_errno(3);
+        return (ft_errno(3));
     }
     if (cheak_sq(str) == 1)
     {
         printf("single Q\n");
-        ft_errno(1);
+        return (ft_errno(1));
     }
     if (cheak_dq(str) == 4)
     {
         printf("DOUBLE Q\n");
-        ft_errno(4);
+        return (ft_errno(4));
     }
-    
-    return 0;
+    if (cheak_space(str) == 0)
+    {
+        printf("space\n");
+        return (ft_errno(5));
+    }
+    return 1;
 }
