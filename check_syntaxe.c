@@ -6,13 +6,17 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 13:05:42 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/02 14:42:06 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
+
+
+//// NOTE :: most of this functions are not working well 
+//// WHEN :: I add many dq and sq !!!!!
 int ft_errno(int code)
 {
     if (code == 1)
