@@ -1,0 +1,30 @@
+token -> "asd > aasf < adfg << >>sdfg"
+➜  minivers3 (master) echo "kkk'$USER'jj"                                                    ✭ ✱
+kkk'rmoujan'jj
+➜  minivers3 (master) echo "kkk $USER jj"                                                    ✭ ✱
+kkk rmoujan jj
+➜  minivers3 (master) echo 'kkk $USER jj'                                                    ✭ ✱
+kkk $USER jj
+➜  minivers3 (master) echo 'kkk "$USER" jj'                                                  ✭ ✱
+kkk "$USER" jj
+
+$ minishell < $dfg
+BEFORE PARSER
+debut parser
+AFTER PARSER
+PTR IS dfg
+value ||
+[1]    85495 segmentation fault  ./minishell
+cases are "" is different l empty string !!!
+3andk " hallo $'''''" ==>khas dik $ teban nety 3andk maktbasnh !!!!!!!
+
+# MallocStackLogging=1// for leaks 
+# fash kandir << in cat -e >> outfile 3andek dok files makykonosh 
+# f in/out files kaykon 3andi empty string
+# ===> lmoshkil kayn anaho fash kan nfree f expand and remove kayfriyaw dok files 
+# => lmoshkil kayn fe expand katb9ay t expandi o ila mal9itish katrdi empty string normalemet returni str nefsha 
+
+
+# CASES that must return error :
+#1  < > ls  ==> MUST be HANDLED 
+#2 // 3andke had case """""""'''''""""" cat --> had les fctes kay7ydo ta space li bin "  and cat !!!!!
