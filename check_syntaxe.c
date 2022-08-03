@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/03 12:35:03 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/03 14:31:44 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,52 @@ int cheak_redrections(char *str)
         return 3;
     return 0;
 }
+
+//cheak more red :
+// Iam working on this now !!!!
+//Im still work on thiiiiiiis 
+//had case makhedmash <<hh << << hsvchjvs ==> must appear an error !!!
+int cheak_redrections2(char *str)
+{
+    int i;
+    int flag;
+    
+    i = 0;
+    flag = 0;
+
+    while (str[i])
+    {
+        if (!flag && (str[i] == '\'' || str[i] == '"'))
+        {
+            flag = str[i];
+        }
+        else if (flag && str[i] == flag)
+        {
+            flag = 0;
+        }
+        if (str[i] == '<' && !flag)
+        {
+            if (str[i + 1] != '\0' && (str[i + 1] == '<'))
+            {
+                if (str[i + 2] != '\0' && str[i + 2] == '<')
+                {
+                    while (str[i + 3] != '\0')
+                    {
+                        if (str[i + 3] != ' ' || str[i + 3] != '$' || !ft_isalnum(str[i + 3]))
+                            return 3;
+                        // i++;
+                        break;
+                    }
+                }  
+            }
+        }
+        i++;
+    }
+    return 0;
+}
+
+
+
 
 int cheak_pipes(char *str)
 {
@@ -323,5 +369,10 @@ int ft_check(char *str)
         printf("space\n");
         return (ft_errno(5));
     }
+    //  if (cheak_redrections2(str) == 3)
+    // {
+    //     printf("red2 \n");
+    //     return (ft_errno(3));
+    // }
     return 1;
 }
