@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:11:11 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 14:59:52 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/03 10:24:06 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 char **split_pipe(char *input_user)
 {
     char **cmds;
-    int i = 0;
+    // int i = 0;
     replace_pipe_double(&input_user);
     // replace_pipe_single(&input_user);00
     // printf("from split pipe , inputuser is %s\n", input_user);

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:42:59 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 10:43:31 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/03 10:25:55 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ char *ft_addspace(char *ptr)
     int len;
     char *new;
     char *str;
-    char *p;
+    // char *p;
     
     i = 0;
     len  = 0;

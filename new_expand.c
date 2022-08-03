@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 19:19:32 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/03 10:26:58 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
     char *new;
     int flag;
     int i;
-    char *p;
+    // char *p;
     
     start = 0;
     flag = 0;

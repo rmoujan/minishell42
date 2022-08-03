@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
- CFLAGS= #-Wall -Wextra -Werror #-lreadline #-L  
+ CFLAGS= -Wall -Wextra -Werror #-lreadline -L  
 RM = rm -f
 
 SRC=minishell.c\
@@ -18,7 +18,6 @@ SRC=minishell.c\
 	split_pipe.c\
 	create_tokens.c\
 	bring_data.c\
-	ft_lexer.c\
 	add_space.c\
 	new_expand.c\
 	remove_quotes.c\
@@ -32,7 +31,7 @@ all : $(NAME)
 
 $(NAME):${OBJ}
 	@make -C libft
-	$(CC) -lreadline $(OBJ) $(lib) -o $(NAME)
+	$(CC) -fsanitize=address -g -lreadline $(OBJ) $(lib) -o $(NAME)
 
 %.o : %.c
 	@${CC} -c ${CFLAGS} $< -o $@
