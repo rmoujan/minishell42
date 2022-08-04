@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 12:42:46 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 14:52:34 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int ft_checkredrections(t_command *head)
                     return (-1);
                 }
             }
+            else if(compare_redrections(tmp->data->token) == 1)
+                {
+                    printf("===> ELSEEEE \n");
+                    tmp->data = save;
+                    ft_errno(3);
+                    free_node(head);
+                    return (-1);
+                }
             tmp->data = tmp->data->next;
         }
         tmp->data = save;
