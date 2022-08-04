@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 17:19:18 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 18:11:41 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int main(int argc, char *argv[], char *const envp[])
               free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             }
             free(str);
-            //ft_output(data);
-            //printf("FREEEEEE |%s|\n\n\n", data->data->token);
             free_node(data);
       }
     }

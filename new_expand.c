@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 17:07:57 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 18:39:31 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char *get_value(char *ptr, char *const envp[])
     {
         if (strncmp(envp[i], ptr, ft_strlen(ptr))== 0)
         {
+            printf("===>> if 000000000000\n");
             tab = ft_split(envp[i], '=');
             free(tab[0]);
             free(ptr);
@@ -34,26 +35,28 @@ char *get_value(char *ptr, char *const envp[])
             free(tab);
             return (tab[1]);
         }
+        printf("===>> else 000000000000\n");
         i++;
     }
+    free(ptr);
     return new;
 }
 
 //all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
 char *expand_dollar(char *str, char *const envp[], char *argv[])
 {
-    int start;
     char *ptr;
     char *new;
+    int start;
     int flag;
     int i;
-    // char *p;
     
     start = 0;
     flag = 0;
     i = 0;
     new = ft_strdup("");
-    // printf("EXPAND DOLLLAR |%s|\n", str);
+    
+    printf("EXPAND DOLLLAR |%s|\n", str);
     while (str[i] != '\0')
     {
         printf("inside expand \n");
@@ -63,12 +66,14 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
             flag = 0;
         if (str[i] == '$')
         {
+            printf("if 1 \n");
             ptr = ft_substr(str, start, i - start);
             new = ft_strjoin(new, ptr);
             start = i;
         }
         if (str[i] == '$' && ft_isdigit(str[i + 1]) && flag != '\'')
         {
+            printf("if 2 \n");
             if (str[i + 1] != '\0' && str[i + 1] == 48)
             {
                 //ptr = ft_strdup(argv[0]);
@@ -88,20 +93,22 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         }
         else if (str[i] ==  '$' && ft_isalnum(str[i + 1]) && flag != '\'')
         {
+            printf("if 3 \n");
             start = ++i;
             while (str[i] != '\0' && (ft_isalnum(str[i]) || str[i] == '_'))
             {
                 i++;
             }
             ptr = ft_substr(str, start, ((i) - start));
-            // printf("PTR IS %s\n", ptr);
-            ptr = get_value(ptr, envp);
+            //printf("PTR IS %s\n", ptr);
+             ptr = get_value(ptr, envp);//
             //printf("value |%s|\n", ptr);
             new = ft_strjoin(new, ptr);
             start = i;
         }
         else if (str[i] == '$' && str[i + 1] == '?' && flag != '\'')
         {
+            printf("if 4 \n");
             //exit status of the last prg :   
             ptr = ft_itoa(g_state);
             // // printf("1--9 %s\n", ptr);
@@ -111,19 +118,25 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         }
          else if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] =='"'))
         {
+            printf("if 5 \n");
             //when we meet $ and next char is " or ' , we must skip this $ !!!!
             start = ++i;
         }
         else if(str[i + 1] == '\0')
         {
+            printf("if 6 \n");
             i++;
             ptr = ft_substr(str, start, i - start);
             new = ft_strjoin(new, ptr);
         }
         else
+        {
+            printf("if 7 \n");
             i++;
+        }
+        printf("koko\n");
     }
-    //  while (1);
+    //while (1);
     return new;
 }
 
@@ -241,7 +254,7 @@ void expand_cmd(char ***tab, char *const envp[], char *argv[])
                     free(cmd[i]);
                     cmd[i] = ft_itoa(-1);
                 }
-            printf("====>> %s\n", cmd[i]);
+            // printf("====>> %s\n", cmd[i]);
             free(ptr);   
         }
         i++;
@@ -273,9 +286,7 @@ void  ft_expand(t_cmdfinal *cmd, char *const envp[], char *argv[])
                         // free(tmp->file->name);//!!
                         ptr = tmp->file->name;
                         tmp->file->name = expand_dollar(tmp->file->name, envp, argv);
-                    // }
                     free(ptr);//!!
-                // while (1);
                 }
                 tmp->file = tmp->file->next;
                 //printf("222\n");
