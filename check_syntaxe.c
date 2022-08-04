@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/03 14:31:44 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 12:36:15 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,55 @@ int cheak_redrections(char *str)
     return 0;
 }
 
+// //cheak more red :
+// // Iam working on this now !!!!
+// //Im still work on thiiiiiiis 
+// //had case makhedmash <<hh << << hsvchjvs ==> must appear an error !!!
+// int cheak_redrections2(char *str)
+// {
+//     int i;
+//     int flag;
+    
+//     i = 0;
+//     flag = 0;
+
+//     while (str[i])
+//     {
+//         if (!flag && (str[i] == '\'' || str[i] == '"'))
+//         {
+//             flag = str[i];
+//         }
+//         else if (flag && str[i] == flag)
+//         {
+//             flag = 0;
+//         }
+//         if (str[i] == '<' && !flag)
+//         {
+//             if (str[i + 1] != '\0' && (str[i + 1] == '<'))
+//             {
+//                 if (str[i + 2] != '\0' && str[i + 2] == '<')
+//                 {
+//                     while (str[i + 3] != '\0')
+//                     {
+//                         if (str[i + 3] != ' ' || str[i + 3] != '$' || !ft_isalnum(str[i + 3]))
+//                             return 3;
+//                         // i++;
+//                         break;
+//                     }
+//                 }  
+//             }
+//         }
+//         i++;
+//     }
+//     return 0;
+// }
+
+//vers 3 of red ::
 //cheak more red :
 // Iam working on this now !!!!
 //Im still work on thiiiiiiis 
 //had case makhedmash <<hh << << hsvchjvs ==> must appear an error !!!
+
 int cheak_redrections2(char *str)
 {
     int i;
@@ -114,28 +159,18 @@ int cheak_redrections2(char *str)
         {
             flag = 0;
         }
-        if (str[i] == '<' && !flag)
+        if (str[i++] == '<' && !flag)
         {
-            if (str[i + 1] != '\0' && (str[i + 1] == '<'))
-            {
-                if (str[i + 2] != '\0' && str[i + 2] == '<')
-                {
-                    while (str[i + 3] != '\0')
-                    {
-                        if (str[i + 3] != ' ' || str[i + 3] != '$' || !ft_isalnum(str[i + 3]))
-                            return 3;
-                        // i++;
-                        break;
-                    }
-                }  
-            }
+            while (str[i] != '\0' && str[i] == ' ')
+                i++;   
+            if (str[i] == '\0')
+                return 3;
+            // else if (str[i] )
         }
         i++;
     }
     return 0;
 }
-
-
 
 
 int cheak_pipes(char *str)

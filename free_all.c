@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/07/31 21:22:26 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 11:53:41 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void free_node(t_command *head)
 {
     t_command *tmp;
     t_token *token;
+    
     while (head)
     {
         tmp = head;

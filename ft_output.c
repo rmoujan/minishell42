@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 19:01:23 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/07/26 12:53:01 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 11:40:23 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void ft_output(t_command *data)
         middle = tmp->data;
         while (tmp->data)
         {
-            // printf("** (%s) and id is (%d)\n",tmp->data->token, tmp->data->id);
+            //printf("** (%s) and id is (%d)\n",tmp->data->token, tmp->data->id);
             printf("** (%s) \n",tmp->data->token);
             tmp->data = tmp->data->next;
         }

@@ -22,6 +22,7 @@ SRC=minishell.c\
 	new_expand.c\
 	remove_quotes.c\
 	edit_cmd.c\
+	check_redrectionserror.c\
 	
 OBJ = $(subst .c,.o,$(SRC))
 lib = ./libft/libft.a
