@@ -32,7 +32,7 @@ all : $(NAME)
 
 $(NAME):${OBJ}
 	@make -C libft
-	$(CC) -fsanitize=address -g -lreadline $(OBJ) $(lib) -o $(NAME)
+	$(CC) -lreadline $(OBJ) $(lib) -o $(NAME)
 
 %.o : %.c
 	@${CC} -c ${CFLAGS} $< -o $@

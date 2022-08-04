@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 14:52:34 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 15:30:24 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int ft_checkredrections(t_command *head)
                     printf("===> IIIIIIFFF 2\n");
                     tmp->data = save;
                     ft_errno(3);
-                    free_node(head);
+                    // free_node(head);
                     return (-1);
                 }
             }
@@ -66,7 +66,7 @@ int ft_checkredrections(t_command *head)
                     printf("===> ELSEEEE \n");
                     tmp->data = save;
                     ft_errno(3);
-                    free_node(head);
+                    // free_node(head);
                     return (-1);
                 }
             tmp->data = tmp->data->next;
