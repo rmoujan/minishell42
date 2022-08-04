@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
- CFLAGS= -Wall -Wextra -Werror #-lreadline -L  
+#  CFLAGS= -Wall -Wextra -Werror #-lreadline -L  
 RM = rm -f
 
 SRC=minishell.c\
@@ -23,6 +23,7 @@ SRC=minishell.c\
 	remove_quotes.c\
 	edit_cmd.c\
 	check_redrectionserror.c\
+	number_nodefinal.c\
 	
 OBJ = $(subst .c,.o,$(SRC))
 lib = ./libft/libft.a

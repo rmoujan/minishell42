@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 11:55:06 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 17:17:16 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_cmdfinal t_cmdfinal;
 struct s_cmdfinal{
     t_files *file; // will contains all names IN/OUT files and heredoc !!! 
     char **tab;    // will contains name of cmd and its args 
+    int number_node;
     t_cmdfinal *next;
 };
 
@@ -104,6 +105,7 @@ void  edit_cmd(t_cmdfinal *cmd);
 int compare_redrections(char *str);
 int ft_errno(int code);
 int ft_checkredrections(t_command *head);
+void ft_numberofnode(t_cmdfinal *head);
 //int ft_counterspace_back(char *ptr);
 //void add_space(char *str, int *i);
 #endif

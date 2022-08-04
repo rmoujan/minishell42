@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/03 10:26:58 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 17:07:57 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
             {
                 //ptr = ft_strdup(argv[0]);
                 ptr = argv[0];
-                // printf("0 %s\n", ptr);
+                //printf("0 %s\n", ptr);
                 new = ft_strjoin(new, ptr);
             }
             else
             {
                 ptr = ft_strdup("");
-                // printf("1--9 %s\n", ptr);
+                //printf("1--9 %s\n", ptr);
                 new = ft_strjoin(new, ptr);
                 
             }
@@ -96,7 +96,7 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
             ptr = ft_substr(str, start, ((i) - start));
             // printf("PTR IS %s\n", ptr);
             ptr = get_value(ptr, envp);
-            // printf("value |%s|\n", ptr);
+            //printf("value |%s|\n", ptr);
             new = ft_strjoin(new, ptr);
             start = i;
         }
@@ -111,10 +111,7 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         }
          else if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] =='"'))
         {
-            //exit status of the last prg :   
-            // ptr = "'";
-            // // printf("1--9 %s\n", ptr);
-            // new = ft_strjoin(new, ptr);
+            //when we meet $ and next char is " or ' , we must skip this $ !!!!
             start = ++i;
         }
         else if(str[i + 1] == '\0')
@@ -126,7 +123,7 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         else
             i++;
     }
-    // while (1);
+    //  while (1);
     return new;
 }
 

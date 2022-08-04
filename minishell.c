@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 16:42:12 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 17:19:18 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ int main(int argc, char *argv[], char *const envp[])
               ft_remove(cmd_final);//!!in this step there is no leaks !!
               //printf("after remove\n");
               edit_cmd(cmd_final);
-             //ft_outputcmdfinal(cmd_final);//!!
+              ft_numberofnode(cmd_final);
+              // ft_outputcmdfinal(cmd_final);//!!
               //  ft_output(data);//++ had ft_output hiya li fiha leaks au niveau de nodes!!!
               // ft_executor();
               free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
-              
             }
             free(str);
-            ft_output(data);
-            printf("FREEEEEE |%s|\n\n\n", data->data->token);
+            //ft_output(data);
+            //printf("FREEEEEE |%s|\n\n\n", data->data->token);
             free_node(data);
       }
     }
