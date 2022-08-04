@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:24:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/07/31 21:24:01 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:31:09 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
-
+//I'm working with it
 char *handle_quotes(char *str)
 {
     int i;

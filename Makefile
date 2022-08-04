@@ -1,18 +1,12 @@
 NAME=minishell
 CC=gcc
-#  CFLAGS= -Wall -Wextra -Werror #-lreadline -L  
+CFLAGS= -Wall -Wextra -Werror #-lreadline -L  
 RM = rm -f
 
 SRC=minishell.c\
 	ft_output.c\
-	ft_delete.c\
-	check_cmd.c\
 	ft_parser.c\
-	syntax_analyser.c\
 	check_syntaxe.c\
-	tools/ft_isdel.c\
-	skip_tokens.c\
-	ft_remove.c\
 	split_space.c\
 	free_all.c\
 	split_pipe.c\
@@ -24,31 +18,37 @@ SRC=minishell.c\
 	edit_cmd.c\
 	check_redrectionserror.c\
 	number_nodefinal.c\
-	
-OBJ = $(subst .c,.o,$(SRC))
-lib = ./libft/libft.a
-libobj = ./libft/*.o
+	libft/ft_strjoin.c\
+	libft/ft_itoa.c\
+	libft/ft_strlen.c\
+	libft/ft_strdup.c\
+	libft/ft_strcmp.c\
+	libft/ft_strncmp.c\
+	libft/ft_substr.c\
+	libft/ft_isdigit.c\
+	libft/ft_split.c\
+	libft/ft_isalnum.c\
 
-all : $(NAME)
+OBJ = $(SRC:.c=.o)
 
-$(NAME):${OBJ}
-	@make -C libft
-	$(CC) -lreadline $(OBJ) $(lib) -o $(NAME)
+all: $(NAME)
 
-%.o : %.c
-	@${CC} -c ${CFLAGS} $< -o $@
+$(NAME): $(OBJ)
+	@$(CC) -fsanitize=address -lreadline $(CFLAGS) $(OBJ) $(lib) -o $(NAME)
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(libobj)
+	$(RM) $(OBJ)
 
 fclean:clean
-	$(RM) $(NAME) $(lib)
+	$(RM) $(NAME)
 
 re: fclean all
-# l'igno 2020
-#  a okk <
-#  knkn_
 
-# $(NAME):${OBJ}
+# # 000
+# $(NAME):$(OBJ)
 # 	@make -C libft
-# 	$(CC) -fsanitize=address -g -lreadline $(OBJ) $(lib) -o $(NAME)
+# 	@$(CC) -fsanitize=address -lreadline $(OBJ) $(lib) -o $(NAME)
+# tools/ft_isdel.c\

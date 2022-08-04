@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:53:15 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/02 15:03:51 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/04 20:28:47 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
-
+//I'm working with it
 //old vers
 //check if there are any pipes inside " " to replace them with -2
 // void replace_pipe_double(char **ptr)
