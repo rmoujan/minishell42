@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror #-lreadline -L  
+CFLAGS= -Wall -Wextra -Werror #-lreadline -L
 RM = rm -f
 
 SRC=minishell.c\

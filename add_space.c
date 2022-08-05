@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:42:59 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/03 10:25:55 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 11:26:35 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void ft_copy2(char **str, char *ptr)
     }
     new[j] = '\0';
 }
+
 
 //example : <inf cat -e >out1 | << end ls -la >> out2
 char *ft_addspace(char *ptr)
