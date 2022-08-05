@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:13:31 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:28:18 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 12:10:51 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void ft_numberofnode(t_cmdfinal *head)
         j++;
         cmd = cmd->next;
     }
-    printf("number of node are ||%d|| \n", j);
+    // printf("number of node are ||%d|| \n", j);
     head->number_node = j;
 }

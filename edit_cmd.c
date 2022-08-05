@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:43:24 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:27:25 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 12:10:11 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
+
 // check is the tab of cmd contains -1 or not
 int ft_check_null(char **tab)
 {
@@ -43,7 +44,6 @@ char **allocate_cmd(int len, char **cmd)
         if (strcmp(cmd[i], "-1") != 0)
         {
             tab[j++] = ft_strdup(cmd[i]);
-            printf("7777 == %s\n", tab[j - 1]);
         }
         i++;
     }
@@ -62,7 +62,6 @@ void  edit_cmd(t_cmdfinal *cmd)
     tmp = cmd;
     i = 0;
     count = 0;
-    printf("start edit cmd \n");
     while (tmp)
     {
         i = 0;
@@ -71,7 +70,6 @@ void  edit_cmd(t_cmdfinal *cmd)
         {
             while (tmp->tab[i])
             {
-                printf("inside while edit cmd\n");
                 if (strcmp(tmp->tab[i], "-1") != 0)
                 {
                     count++;
@@ -79,12 +77,10 @@ void  edit_cmd(t_cmdfinal *cmd)
                 i++;
             }
             ptr = tmp->tab;
-            printf("0000 count is %d\n", count);
             tmp->tab = allocate_cmd(count,tmp->tab);
             free_lines(ptr);
         }
         tmp = tmp->next;
     }
-    printf("end edit cmd \n");
 }
 

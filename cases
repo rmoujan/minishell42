@@ -40,4 +40,24 @@ cases are "" is different l empty string !!!
 # cat < sjknckjdns < kjfnkf < $hjbf | echo hallo > out1 |  wc -l > out2
 #<< | ls > ko | cat
 # << ok | ls > | cat
+#//example : <inf cat -e >out1 | << end ls -la >> out2
 
+# //example :
+# // $ minishell ls -la | cat -e >> out | echo "test hallo">> outfile2
+# // [ls -la ]--->ls is first token and -la is second token !!
+# // [ cat -e >> out ]
+# // [ echo "test hallo">> outfile2]
+# // $ minishell 
+
+
+# //I'm working with it
+# // //old version
+# // // 3andke had case """""""'''''""""" cat --> had les fctes kay7ydo ta space li bin "  and cat !!!!!
+# // //check if there are any spaces inside " " to replace them with -2
+# // //stilll need mora works  fash kankter """"'''  kaykhser kolshi !!!!!
+# // void replace_space_double(char **ptr)
+#// << $END cat -e >> $0USER | < $1PATH ls -la > $HOME
+
+
+#### NOTE : when I RUN THE EXECTION AND RUN LS -LA ... THE PRG MERA KAYSEGFALITI  MERA NO 
+# =====> KHASNI NEAWED INMPLEMETATION B IDDDI !!!

@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:24:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:28:22 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 12:09:02 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
+
 //I'm working with it
 char *handle_quotes(char *str)
 {
@@ -20,11 +21,11 @@ char *handle_quotes(char *str)
     int start;
     char *ptr;
     char *new;
+    
     flag = 0;
     i = 0;
     start = 0;
     new = ft_strdup("");
-    // printf("before str is |%s|\n", str);
     while (str[i] != '\0')
     {
         start = i;
@@ -55,7 +56,6 @@ char *handle_quotes(char *str)
         ptr = ft_substr(str, start, (i - start));
         new = ft_strjoin(new, ptr);
     }
-    // printf("NEW IS :: %s\n", new);
     return new;
 }
 
@@ -96,8 +96,9 @@ int check_spacecmd(char *str)
  {
     char **cmd;
     char *ptr;
-    cmd = *tab;
     int i;
+    
+    cmd = *tab;
     i = 0;
     //I don't rembeber this fct what it did !!!!
     //==> khas doubleq and sq yt7ydo ghi fash makykonsh 3andi space 
@@ -125,8 +126,9 @@ int check_spacecmd(char *str)
  void ft_remove(t_cmdfinal *cmd)
 {
     t_cmdfinal *tmp;
-    char *ptr;
     t_files *save;
+    char *ptr;
+    
     tmp = cmd;
     while (tmp)
     {

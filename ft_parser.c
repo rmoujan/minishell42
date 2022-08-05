@@ -6,13 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:27:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 12:25:22 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
+// give each red an id !!!
 int is_redirect(char *str)
 {
     if (ft_strcmp(str, "<") == 0)
@@ -23,7 +24,7 @@ int is_redirect(char *str)
     {
         return 2;
     }
-    else if (ft_strcmp(str, "<<") == 0)///heredoc id 3
+    else if (ft_strcmp(str, "<<") == 0)
     {
         return 3;
     }
@@ -45,7 +46,6 @@ int counte_linecmd(t_command *node)
     save = tmp->data;
     while (tmp->data)
     {
-        // printf("********%s\n", node->data->token);
         //cheak if there is rederict
         if (is_redirect(tmp->data->token) != 0)
         {
@@ -58,7 +58,6 @@ int counte_linecmd(t_command *node)
         tmp->data = tmp->data->next;
     }
     node->data = save;
-    // printf("COUNTER IS %d\n", counter);
     return counter;
 }
 
@@ -67,6 +66,7 @@ t_cmdfinal *create_node_final(t_command *node)
 {
     t_cmdfinal *head;
     int len;
+    
     //create node global !!!
     head = (t_cmdfinal *)malloc(sizeof(t_cmdfinal));
     if (head == NULL)
@@ -98,11 +98,10 @@ t_files *create_file(char *str, int id)
     }
     node->name = ft_strdup(str);
     node->id = id;
-    // printf("|node->name is %s and id  is %d|\n", node->name, node->id);
     return node; 
 }
 
-//hena fash kay segfaultii !!! 
+//38 lines
 void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 {
     t_files *file;
@@ -113,7 +112,6 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
     
     i = 0;
     j = 0;
-    // printf("iterates tokens debut\n");
     while (tmp)
     {
         //check if there is rederict
@@ -123,9 +121,7 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
             if (tmp->next != NULL)
             {
                 tmp = tmp->next;
-                printf(" 000 \n");
                 file = create_file(tmp->token, id);
-                printf("file is %s\n", file->name);
                 if (j == 0)
                 {
                     head->file = pointer = file;
@@ -139,27 +135,22 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
             }
         }
         else
-        {
-            printf(" 1111 \n");
             head->tab[i++] = ft_strdup(tmp->token);
-        }
         tmp = tmp->next;
     }
     if (file != NULL)
         file->next = NULL;
     if (j == 0)
         head->file = NULL;
-    //
-    //   if (!j)
-    //     head->file = NULL;
-    // else
-    //     file->next = NULL;
     head->tab[i] = NULL;
 } 
 
 
 //there are some leaks in this fct !!!!
 //preparing token into linked list the send them to executor
+//create cmd global .. I think , it will works !!!
+//NOTE : te9dery mn lhena t7tafdi b dak tmp->data (head) .. I'll cheak this later !!!
+//29 lines
 t_cmdfinal *ft_parser(t_command *node)
 {
     t_command *tmp;
@@ -171,17 +162,11 @@ t_cmdfinal *ft_parser(t_command *node)
     
     tmp = node;
     j = 0;
-    //create cmd global .. I think , it will works !!!
-    //NOTE : te9dery mn lhena t7tafdi b dak tmp->data (head) .. I'll cheak this later !!!
     while (tmp)
     {
         //save the head of tokens of each node 
         save = tmp->data;
-        printf("before create node \n");
         pointer = create_node_final(tmp);
-         printf("after create node \n");
-        // printf("debut parser\n");
-        // links nodes global
         if (j == 0)
         {
             head = final = pointer;
@@ -191,10 +176,10 @@ t_cmdfinal *ft_parser(t_command *node)
             final->next = pointer;
             final = pointer;
         }
-         printf("before iterate tokens %s\n", tmp->data->token);
+        printf("before iterate tokens !!! \n");
         iterate_tokens(tmp->data, pointer);
+        printf("afeeeeer iterate tokens !!! \n");
         tmp->data = save;
-        printf("after create tokens \n");
         tmp = tmp->next;
         j++;
     }

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:27:34 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 11:57:19 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void free_node(t_command *head)
             token = head->data->next;
 			free(head->data->token);
 			free(head->data);
-			
 			head->data = token;
-			//tmp->data = head->data;
 		}
 		head  = tmp->next;
 		free(tmp);
@@ -48,32 +46,30 @@ void free_lines(char **cmds)
     free(cmds);
 }
 
-
+//28 lines !!!
 void free_cmdfinal(t_cmdfinal *cmd)
 {
-    int i = 0;
-    int j = 1;
     t_files *tmp;
     t_cmdfinal *pointer;
+    int i;
+    int j;
 
+    i = 0;
+    j = 1;
     printf("|||| FREE CMD FINAL|||| \n");
     //ERROR que wakha t salat data mn cmd ba9i kaydor f while !!!!
     while (cmd !=  NULL) 
     {
         pointer = cmd;
-        // printf("while number %d \n", j);
         i = 0;
         while (cmd->tab[i])
         {
             free(cmd->tab[i]);
-            // cmd->tab[i] = NULL;
-            // printf("|%s|\n", cmd->tab[i]);
             i++;
         }
        free(cmd->tab);
         while (cmd->file)
         {
-            // printf("file is |%s|\n", cmd->file->name);
             tmp = cmd->file->next;
             free(cmd->file->name);
             free(cmd->file);

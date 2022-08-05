@@ -34,7 +34,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -fsanitize=address -lreadline $(CFLAGS) $(OBJ) $(lib) -o $(NAME)
+	@$(CC)  -lreadline $(CFLAGS) $(OBJ) $(lib) -o $(NAME)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@

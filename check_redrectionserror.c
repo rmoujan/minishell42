@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:27:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 11:58:47 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int compare_redrections(char *str)
 
 int ft_red(char *str1, char *str2)
 {
-    // if (strcmp(str1, str2) == 0)
-    //     return 1;
     if(compare_redrections(str1) == 1)
     {
         if(compare_redrections(str2) == 1)
@@ -36,37 +34,31 @@ int ft_red(char *str1, char *str2)
     return 0;
 }
 
+//30lines !!!
 int ft_checkredrections(t_command *head)
 {
     t_command *tmp;
     t_token *save;
     
     tmp = head;
-    printf("===>  STARTING CHEAK \n");
     while (tmp)
     {
-        printf("===> WHILLLLLE 1\n");
         save = tmp->data;
         while (tmp->data)
-        { printf("===> WHILLLLLE 2\n");
+        {
             if (tmp->data->next != NULL)
             {
-                 printf("===> IIIIIIFFF 1\n");
                 if(ft_red(tmp->data->token, tmp->data->next->token) == 1)
                 {
-                    printf("===> IIIIIIFFF 2\n");
                     tmp->data = save;
                     ft_errno(3);
-                    // free_node(head);
                     return (-1);
                 }
             }
             else if(compare_redrections(tmp->data->token) == 1)
                 {
-                    printf("===> ELSEEEE \n");
                     tmp->data = save;
                     ft_errno(3);
-                    // free_node(head);
                     return (-1);
                 }
             tmp->data = tmp->data->next;
