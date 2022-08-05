@@ -6,48 +6,43 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 12:12:42 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 20:52:47 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
-
-//had case khedama :: !!!!! """'''"''""''"'"'"""' ls
+//test case : "espace | cmdname" ::  should must handle this stest case !!!!! == >normalement bash skip spaces ==> is done !!!!!
+//// had case khedama :: !!!!! """'''"''""''"'"'"""' ls
 //// NOTE :: most of this functions are  working well 
 //// WHEN :: I add many dq and sq !!!!!
+void output_error(char *str)
+{
+    printf("\033[0;31m");
+    printf("minishell: %s \n", str);
+    printf("\033[0m");
+}
+
+//20lines !!
 int ft_errno(int code)
 {
     if (code == 1)
     {
-        printf("\033[0;31m");
-        printf("minishell: syntax error near unexpected token '\n");
-        printf("\033[0m");
+        output_error("syntax error near unexpected token '");
         return(0);
     }
     if (code == 2)
     {
-        printf("\033[0;31m");
-        printf("minishell: syntax error near unexpected token '|'\n");
-        printf("\033[0m");
+        output_error("syntax error near unexpected token '|'");
         return(0);
     }
-     if (code == 3)
+    if (code == 3)
     {
-        printf("\033[0;31m");
-        printf("minishell: syntax error near unexpected token '<'\n");
-        printf("\033[0m");
+        output_error("syntax error near unexpected token '<'");
         return(0);
     }
-     if (code == 4)
-    {
-        printf("\033[0;31m");
-        printf("minishell: syntax error near unexpected token '\n");
-        printf("\033[0m");
-        return(0);
-    }
-     if (code == 5)
+    if (code == 4)
     {
         return(0);
     }
@@ -123,6 +118,21 @@ int cheak_redrections2(char *str)
 }
 
 
+int check_spacepipe(char *str)
+{
+    int i;
+    
+    i = 0;
+    while (str[i] != '\0' && str[i] == ' ')
+    {
+        i++;
+    }
+    if (str[i] == '|')
+        return 0;
+    return 1;
+}
+
+//23 lines
 int cheak_pipes(char *str)
 {
     int i;
@@ -130,18 +140,14 @@ int cheak_pipes(char *str)
 
     i = 0;
     flag = 0;
-    if (str[0] == '|')
+    if (!check_spacepipe(str) || str[0] == '|')
         return 2;
     while (str[i] != '\0')
     {
         if (!flag && (str[i] == '\'' || str[i] == '"'))
-        {
             flag = str[i];
-        }
         else if (flag && str[i] == flag)
-        {
             flag = 0;
-        }
         if (str[i] == '|' && !flag)
         {
             if (str[i + 1] != '\0' && str[i + 1] == '|')
@@ -154,7 +160,7 @@ int cheak_pipes(char *str)
     return 0;
 }
 
-
+//14 lines
 int cheak_space(char *str)
 {
     int i;
@@ -172,6 +178,8 @@ int cheak_space(char *str)
     }
     return counter;
 }
+
+//23 lines
 //it seems it's working !!!!!!
 int cheak_quotes(char *str)
 {
@@ -182,7 +190,6 @@ int cheak_quotes(char *str)
     i = 0;
     count = 0;
     flag = 0;
-    // '' and ""
     while (str[i] != '\0')
     {
         if (!flag && (str[i] == '\'' || str[i] == '"'))
@@ -197,16 +204,14 @@ int cheak_quotes(char *str)
         }
         i++;
     }
-    //printf("count is %d\n", count);
     if (count % 2 != 0)
         return 1;
     return 0;
 }
 
-
+// 17 lines 
 int ft_check(char *str)
 {
-    
     if (cheak_pipes(str) == 2)
     {
         // printf("pipes\n");
@@ -220,17 +225,12 @@ int ft_check(char *str)
     if (cheak_quotes(str) == 1)
     {
         // printf("quotes \n");
-        return (ft_errno(4));
+        return (ft_errno(1));
     }
     if (cheak_space(str) == 0)
     {
         // printf("space\n");
-        return (ft_errno(5));
+        return (ft_errno(4));
     }
-    //  if (cheak_redrections2(str) == 3)
-    // {
-    //     printf("red2 \n");
-    //     return (ft_errno(3));
-    // }
     return 1;
 }

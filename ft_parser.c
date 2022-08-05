@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 12:25:22 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/05 19:51:40 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ t_files *create_file(char *str, int id)
     return node; 
 }
 
+
+//working on this !!!
 //38 lines
 void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 {
@@ -146,43 +148,68 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 } 
 
 
-//there are some leaks in this fct !!!!
-//preparing token into linked list the send them to executor
-//create cmd global .. I think , it will works !!!
-//NOTE : te9dery mn lhena t7tafdi b dak tmp->data (head) .. I'll cheak this later !!!
-//29 lines
+
+
+
+
+
+
+
+
+void link_node(t_cmdfinal **head, t_cmdfinal **final, t_cmdfinal **pointer)
+{
+    if (*head == 0)
+	{
+        *head  = *pointer;
+		*final = *pointer;	
+	}
+    else
+    {
+        
+        (*final)->next = *pointer;
+        *final = *pointer;
+    }
+}
+
+//20 lines
 t_cmdfinal *ft_parser(t_command *node)
 {
-    t_command *tmp;
+    t_command *tmp; 
     t_cmdfinal *head;
     t_cmdfinal *pointer;
     t_cmdfinal *final;
     t_token *save;
-    int j;
     
     tmp = node;
-    j = 0;
+    head = 0;
+    final = 0;
     while (tmp)
     {
         //save the head of tokens of each node 
         save = tmp->data;
         pointer = create_node_final(tmp);
-        if (j == 0)
-        {
-            head = final = pointer;
-        }
-        else
-        {
-            final->next = pointer;
-            final = pointer;
-        }
+        link_node(&head, &final, &pointer);
+        // if (head == 0)
+		// {
+        //     head  = pointer;
+		// 	final = pointer;	
+		// }
+        // else
+        // {
+        //     final->next = pointer;
+        //     final = pointer;
+        // }
         printf("before iterate tokens !!! \n");
         iterate_tokens(tmp->data, pointer);
         printf("afeeeeer iterate tokens !!! \n");
         tmp->data = save;
         tmp = tmp->next;
-        j++;
     }
     pointer->next = NULL;
     return (head);
 }
+
+//there are some leaks in this fct !!!!
+//preparing token into linked list the send them to executor
+//create cmd global .. I think , it will works !!!
+//NOTE : te9dery mn lhena t7tafdi b dak tmp->data (head) .. I'll cheak this later !!!
