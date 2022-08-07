@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 19:51:40 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 12:11:55 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/libft.h"
 
 // give each red an id !!!
+// 18 lines 
 int is_redirect(char *str)
 {
     if (ft_strcmp(str, "<") == 0)
@@ -35,6 +36,7 @@ int is_redirect(char *str)
     return 0;
 }
 
+//21 lines
 int counte_linecmd(t_command *node)
 {
     t_command *tmp;
@@ -61,6 +63,7 @@ int counte_linecmd(t_command *node)
     return counter;
 }
 
+//17 lines
 //create node final !!!
 t_cmdfinal *create_node_final(t_command *node)
 {
@@ -86,7 +89,7 @@ t_cmdfinal *create_node_final(t_command *node)
 }
 
 //create file of node final :
-t_files *create_file(char *str, int id)
+t_files *create_file(char *str)
 {
     t_files *node;
 
@@ -97,9 +100,31 @@ t_files *create_file(char *str, int id)
          exit(1);
     }
     node->name = ft_strdup(str);
-    node->id = id;
+    node->id = is_redirect(str);
     return node; 
 }
+
+// void fill_node_files(t_token *tmp, t_files **file, t_files **pointer, t_cmdfinal **head)
+// {
+//     // idd = is_redirect(tmp->token);
+//     if (tmp->next != NULL)
+//     {
+//         tmp = tmp->next;
+//         (*file) = create_file(tmp->token, id);
+//         if (j == 0)
+//         {
+//             (*head)->file = *file;
+//             *pointer = *file;
+//             }
+//         else if (j != 0)
+//         {
+//            (*pointer)->next = *file;
+//             *pointer = *file;
+//         }
+//         j++;
+//     }
+// }
+
 
 
 //working on this !!!
@@ -110,7 +135,7 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
     t_files *pointer;
     int i;
     int j;
-    int id;
+    // int id;
     
     i = 0;
     j = 0;
@@ -119,14 +144,16 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
         //check if there is rederict
         if (is_redirect(tmp->token) != 0)
         {
-            id = is_redirect(tmp->token);
+            // I'm norm this !!
+            //id = is_redirect(tmp->token);
             if (tmp->next != NULL)
             {
                 tmp = tmp->next;
-                file = create_file(tmp->token, id);
+                file = create_file(tmp->token);
                 if (j == 0)
                 {
-                    head->file = pointer = file;
+                    head->file = file;
+                    pointer = file;
                 }
                 else if (j != 0)
                 {
@@ -145,16 +172,7 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
     if (j == 0)
         head->file = NULL;
     head->tab[i] = NULL;
-} 
-
-
-
-
-
-
-
-
-
+}
 
 void link_node(t_cmdfinal **head, t_cmdfinal **final, t_cmdfinal **pointer)
 {
@@ -171,7 +189,7 @@ void link_node(t_cmdfinal **head, t_cmdfinal **final, t_cmdfinal **pointer)
     }
 }
 
-//20 lines
+//20 lines max variables declared in fct are 5 vars 
 t_cmdfinal *ft_parser(t_command *node)
 {
     t_command *tmp; 
@@ -199,9 +217,9 @@ t_cmdfinal *ft_parser(t_command *node)
         //     final->next = pointer;
         //     final = pointer;
         // }
-        printf("before iterate tokens !!! \n");
+        printf("00000 before iterate tokens!!! \n");
         iterate_tokens(tmp->data, pointer);
-        printf("afeeeeer iterate tokens !!! \n");
+        printf("afteeeeer iterate tokens !!! \n");
         tmp->data = save;
         tmp = tmp->next;
     }

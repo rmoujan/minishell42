@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:08:09 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:55:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 11:14:30 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,26 @@ void return_space_double(char **str1)
     }
 }
 
-//26 lines !!!
+//27 lines !!!
 // start creation of the  big node t_command !!!!
 t_command *split_space(char **cmds)
 {
-    int i;
-    char **data;
-    t_command *head;
-    t_command *tmp;
-    t_command *node;
+    t_command	*head;
+    t_command	*tmp;
+    t_command	*node;
+    char		**data;
+    int			i;
   
     i = 0;
     while (cmds[i])
     {
         replace_space_double(&cmds[i]);
         data = ft_split(cmds[i], ' ');
-        node = create_cmd(data);
+		node = create_cmd(data);
         if (i == 0)
         {
-            head = tmp = node;
+            head = node;
+			tmp  = node;
         }
         else
         {

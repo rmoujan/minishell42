@@ -6,16 +6,15 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:53:15 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:48:35 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 10:45:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
-
 //I'm working with it
-//new vers
+//17 lines 
 void replace_pipe_double(char **ptr)
 {
     int i;
@@ -24,8 +23,8 @@ void replace_pipe_double(char **ptr)
     
     i = 0;
     str = *ptr;
-    flag = 0;
-    //I replace each | that inside " " with -2 !!!!!
+    flag = 0;   
+    //I replace each | that inside " " or ' ' with -2 !!!!!
     while (str[i] != '\0')
     {
         if(!flag && (str[i] == '\'' || str[i] == '"'))

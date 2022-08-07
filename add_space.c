@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:42:59 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 12:13:17 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 10:28:36 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,21 @@ void ft_copy2(char **str, char *ptr)
     new[j] = '\0';
 }
 
+int isredirect_exist(char *ptr)
+{
+    int i;
+    
+    i = 0;
+    while (ptr[i] != '\0')
+    {
+        if (check_redirects(ptr[i]) == 1)
+            return 1;
+    i++;
+    }
+    return 0;
+}
+
+//17 lines !!!!
 char *ft_addspace(char *ptr)
 {
     int i;
@@ -146,11 +161,17 @@ char *ft_addspace(char *ptr)
     
     i = 0;
     len  = 0;
-    //is how many spaces that I should add in my new input user !!!
-    len = ft_counterspace_front(ptr) + ft_counterspace_back(ptr);
-    new = (char *)malloc(sizeof(char) * (ft_strlen(ptr) + len + 1));
-    str = ft_copy1(ptr);
-    ft_copy2(&new, str);
-    free(str);
-    return new;
+    // First of all check is the cmd line contain a redirect or not 
+    if (isredirect_exist(ptr) == 1)
+    {
+        //printf(" 123456789   add space \n");
+        //is how many spaces that I should add in my new input user !!!
+        len = ft_counterspace_front(ptr) + ft_counterspace_back(ptr);
+        new = (char *)malloc(sizeof(char) * (ft_strlen(ptr) + len + 1));
+        str = ft_copy1(ptr);
+        ft_copy2(&new, str);
+        free(str);
+        return new;
+    }
+    return ft_strdup(ptr);
 } 
