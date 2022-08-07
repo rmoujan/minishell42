@@ -6,13 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 16:54:42 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 19:42:20 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
+//all fcts have less or equal to 25 lines !!!!
 // give each red an id !!!
 // 18 lines 
 int is_redirect(char *str)
@@ -170,7 +171,7 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
     put_null(&file, &head, i, j);
 }
 
-void link_node(t_cmdfinal **head, t_cmdfinal **final, t_cmdfinal **pointer)
+void parser_linknode(t_cmdfinal **head, t_cmdfinal **final, t_cmdfinal **pointer)
 {
     if (*head == 0)
 	{
@@ -203,7 +204,7 @@ t_cmdfinal *ft_parser(t_command *node)
         //save the head of tokens of each node 
         save = tmp->data;
         pointer = create_node_final(tmp);
-        link_node(&head, &final, &pointer);
+        parser_linknode(&head, &final, &pointer);
         // if (head == 0)
 		// {
         //     head  = pointer;

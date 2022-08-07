@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 18:10:51 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 19:09:49 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
-
+//still need norm ==> there are some fcts more than 25 lines !!!!
 //test case : "espace | cmdname" ::  should must handle this stest case !!!!! == >normalement bash skip spaces ==> is done !!!!!
 //// had case khedama :: !!!!! """'''"''""''"'"'"""' ls
 //// NOTE :: most of this functions are  working well 
@@ -87,34 +87,34 @@ int cheak_redrections(char *str)
     return 0;
 }
 
-int cheak_redrections2(char *str)
-{
-    int i;
-    int flag;
+// int cheak_redrections2(char *str)
+// {
+//     int i;
+//     int flag;
     
-    i = 0;
-    flag = 0;
-    while (str[i])
-    {
-        if (!flag && (str[i] == '\'' || str[i] == '"'))
-        {
-            flag = str[i];
-        }
-        else if (flag && str[i] == flag)
-        {
-            flag = 0;
-        }
-        if (str[i++] == '<' && !flag)
-        {
-            while (str[i] != '\0' && str[i] == ' ')
-                i++;   
-            if (str[i] == '\0')
-                return 3;
-        }
-        i++;
-    }
-    return 0;
-}
+//     i = 0;
+//     flag = 0;
+//     while (str[i])
+//     {
+//         if (!flag && (str[i] == '\'' || str[i] == '"'))
+//         {
+//             flag = str[i];
+//         }
+//         else if (flag && str[i] == flag)
+//         {
+//             flag = 0;
+//         }
+//         if (str[i++] == '<' && !flag)
+//         {
+//             while (str[i] != '\0' && str[i] == ' ')
+//                 i++;   
+//             if (str[i] == '\0')
+//                 return 3;
+//         }
+//         i++;
+//     }
+//     return 0;
+// }
 
 
 int check_spacepipe(char *str)

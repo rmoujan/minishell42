@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:53:15 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 10:45:48 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 19:25:27 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void replace_pipe_double(char **ptr)
     }
 }
 
+// 17 lines !!!
 //new version
 //replace -2 inside " " with |
 void return_pipe_double(char **str1)

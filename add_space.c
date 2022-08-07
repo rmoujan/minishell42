@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:42:59 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 16:53:33 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 19:24:42 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
-
+// //all fcts have less or equal to 25 lines !!!!
 int check_redirects(char c)
 {
     if (c == '<' || c == '>')
@@ -22,6 +22,7 @@ int check_redirects(char c)
     return 0;
 }
 
+//16 lines
 //vers 2::
 // //counter space in front of < >, seems its working !!!
 int ft_counterspace_front(char *ptr)
@@ -71,7 +72,7 @@ int ft_counterspace_back(char *ptr)
     return counter;
 }
 
-//26 lines !!
+//25 lines !!
 char  *ft_copy1(char *ptr)
 {
     char *new;
@@ -93,9 +94,7 @@ char  *ft_copy1(char *ptr)
         if (check_redirects(ptr[i]) && !flag)
         {
             if (ptr[i + 1] != '\0' && ptr[i + 1] != ' ' && !check_redirects(ptr[i + 1]))
-                {
-                    new[j++] = ' ';
-                }
+                new[j++] = ' ';
         }
         i++;
     }
@@ -103,7 +102,15 @@ char  *ft_copy1(char *ptr)
     return new;
 }
 
-//29 lines
+void putflag_copy2(int *flag, char c)
+{
+    if(!*flag && (c == '\'' || c == '"'))
+            *flag = c;
+    else if(*flag && c == *flag)
+            *flag = 0;  
+}
+
+//23 lines
 void ft_copy2(char **str, char *ptr)
 {
     char *new;
@@ -117,18 +124,17 @@ void ft_copy2(char **str, char *ptr)
     new = *str;
     while (ptr[i] != '\0')
     {
-        if(!flag && (ptr[i] == '\'' || ptr[i] == '"'))
-            flag = ptr[i];
-        else if(flag && ptr[i] == flag)
-            flag = 0;
+        // if(!flag && (ptr[i] == '\'' || ptr[i] == '"'))
+        //     flag = ptr[i];
+        // else if(flag && ptr[i] == flag)
+        //     flag = 0;
+        putflag_copy2(&flag, ptr[i]);
         if (check_redirects(ptr[i]) && !flag)
         {
             if (i != 0)
             {
                 if (ptr[i - 1] != '\0' && ptr[i - 1] != ' ' && !check_redirects(ptr[i - 1]))
-                {
                     new[j++] = ' ';
-                }
             }
         }
         new[j++] = ptr[i];

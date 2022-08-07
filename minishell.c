@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 18:07:18 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 19:47:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[], char *const envp[])
               //printf("after remove\n");
               edit_cmd(cmd_final);
               ft_numberofnode(cmd_final);
-             // ft_outputcmdfinal(cmd_final);//!!
+              ft_outputcmdfinal(cmd_final);//!!
               //ft_output(data);//++ had ft_output hiya li fiha leaks au niveau de nodes!!!
               //ft_executor();
               free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
