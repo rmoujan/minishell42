@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 14:43:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 15:50:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_cmdfinal *create_node_final(t_command *node)
     }
     //allocate for tab that will contains name cmd and its args !!
     len = counte_linecmd(node);
+    printf("len is %d\n", len);
     head->tab = (char **) malloc(sizeof (char *) * (len + 1));
     if (head->tab == NULL)
     {
@@ -120,16 +121,22 @@ void link_nodetokens(t_files **file, t_files **pointer, t_cmdfinal **head, int j
 
 void put_null(t_files **file, t_cmdfinal **head, int i, int j)
 {
-    if (*file != NULL)
+    if ((*file) != NULL)
+    {
+        printf(" 8888 \n\n");
         (*file)->next = NULL;
+    }
     if (j == 0)
+    {
+        printf(" 33333 \n\n");
         (*head)->file = NULL;
+    }
     (*head)->tab[i] = NULL;
 }
 
 
 //working on this !!!
-//24 lines
+//25 lines
 //must find  out a way to customize this !!!!!!!!
 void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 {
@@ -140,11 +147,14 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
     
     i = 0;
     j = 0;
+    file = NULL;
     while (tmp)
     {
+        //printf("PARSER WHILE \n\n");
         //check if there is rederict
         if (is_redirect(tmp->token) != 0)
         {
+            //printf("FLAAAAAG \n");
             if (tmp->next != NULL)
             {
                 file = create_file(tmp->next->token, is_redirect(tmp->token));
@@ -187,6 +197,7 @@ t_cmdfinal *ft_parser(t_command *node)
     tmp = node;
     head = 0;
     final = 0;
+    pointer = 0;
     while (tmp)
     {
         //save the head of tokens of each node 
@@ -209,6 +220,7 @@ t_cmdfinal *ft_parser(t_command *node)
         tmp->data = save;
         tmp = tmp->next;
     }
+        // while (1);
     pointer->next = NULL;
     return (head);
 }

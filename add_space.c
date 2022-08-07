@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:42:59 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 10:28:36 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 15:08:29 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ char *ft_addspace(char *ptr)
     // First of all check is the cmd line contain a redirect or not 
     if (isredirect_exist(ptr) == 1)
     {
-        //printf(" 123456789   add space \n");
+        printf(" 123456789   add space \n");
         //is how many spaces that I should add in my new input user !!!
         len = ft_counterspace_front(ptr) + ft_counterspace_back(ptr);
         new = (char *)malloc(sizeof(char) * (ft_strlen(ptr) + len + 1));

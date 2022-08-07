@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 10:17:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 15:55:33 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[], char *const envp[])
             printf("before bring data \n");
             data = ft_bring_data(str);// in this step there is no leaks !!!!
             printf("after bring data \n");
-            ft_output(data);
+            //ft_output(data);
             //printf("after bring data\n");
             // ft_output(data);
             if (ft_checkredrections(data) != -1)
@@ -49,7 +49,8 @@ int main(int argc, char *argv[], char *const envp[])
               //printf("INSIDE IF result\n");
               //ft_output(data);
               printf("BEFORE PARSER\n");;
-              cmd_final = ft_parser(data);// in this step there is no leaks !!
+              cmd_final = ft_parser(data);// in this step there is are leaks !!
+             // while (1);
               printf("AFTER PARSER\n");
               // printf("starting expand !!\n");
               ft_expand(cmd_final, envp, argv);//in this step there is no leaks !!
@@ -58,7 +59,7 @@ int main(int argc, char *argv[], char *const envp[])
               //printf("after remove\n");
               edit_cmd(cmd_final);
               ft_numberofnode(cmd_final);
-              ft_outputcmdfinal(cmd_final);//!!
+             ft_outputcmdfinal(cmd_final);//!!
               //  ft_output(data);//++ had ft_output hiya li fiha leaks au niveau de nodes!!!
               // ft_executor();
               free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00

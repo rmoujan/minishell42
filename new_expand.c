@@ -6,13 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 14:37:18 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 15:58:17 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
+//21 lines
 //now I am working on this version 28-07-2022 !!
 char *get_value(char *ptr, char *const envp[])
 {
@@ -38,8 +39,9 @@ char *get_value(char *ptr, char *const envp[])
     free(ptr);
     return new;
 }
-
+//> 25 lines
 //all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
+//Iam now custmizing this !!!!
 char *expand_dollar(char *str, char *const envp[], char *argv[])
 {
     char *ptr;
@@ -150,7 +152,17 @@ int check_dollar(char *str)
     return counter;
 }
 
-//31 lines
+char *change_emptystr(char **str)
+{
+    char *ptr;
+
+    free(*str);
+    ptr = ft_itoa(-1);
+    return ptr;
+}
+
+
+//22 lines
 void expand_cmd(char ***tab, char *const envp[], char *argv[])
 {
     char **cmd;
@@ -167,18 +179,21 @@ void expand_cmd(char ***tab, char *const envp[], char *argv[])
             cmd[i] =  expand_dollar(cmd[i], envp, argv);
             if (cmd[i][0] == '\0')
                 {
-                    free(cmd[i]);
-                    cmd[i] = ft_itoa(-1);
+                    // free(cmd[i]);
+                    // cmd[i] = ft_itoa(-1);
+                   cmd[i] = change_emptystr(&cmd[i]);
                 }
             else  if (cmd[i][0] == '"' && cmd[i][1] == '"' && cmd[i][2] == '\0')
                 {
-                    free(cmd[i]);
-                    cmd[i] = ft_itoa(-1);
+                    // free(cmd[i]);
+                    // cmd[i] = ft_itoa(-1);
+                    cmd[i] = change_emptystr(&cmd[i]);
                 }
             else  if (cmd[i][0] == '\'' && cmd[i][1] == '\'' && cmd[i][2] == '\0')
                 {
-                    free(cmd[i]);
-                    cmd[i] = ft_itoa(-1);
+                    // free(cmd[i]);
+                    // cmd[i] = ft_itoa(-1);
+                    cmd[i] = change_emptystr(&cmd[i]);
                 }
             free(ptr);   
         }
