@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 12:06:53 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 12:44:09 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int check_dollar(char *str)
     return counter;
 }
 
-
+//31 lines
 void expand_cmd(char ***tab, char *const envp[], char *argv[])
 {
     char **cmd;
@@ -188,6 +188,7 @@ void expand_cmd(char ***tab, char *const envp[], char *argv[])
 
 //starting new version of expand!!
 //u have 3 cases that any token must be start : soit $ or " or ' 
+//23 lines
 void  ft_expand(t_cmdfinal *cmd, char *const envp[], char *argv[])
 {
        t_cmdfinal *tmp;

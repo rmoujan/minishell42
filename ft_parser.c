@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 12:11:55 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 13:35:24 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_cmdfinal *create_node_final(t_command *node)
 }
 
 //create file of node final :
-t_files *create_file(char *str)
+t_files *create_file(char *str, int id)
 {
     t_files *node;
 
@@ -100,42 +100,44 @@ t_files *create_file(char *str)
          exit(1);
     }
     node->name = ft_strdup(str);
-    node->id = is_redirect(str);
+    node->id = id;
     return node; 
 }
 
-// void fill_node_files(t_token *tmp, t_files **file, t_files **pointer, t_cmdfinal **head)
-// {
-//     // idd = is_redirect(tmp->token);
-//     if (tmp->next != NULL)
-//     {
-//         tmp = tmp->next;
-//         (*file) = create_file(tmp->token, id);
-//         if (j == 0)
-//         {
-//             (*head)->file = *file;
-//             *pointer = *file;
-//             }
-//         else if (j != 0)
-//         {
-//            (*pointer)->next = *file;
-//             *pointer = *file;
-//         }
-//         j++;
-//     }
-// }
+void link_nodetokens(t_files **file, t_files **pointer, t_cmdfinal **head, int j)
+{
+    if (j == 0)
+	{
+       (*head)->file = *file;
+       *pointer = *file;
+	}
+    else
+    {
+        (*pointer)->next = (*file);
+        *pointer = *file;
+    }
+}
 
+void put_null(t_files **file, t_cmdfinal **head, int i, int j)
+{
+    if (*file != NULL)
+        (*file)->next = NULL;
+    if (j == 0)
+        (*head)->file = NULL;
+    (*head)->tab[i] = NULL;
+}
 
 
 //working on this !!!
-//38 lines
+//30 lines
+//must find  out a way to customize this !!!!!!!!
 void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 {
     t_files *file;
     t_files *pointer;
     int i;
     int j;
-    // int id;
+    int id;
     
     i = 0;
     j = 0;
@@ -144,22 +146,12 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
         //check if there is rederict
         if (is_redirect(tmp->token) != 0)
         {
-            // I'm norm this !!
-            //id = is_redirect(tmp->token);
+            id = is_redirect(tmp->token);
             if (tmp->next != NULL)
             {
                 tmp = tmp->next;
-                file = create_file(tmp->token);
-                if (j == 0)
-                {
-                    head->file = file;
-                    pointer = file;
-                }
-                else if (j != 0)
-                {
-                    pointer->next = file;
-                    pointer = file;
-                }
+                file = create_file(tmp->token, id);
+                link_nodetokens(&file, &pointer, &head, j);
                 j++;
             }
         }
@@ -167,11 +159,13 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
             head->tab[i++] = ft_strdup(tmp->token);
         tmp = tmp->next;
     }
-    if (file != NULL)
-        file->next = NULL;
-    if (j == 0)
-        head->file = NULL;
-    head->tab[i] = NULL;
+    //should put this on a fct !!
+    // if (file != NULL)
+    //     file->next = NULL;
+    // if (j == 0)
+    //     head->file = NULL;
+    // head->tab[i] = NULL;
+    put_null(&file, &head, i, j);
 }
 
 void link_node(t_cmdfinal **head, t_cmdfinal **final, t_cmdfinal **pointer)
@@ -210,7 +204,7 @@ t_cmdfinal *ft_parser(t_command *node)
         // if (head == 0)
 		// {
         //     head  = pointer;
-		// 	final = pointer;	
+		// 	   final = pointer;	
 		// }
         // else
         // {

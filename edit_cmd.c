@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:43:24 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 12:10:11 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 12:45:37 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char **allocate_cmd(int len, char **cmd)
     return tab;
 }
 
+//28 lines
 //clacul how many lines in cmd tab without counting lines that contains -1 !!
 void  edit_cmd(t_cmdfinal *cmd)
 {

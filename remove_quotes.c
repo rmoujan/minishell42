@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:24:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 12:09:02 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 12:44:56 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int check_spacecmd(char *str)
     return counter;
 }
 
+//16 lines
  void handle_cmd(char ***tab)
  {
     char **cmd;
@@ -123,6 +124,7 @@ int check_spacecmd(char *str)
     }
  }
  
+ //22 lines
  void ft_remove(t_cmdfinal *cmd)
 {
     t_cmdfinal *tmp;
