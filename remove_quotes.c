@@ -6,55 +6,65 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:24:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 12:44:56 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 18:00:19 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
-
+//all fcts have less or equal to 25 lines !!!!
+void put_flag(int *flag, int *i,int *start, char c)
+{
+    if(!*flag && (c == '\'' || c == '"'))
+    {
+        *flag = c;
+        *start = ++(*i);
+    }
+    else if(*flag && *flag == c)
+    {
+        *flag = 0;
+        *start = ++(*i);
+    }
+    
+}
+//25 lines
 //I'm working with it
 char *handle_quotes(char *str)
 {
-    int i;
-    int flag;
-    int start;
-    char *ptr;
     char *new;
+    int start;
+    int flag;
+    int i;
     
     flag = 0;
     i = 0;
-    start = 0;
     new = ft_strdup("");
     while (str[i] != '\0')
     {
         start = i;
-        if(!flag && (str[i] == '\'' || str[i] == '"'))
-        {
-            flag = str[i];
-            start = ++i;
-        }
-        else if(flag && flag == str[i])
-        {
-            flag = 0;
-            start = ++i;
-        }
+        // if(!flag && (str[i] == '\'' || str[i] == '"'))
+        // {
+        //     flag = str[i];
+        //     start = ++i;
+        // }
+        // else if(flag && flag == str[i])
+        // {
+        //     flag = 0;
+        //     start = ++i;
+        // }
+        put_flag(&flag, &i, &start, str[i]);
         if (flag)
         {
             while (str[i] != '\0' && str[i] != flag)
-            {
                 i++;
-            }
         }
         else
         {
             while (str[i] != '\0' && (str[i] != '\'' && str[i] != '"'))
-            {
                 i++;
-            }
         }
-        ptr = ft_substr(str, start, (i - start));
-        new = ft_strjoin(new, ptr);
+        // ptr = ft_substr(str, start, (i - start));
+        new = ft_strjoin(new, ft_substr(str, start, (i - start)));
     }
     return new;
 }

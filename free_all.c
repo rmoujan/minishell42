@@ -6,13 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:57:19 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 18:10:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
+//all fcts have less or equal to 25 lines !!!!
 void free_node(t_command *head)
 {
     t_command *tmp;
@@ -46,28 +47,23 @@ void free_lines(char **cmds)
     free(cmds);
 }
 
-//28 lines !!!
+//16 lines !!!
 void free_cmdfinal(t_cmdfinal *cmd)
 {
     t_files *tmp;
     t_cmdfinal *pointer;
-    int i;
-    int j;
 
-    i = 0;
-    j = 1;
-    printf("|||| FREE CMD FINAL|||| \n");
-    //ERROR que wakha t salat data mn cmd ba9i kaydor f while !!!!
+    //printf("|||| FREE CMD FINAL|||| \n");
     while (cmd !=  NULL) 
     {
         pointer = cmd;
-        i = 0;
-        while (cmd->tab[i])
-        {
-            free(cmd->tab[i]);
-            i++;
-        }
-       free(cmd->tab);
+        free_lines(cmd->tab);
+        // while (cmd->tab[i])
+        // {
+        //     free(cmd->tab[i]);
+        //     i++;
+        // }
+        // free(cmd->tab);
         while (cmd->file)
         {
             tmp = cmd->file->next;
@@ -77,6 +73,5 @@ void free_cmdfinal(t_cmdfinal *cmd)
         }
         free(cmd);
         cmd = pointer->next;
-        j++;
     }
 }

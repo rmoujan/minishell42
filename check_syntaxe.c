@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 20:52:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 18:10:51 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int cheak_redrections2(char *str)
     
     i = 0;
     flag = 0;
-
     while (str[i])
     {
         if (!flag && (str[i] == '\'' || str[i] == '"'))

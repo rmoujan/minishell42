@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 15:50:48 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 16:54:42 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_cmdfinal *create_node_final(t_command *node)
     }
     //allocate for tab that will contains name cmd and its args !!
     len = counte_linecmd(node);
-    printf("len is %d\n", len);
+    // printf("len is %d\n", len);
     head->tab = (char **) malloc(sizeof (char *) * (len + 1));
     if (head->tab == NULL)
     {
@@ -123,12 +123,12 @@ void put_null(t_files **file, t_cmdfinal **head, int i, int j)
 {
     if ((*file) != NULL)
     {
-        printf(" 8888 \n\n");
+        // printf(" 8888 \n\n");
         (*file)->next = NULL;
     }
     if (j == 0)
     {
-        printf(" 33333 \n\n");
+        // printf(" 33333 \n\n");
         (*head)->file = NULL;
     }
     (*head)->tab[i] = NULL;
@@ -214,9 +214,9 @@ t_cmdfinal *ft_parser(t_command *node)
         //     final->next = pointer;
         //     final = pointer;
         // }
-        printf("00000 before iterate tokens!!! \n");
+        // printf("00000 before iterate tokens!!! \n");
         iterate_tokens(tmp->data, pointer);
-        printf("afteeeeer iterate tokens !!! \n");
+        // printf("afteeeeer iterate tokens !!! \n");
         tmp->data = save;
         tmp = tmp->next;
     }
