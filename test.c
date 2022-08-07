@@ -6,40 +6,45 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 19:22:06 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 19:26:02 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:34:29 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "minishell.h"
 
-t_cmdfinal	*ft_parser(t_command *node)
+void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 {
-    t_command	*tmp; 
-    t_cmdfinal	*head;
-    t_cmdfinal	*pointer;
-    t_cmdfinal	*final;
-    t_token		*save;
+    t_files *file;
+    t_files *pointer;
+    int i;
+    int j;
+    int id;
     
-    tmp = node;
-    head = 0;
+    i = 0;
+    j = 0;
     while (tmp)
     {
-        save = tmp->data;
-        pointer = create_node_final(tmp);
-        if (head == 0)
-		{
-            head  = pointer;
-			final = pointer;	
-		}
-        else
+        //check if there is rederict
+        if (is_redirect(tmp->token) != 0)
         {
-            final->next = pointer;
-            final = pointer;
+            id = is_redirect(tmp->token);
+            if (tmp->next != NULL)
+            {
+                tmp = tmp->next;
+                file = create_file(tmp->token, id);
+                link_nodetokens(&file, &pointer, &head, j);
+                j++;
+            }
         }
-        iterate_tokens(tmp->data, pointer);
-        tmp->data = save;
+        else
+            head->tab[i++] = ft_strdup(tmp->token);
         tmp = tmp->next;
     }
-    pointer->next = NULL;
-    return (head);
+    //should put this on a fct !!
+    // if (file != NULL)
+    //     file->next = NULL;
+    // if (j == 0)
+    //     head->file = NULL;
+    // head->tab[i] = NULL;
+    put_null(&file, &head, i, j);
 }

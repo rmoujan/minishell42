@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:11:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 13:35:24 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:43:47 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void put_null(t_files **file, t_cmdfinal **head, int i, int j)
 
 
 //working on this !!!
-//30 lines
+//24 lines
 //must find  out a way to customize this !!!!!!!!
 void iterate_tokens(t_token *tmp, t_cmdfinal *head)
 {
@@ -137,7 +137,6 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
     t_files *pointer;
     int i;
     int j;
-    int id;
     
     i = 0;
     j = 0;
@@ -146,12 +145,11 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
         //check if there is rederict
         if (is_redirect(tmp->token) != 0)
         {
-            id = is_redirect(tmp->token);
             if (tmp->next != NULL)
             {
-                tmp = tmp->next;
-                file = create_file(tmp->token, id);
+                file = create_file(tmp->next->token, is_redirect(tmp->token));
                 link_nodetokens(&file, &pointer, &head, j);
+                tmp = tmp->next;
                 j++;
             }
         }
@@ -159,12 +157,6 @@ void iterate_tokens(t_token *tmp, t_cmdfinal *head)
             head->tab[i++] = ft_strdup(tmp->token);
         tmp = tmp->next;
     }
-    //should put this on a fct !!
-    // if (file != NULL)
-    //     file->next = NULL;
-    // if (j == 0)
-    //     head->file = NULL;
-    // head->tab[i] = NULL;
     put_null(&file, &head, i, j);
 }
 

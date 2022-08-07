@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 12:44:09 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/07 14:37:18 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void  ft_expand(t_cmdfinal *cmd, char *const envp[], char *argv[])
             {
                 if (tmp->file->id != 3)
                 {
-                     //check be3da if there is a dollar 3ad expandi if not no need to expand !!
+                    //check be3da if there is a dollar 3ad expandi if not no need to expand !!
                     ptr = tmp->file->name;
                     tmp->file->name = expand_dollar(tmp->file->name, envp, argv);
                     free(ptr);
