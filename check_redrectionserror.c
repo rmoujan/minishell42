@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:58:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:19:27 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,28 @@ int ft_red(char *str1, char *str2)
     return 0;
 }
 
-//30lines !!!
+//16 lines
+int chunk_checkredrections(t_token *save, t_command *tmp)
+{
+    if (tmp->data->next != NULL)
+    {
+        if(ft_red(tmp->data->token, tmp->data->next->token) == 1)
+        {
+            tmp->data = save;
+            ft_errno(3);
+            return (-1);
+        }
+    }
+    else if(compare_redrections(tmp->data->token) == 1)
+    {
+        tmp->data = save;
+        ft_errno(3);
+        return (-1);
+    }
+    return 0;
+}
+
+//17lines !!!
 int ft_checkredrections(t_command *head)
 {
     t_command *tmp;
@@ -46,21 +67,23 @@ int ft_checkredrections(t_command *head)
         save = tmp->data;
         while (tmp->data)
         {
-            if (tmp->data->next != NULL)
-            {
-                if(ft_red(tmp->data->token, tmp->data->next->token) == 1)
-                {
-                    tmp->data = save;
-                    ft_errno(3);
-                    return (-1);
-                }
-            }
-            else if(compare_redrections(tmp->data->token) == 1)
-                {
-                    tmp->data = save;
-                    ft_errno(3);
-                    return (-1);
-                }
+            // if (tmp->data->next != NULL)
+            // {
+            //     if(ft_red(tmp->data->token, tmp->data->next->token) == 1)
+            //     {
+            //         tmp->data = save;
+            //         ft_errno(3);
+            //         return (-1);
+            //     }
+            // }
+            // else if(compare_redrections(tmp->data->token) == 1)
+            //     {
+            //         tmp->data = save;
+            //         ft_errno(3);
+            //         return (-1);
+            //     }
+            if(chunk_checkredrections(save, tmp) == -1)
+                return (-1);
             tmp->data = tmp->data->next;
         }
         tmp->data = save;

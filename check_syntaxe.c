@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 15:42:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:06:31 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,15 @@ int ft_errno(int code)
     return (1);
 }
 
-//32
-//I think still not complet !!!
+void redrections_flag(int *flag, char c)
+{
+    if (!*flag && (c == '\'' || c == '"'))
+        *flag = c;
+    else if (*flag && c == *flag)
+        *flag = 0;
+}
+
+//23 lines !!!
 int cheak_redrections(char *str)
 {
     int i;
@@ -62,22 +69,13 @@ int cheak_redrections(char *str)
         return 3;
     while (str[i])
     {
-        if (!flag && (str[i] == '\'' || str[i] == '"'))
-        {
-            flag = str[i];
-        }
-        else if (flag && str[i] == flag)
-        {
-            flag = 0;
-        }
+        redrections_flag(&flag, str[i]);
         if ((str[i] == '<' || str[i] == '>') && !flag)
         {
             if (str[i + 1] != '\0' && (str[i + 1] == '<' || str[i + 1] == '>'))
             {
                 if (str[i + 2] != '\0' && (str[i + 2] == '<' || str[i + 2] == '>'))
-                {
                     return 3;
-                }
             }
         }
         i++;
@@ -86,6 +84,7 @@ int cheak_redrections(char *str)
         return 3;
     return 0;
 }
+
 //19 lines
 int check_spacepipe(char *str)
 {
