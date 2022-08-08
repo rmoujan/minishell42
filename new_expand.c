@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 14:14:19 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 18:23:22 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void ft_initializeexpand(int *i, int *flag, int *start, char **new)
     *i = 0;
     *new = ft_strdup("");
 }
-//> 25 lines
+//> 54 lines
 //all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
 //I am now custmizing this !!!!
 char *expand_dollar(char *str, char *const envp[], char *argv[])
@@ -132,22 +132,16 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         flag_expand(str, &i, &flag);
         if (str[i] == '$')
         {
-            ptr = ft_substr(str, start, i - start);
-            new = ft_strjoin(new, ptr);
+            //ptr = ft_substr(str, start, i - start);
+            new = ft_strjoin(new, ft_substr(str, start, i - start));
             start = i;
         }
         if (str[i] == '$' && ft_isdigit(str[i + 1]) && flag != '\'')
         {
             if (str[i + 1] != '\0' && str[i + 1] == 48)
-            {
-                ptr = argv[0];
-                new = ft_strjoin(new, ptr);
-            }
+                new = ft_strjoin(new,  ft_strdup(argv[0]));
             else
-            {
-                ptr = ft_strdup("");
-                new = ft_strjoin(new, ptr);  
-            }
+                new = ft_strjoin(new, ft_strdup(""));  
             start += 2;
             i++;
         }
@@ -163,8 +157,8 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         }
         else if (str[i] == '$' && str[i + 1] == '?' && flag != '\'')
         {
-            ptr = ft_itoa(g_state);
-            new = ft_strjoin(new, ptr);
+            //ptr = ft_itoa(g_state);
+            new = ft_strjoin(new, ft_itoa(g_state));
             start += 2;
             i += 2;
         }
@@ -173,8 +167,8 @@ char *expand_dollar(char *str, char *const envp[], char *argv[])
         else if(str[i + 1] == '\0')
         {
             i++;
-            ptr = ft_substr(str, start, i - start);
-            new = ft_strjoin(new, ptr);
+           // ptr = ft_substr(str, start, i - start);
+            new = ft_strjoin(new, ft_substr(str, start, i - start));
         }
         else
             i++;
