@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 16:19:27 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 19:45:27 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 int compare_redrections(char *str)
 {
     if (strcmp(str, "<") == 0 || strcmp(str, ">") == 0 
-    || strcmp(str, "<<") == 0 || strcmp(str, ">>") == 0 )
+    || strcmp(str, "<<") == 0 || strcmp(str, ">>") == 0
+    || strcmp(str, "><") == 0 || strcmp(str, "<>") == 0) 
     {
         return 1;
     }
