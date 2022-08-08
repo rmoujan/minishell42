@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 17:06:44 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 12:46:52 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,103 +39,107 @@ char *get_value(char *ptr, char *const envp[])
     free(ptr);
     return new;
 }
-//> 25 lines
-//all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
-//Iam now custmizing this !!!!
-char *expand_dollar(char *str, char *const envp[], char *argv[])
+
+void chunk0_expand(char *str, int *i, int *start, char **new)
 {
     char *ptr;
+
+    ptr = ft_substr(str, *start, (*i) - (*start));
+    *new = ft_strjoin(*new, ptr);
+    *start = *i;
+}
+
+void chunk1_expand(char *str, int *i, int *start, char **new)
+{
+    char *ptr;
+    
+    if (str[*i + 1] != '\0' && str[*i + 1] == 48)
+    {
+        ptr = argv[0];
+        *new = ft_strjoin(*new, ptr);
+    }
+    else
+    {
+        ptr = ft_strdup("");
+        *new = ft_strjoin(*new, ptr);  
+    }
+    *start = *start + 2;
+    (*i)++; 
+}
+
+void chunk2_expand(char *str, int *i, int *start, char **new)
+{
+    char *ptr;
+    
+    *start = ++(*i);
+    while (str[*i] != '\0' && (ft_isalnum(str[*i]) || str[*i] == '_'))
+        (*i)++;
+    ptr = ft_substr(str, *start, ((*i) - (*start)));
+    ptr = get_value(ptr, envp);
+    *new = ft_strjoin(*new, ptr);
+    *start = *i;
+}
+
+void chunk3_expand(char *str, int *i, int *start, char **new)
+{
+    char *ptr;
+    
+    ptr = ft_itoa(g_state);
+    *new = ft_strjoin(*new, ptr);
+    *start = *start + 2;
+    *i = *i + 2;
+}
+
+void flag_expand(char *str, int *i, int *flag)
+{
+    if(!*flag && (str[*i] == '\'' || str[*i] == '"'))
+        *flag = str[*i];
+    else if(*flag && *flag == str[*i])
+        *flag = 0;
+}
+void chunk4_expand(char *str, int *i, int *start, char **new)
+{
+    char *ptr;
+    
+    (*i)++;
+    ptr = ft_substr(str, *start, *i - *start);
+    *new = ft_strjoin(*new, ptr);
+}
+void ft_initializeexpand(int *i, int *flag, int *start, char **new)
+{
+    *start = 0;
+    *flag = 0;
+    *i = 0;
+    *new = ft_strdup("");
+}
+//> 25 lines
+//all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
+//I am now custmizing this !!!!
+char *expand_dollar(char *str, char *const envp[], char *argv[])
+{
     char *new;
     int start;
     int flag;
     int i;
     
-    start = 0;
-    flag = 0;
-    i = 0;
-    new = ft_strdup("");
-    printf("EXPAND DOLLLAR |%s|\n", str);
+    ft_initializeexpand(&i, &flag, &start, &new);
     while (str[i] != '\0')
     {
-        printf("inside expand \n");
-        if(!flag && (str[i] == '\'' || str[i] == '"'))
-            flag = str[i];
-        else if(flag && flag == str[i])
-            flag = 0;
+        flag_expand(str, &i, &flag);
         if (str[i] == '$')
-        {
-            printf("if 1 \n");
-            ptr = ft_substr(str, start, i - start);
-            new = ft_strjoin(new, ptr);
-            printf("== >|%s|\n", new);
-            start = i;
-        }
+            chunk0_expand(str, &i, &start, &new);
         if (str[i] == '$' && ft_isdigit(str[i + 1]) && flag != '\'')
-        {
-             printf("if 2 \n");
-            if (str[i + 1] != '\0' && str[i + 1] == 48)
-            {
-                //ptr = ft_strdup(argv[0]);
-                ptr = argv[0];
-                //printf("0 %s\n", ptr);
-                new = ft_strjoin(new, ptr);
-            }
-            else
-            {
-                ptr = ft_strdup("");
-                //printf("1--9 %s\n", ptr);
-                new = ft_strjoin(new, ptr);
-                
-            }
-            start += 2;
-            i++;
-        }
+            chunk1_expand(str, &i, &start, &new);
         else if (str[i] ==  '$' && ft_isalnum(str[i + 1]) && flag != '\'')
-        {
-            printf("if 3 \n");
-            start = ++i;
-            while (str[i] != '\0' && (ft_isalnum(str[i]) || str[i] == '_'))
-            {
-                i++;
-            }
-            ptr = ft_substr(str, start, ((i) - start));
-            //printf("PTR IS %s\n", ptr);
-             ptr = get_value(ptr, envp);//
-            //printf("value |%s|\n", ptr);
-            new = ft_strjoin(new, ptr);
-            printf("== >|%s|\n", new);
-            start = i;
-        }
+            chunk2_expand(str, &i, &start, &new);
         else if (str[i] == '$' && str[i + 1] == '?' && flag != '\'')
-        {
-            printf("if 4 \n");
-            //exit status of the last prg :   
-            ptr = ft_itoa(g_state);
-            // // printf("1--9 %s\n", ptr);
-            new = ft_strjoin(new, ptr);
-            start += 2;
-            i += 2;
-        }
+            chunk3_expand(str, &i, &start, &new);
         else if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] =='"'))
-        {
-            printf("if 5 \n");
-            //when we meet $ and next char is " or ' , we must skip this $ !!!!
             start = ++i;
-        }
         else if(str[i + 1] == '\0')
-        {
-            printf("if 6 \n");
-            i++;
-            ptr = ft_substr(str, start, i - start);
-            new = ft_strjoin(new, ptr);
-            printf("== >|%s|\n", new);
-        }
+            chunk4_expand(str, &i, &start, &new);
         else
-        {
-            printf("if 7 \n");
             i++;
-        }
-        // printf("koko\n");
     }
     return new;
 }
