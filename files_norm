@@ -3,3 +3,8 @@ check_syntaxe.c
 check_redrectionserror.c
 new_expand.c 
 ==> still need check syntaxe error nezid tab 
+
+NOTE : case must be handles : cmd | space. done 
+                            : cat -e |    | cat -e done 
+NOTE : kant dert had ex o b9a kaysegfaulti :  pwd | pwd |     | :: done
+NOTE : << in ls -la >> out | ls -la | cat -e >> outfile| | ls :: done

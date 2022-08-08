@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 12:46:52 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 14:14:19 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,55 +40,55 @@ char *get_value(char *ptr, char *const envp[])
     return new;
 }
 
-void chunk0_expand(char *str, int *i, int *start, char **new)
-{
-    char *ptr;
+// void chunk0_expand(char *str, int *i, int *start, char **new)
+// {
+//     char *ptr;
 
-    ptr = ft_substr(str, *start, (*i) - (*start));
-    *new = ft_strjoin(*new, ptr);
-    *start = *i;
-}
+//     ptr = ft_substr(str, *start, (*i) - (*start));
+//     *new = ft_strjoin(*new, ptr);
+//     *start = *i;
+// }
 
-void chunk1_expand(char *str, int *i, int *start, char **new)
-{
-    char *ptr;
+// void chunk1_expand(char *str, int *i, int *start, char **new)
+// {
+//     char *ptr;
     
-    if (str[*i + 1] != '\0' && str[*i + 1] == 48)
-    {
-        ptr = argv[0];
-        *new = ft_strjoin(*new, ptr);
-    }
-    else
-    {
-        ptr = ft_strdup("");
-        *new = ft_strjoin(*new, ptr);  
-    }
-    *start = *start + 2;
-    (*i)++; 
-}
+//     if (str[*i + 1] != '\0' && str[*i + 1] == 48)
+//     {
+//         ptr = argv[0];
+//         *new = ft_strjoin(*new, ptr);
+//     }
+//     else
+//     {
+//         ptr = ft_strdup("");
+//         *new = ft_strjoin(*new, ptr);  
+//     }
+//     *start = *start + 2;
+//     (*i)++; 
+// }
 
-void chunk2_expand(char *str, int *i, int *start, char **new)
-{
-    char *ptr;
+// void chunk2_expand(char *str, int *i, int *start, char **new)
+// {
+//     char *ptr;
     
-    *start = ++(*i);
-    while (str[*i] != '\0' && (ft_isalnum(str[*i]) || str[*i] == '_'))
-        (*i)++;
-    ptr = ft_substr(str, *start, ((*i) - (*start)));
-    ptr = get_value(ptr, envp);
-    *new = ft_strjoin(*new, ptr);
-    *start = *i;
-}
+//     *start = ++(*i);
+//     while (str[*i] != '\0' && (ft_isalnum(str[*i]) || str[*i] == '_'))
+//         (*i)++;
+//     ptr = ft_substr(str, *start, ((*i) - (*start)));
+//     ptr = get_value(ptr, envp);
+//     *new = ft_strjoin(*new, ptr);
+//     *start = *i;
+// }
 
-void chunk3_expand(char *str, int *i, int *start, char **new)
-{
-    char *ptr;
+// void chunk3_expand(char *str, int *i, int *start, char **new)
+// {
+//     char *ptr;
     
-    ptr = ft_itoa(g_state);
-    *new = ft_strjoin(*new, ptr);
-    *start = *start + 2;
-    *i = *i + 2;
-}
+//     ptr = ft_itoa(g_state);
+//     *new = ft_strjoin(*new, ptr);
+//     *start = *start + 2;
+//     *i = *i + 2;
+// }
 
 void flag_expand(char *str, int *i, int *flag)
 {
@@ -97,14 +97,14 @@ void flag_expand(char *str, int *i, int *flag)
     else if(*flag && *flag == str[*i])
         *flag = 0;
 }
-void chunk4_expand(char *str, int *i, int *start, char **new)
-{
-    char *ptr;
+// void chunk4_expand(char *str, int *i, int *start, char **new)
+// {
+//     char *ptr;
     
-    (*i)++;
-    ptr = ft_substr(str, *start, *i - *start);
-    *new = ft_strjoin(*new, ptr);
-}
+//     (*i)++;
+//     ptr = ft_substr(str, *start, *i - *start);
+//     *new = ft_strjoin(*new, ptr);
+// }
 void ft_initializeexpand(int *i, int *flag, int *start, char **new)
 {
     *start = 0;
@@ -117,27 +117,65 @@ void ft_initializeexpand(int *i, int *flag, int *start, char **new)
 //I am now custmizing this !!!!
 char *expand_dollar(char *str, char *const envp[], char *argv[])
 {
+    char *ptr;
     char *new;
     int start;
     int flag;
     int i;
     
-    ft_initializeexpand(&i, &flag, &start, &new);
+    start = 0;
+    flag = 0;
+    i = 0;
+    new = ft_strdup("");
     while (str[i] != '\0')
     {
         flag_expand(str, &i, &flag);
         if (str[i] == '$')
-            chunk0_expand(str, &i, &start, &new);
+        {
+            ptr = ft_substr(str, start, i - start);
+            new = ft_strjoin(new, ptr);
+            start = i;
+        }
         if (str[i] == '$' && ft_isdigit(str[i + 1]) && flag != '\'')
-            chunk1_expand(str, &i, &start, &new);
+        {
+            if (str[i + 1] != '\0' && str[i + 1] == 48)
+            {
+                ptr = argv[0];
+                new = ft_strjoin(new, ptr);
+            }
+            else
+            {
+                ptr = ft_strdup("");
+                new = ft_strjoin(new, ptr);  
+            }
+            start += 2;
+            i++;
+        }
         else if (str[i] ==  '$' && ft_isalnum(str[i + 1]) && flag != '\'')
-            chunk2_expand(str, &i, &start, &new);
+        {
+            start = ++i;
+            while (str[i] != '\0' && (ft_isalnum(str[i]) || str[i] == '_'))
+                i++;
+            ptr = ft_substr(str, start, ((i) - start));
+            ptr = get_value(ptr, envp);
+            new = ft_strjoin(new, ptr);
+            start = i;
+        }
         else if (str[i] == '$' && str[i + 1] == '?' && flag != '\'')
-            chunk3_expand(str, &i, &start, &new);
+        {
+            ptr = ft_itoa(g_state);
+            new = ft_strjoin(new, ptr);
+            start += 2;
+            i += 2;
+        }
         else if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] =='"'))
             start = ++i;
         else if(str[i + 1] == '\0')
-            chunk4_expand(str, &i, &start, &new);
+        {
+            i++;
+            ptr = ft_substr(str, start, i - start);
+            new = ft_strjoin(new, ptr);
+        }
         else
             i++;
     }

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 19:09:49 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:42:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int ft_errno(int code)
     return (1);
 }
 
-
+//32
 //I think still not complet !!!
 int cheak_redrections(char *str)
 {
@@ -86,52 +86,57 @@ int cheak_redrections(char *str)
         return 3;
     return 0;
 }
-
-// int cheak_redrections2(char *str)
-// {
-//     int i;
-//     int flag;
-    
-//     i = 0;
-//     flag = 0;
-//     while (str[i])
-//     {
-//         if (!flag && (str[i] == '\'' || str[i] == '"'))
-//         {
-//             flag = str[i];
-//         }
-//         else if (flag && str[i] == flag)
-//         {
-//             flag = 0;
-//         }
-//         if (str[i++] == '<' && !flag)
-//         {
-//             while (str[i] != '\0' && str[i] == ' ')
-//                 i++;   
-//             if (str[i] == '\0')
-//                 return 3;
-//         }
-//         i++;
-//     }
-//     return 0;
-// }
-
-
+//19 lines
 int check_spacepipe(char *str)
 {
     int i;
     
     i = 0;
     while (str[i] != '\0' && str[i] == ' ')
-    {
         i++;
-    }
     if (str[i] == '|')
         return 0;
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i++] == '|')
+        {
+            while (str[i] != '\0' && str[i] == ' ')
+                i++;
+            if (str[i] == '\0')
+                return 0;
+        }
+    }
     return 1;
 }
 
-//23 lines
+//21 lines
+int check_spaceafterpipe(char *str)
+{
+    int i;
+    int flag;
+    
+    i = 0;
+    flag = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i++] == '|')
+        {
+            flag = 0;
+            while (str[i] != '\0' && str[i] != '|')
+            {
+                if (str[i] != ' ')
+                    flag = 1;
+                i++;   
+            }
+            if (flag == 0 && str[i] != '0' && str[i] == '|')
+                return 0;
+        }
+    }
+    return 1;
+}
+
+//25 lines
 int cheak_pipes(char *str)
 {
     int i;
@@ -140,6 +145,8 @@ int cheak_pipes(char *str)
     i = 0;
     flag = 0;
     if (!check_spacepipe(str) || str[0] == '|')
+        return 2;
+    if (!check_spaceafterpipe(str))
         return 2;
     while (str[i] != '\0')
     {

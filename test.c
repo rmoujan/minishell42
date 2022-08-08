@@ -6,14 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 19:22:06 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 12:20:34 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/08 14:08:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "minishell.h"
 
 //customize before norm :: 
-/> 69 lines
+//> 69 lines
 //all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
 //I am now custmizing this !!!!
 char *expand_dollar(char *str, char *const envp[], char *argv[])
