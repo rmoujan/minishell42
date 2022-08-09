@@ -16,13 +16,14 @@ ft_parser.c: OK!
 ft_parser_complement.c: OK!
 split_space.c: OK!
 split_pipe.c: OK!
-number_nodefinal.c 
+number_nodefinal.c: OK!
+remove_quotes.c: OK!
+
 
 *** FILES that I still do for them norm ::
 new_expand.c 
 minishell.c
 minishell.h
-remove_quotes.c 
 
 
 

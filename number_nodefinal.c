@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:13:31 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 15:55:42 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 17:52:04 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,25 @@ void	ft_numberofnode(t_cmdfinal *head)
 		j++;
 		cmd = cmd->next;
 	}
-	head->number_node = j;
+	cmd = head;
+	while (cmd)
+	{
+		cmd->number_node = j;
+		cmd = cmd->next;
+	}
+}
+
+void put_flagquotes(int *flag, int *i,int *start, char c)
+{
+    if(!*flag && (c == '\'' || c == '"'))
+    {
+        *flag = c;
+        *start = ++(*i);
+    }
+    else if(*flag && *flag == c)
+    {
+        *flag = 0;
+        *start = ++(*i);
+    }
+    
 }

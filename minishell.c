@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 13:00:16 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 17:12:29 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int main(int argc, char *argv[], char *const envp[])
             {
               // printf("INSIDE IF result\n");
               // ft_output(data);
-              // printf("BEFORE PARSER\n");;
+               printf("BEFORE PARSER\n");;
               cmd_final = ft_parser(data);// in this step there is are leaks !!
               // while (1);
               // printf("AFTER PARSER\n");
               // printf("starting expand !!\n");
               ft_expand(cmd_final, envp, argv);//in this step there is no leaks !!
-              //printf("END expand !!\n");
+              printf("END expand !!\n");
               ft_remove(cmd_final);//!!in this step there is no leaks !!
               //printf("after remove\n");
               edit_cmd(cmd_final);

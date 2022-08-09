@@ -20,7 +20,7 @@ SRC=minishell.c\
 	ft_errorpipes.c\
 	ft_errorredrections.c\
 	number_nodefinal.c\
-	ft_parser_complement.c 
+	ft_parser_complement.c\
 	libft/ft_strjoin.c\
 	libft/ft_itoa.c\
 	libft/ft_strlen.c\
@@ -54,4 +54,4 @@ re: fclean all
 # $(NAME):$(OBJ)
 # 	@make -C libft
 # 	@$(CC) -fsanitize=address -lreadline $(OBJ) $(lib) -o $(NAME)
-# tools/ft_isdel.c\
+# tools/ft_isdel.c
