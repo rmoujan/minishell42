@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 18:23:22 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 12:52:43 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void flag_expand(char *str, int *i, int *flag)
     else if(*flag && *flag == str[*i])
         *flag = 0;
 }
+
 // void chunk4_expand(char *str, int *i, int *start, char **new)
 // {
 //     char *ptr;
@@ -105,6 +106,7 @@ void flag_expand(char *str, int *i, int *flag)
 //     ptr = ft_substr(str, *start, *i - *start);
 //     *new = ft_strjoin(*new, ptr);
 // }
+
 void ft_initializeexpand(int *i, int *flag, int *start, char **new)
 {
     *start = 0;
@@ -112,6 +114,7 @@ void ft_initializeexpand(int *i, int *flag, int *start, char **new)
     *i = 0;
     *new = ft_strdup("");
 }
+
 //> 54 lines
 //all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
 //I am now custmizing this !!!!

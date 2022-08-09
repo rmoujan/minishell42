@@ -63,5 +63,6 @@ cases are "" is different l empty string !!!
 # =====> KHASNI NEAWED INMPLEMETATION B IDDDI !!!
 
 // TESTES CASES MUst be handled ::
-1 : >< ><|cat
-2 : ><|cat
+1 : >< ><|cat ==> is done
+2 : ><|cat ==> is done
+3 : """'''"''""''"'"'"""' ls ==> is done

@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:24:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/07 18:00:19 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 12:49:09 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
+
 //all fcts have less or equal to 25 lines !!!!
 void put_flag(int *flag, int *i,int *start, char c)
 {
@@ -27,6 +28,7 @@ void put_flag(int *flag, int *i,int *start, char c)
     }
     
 }
+
 //25 lines
 //I'm working with it
 char *handle_quotes(char *str)

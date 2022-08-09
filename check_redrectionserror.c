@@ -6,39 +6,37 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/08 19:45:27 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 13:36:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
-
-int compare_redrections(char *str)
+int	compare_redrections(char *str)
 {
-    if (strcmp(str, "<") == 0 || strcmp(str, ">") == 0 
-    || strcmp(str, "<<") == 0 || strcmp(str, ">>") == 0
-    || strcmp(str, "><") == 0 || strcmp(str, "<>") == 0) 
-    {
-        return 1;
-    }
-    return 0;
+	if (strcmp(str, "<") == 0 || strcmp(str, ">") == 0
+	|| strcmp(str, "<<") == 0 || strcmp(str, ">>") == 0
+	|| strcmp(str, "><") == 0 || strcmp(str, "<>") == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
-int ft_red(char *str1, char *str2)
+int	ft_red(char *str1, char *str2)
 {
-    if(compare_redrections(str1) == 1)
-    {
-        if(compare_redrections(str2) == 1)
-            return 1;   
-    }
-    return 0;
+	if(compare_redrections(str1) == 1)
+	{
+		if(compare_redrections(str2) == 1)
+			return (1);
+	}
+	return (0);
 }
 
-//16 lines
-int chunk_checkredrections(t_token *save, t_command *tmp)
+int	chunk_checkredrections(t_token *save, t_command *tmp)
 {
-    if (tmp->data->next != NULL)
+	if (tmp->data->next != NULL)
     {
         if(ft_red(tmp->data->token, tmp->data->next->token) == 1)
         {

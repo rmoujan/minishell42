@@ -17,6 +17,8 @@ SRC=minishell.c\
 	remove_quotes.c\
 	edit_cmd.c\
 	check_redrectionserror.c\
+	ft_errorpipes.c\
+	ft_errorredrections.c\
 	number_nodefinal.c\
 	libft/ft_strjoin.c\
 	libft/ft_itoa.c\

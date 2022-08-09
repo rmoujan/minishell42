@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:28:08 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 13:16:03 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@
 #include <fcntl.h>
 
 int g_state;// global variable 
-
-//that's struct will contains in each node a cmd with its args and options 
-//and each node will contains in char *cmd name of cmd its options 
-//and its args and IN/OU files
-// typedef struct s_command t_command;
-// struct s_command{
-//     char *cmd;
-//     char *ifile;
-//     char *ofile;
-//     char *ofile_app;
-//     t_command *next;
-// };
 
 typedef struct s_token t_token;
 struct s_token{
@@ -75,8 +63,6 @@ int ft_check(char *input_user);
 void ft_output(t_command *tmp);
 int check_del(char c);
 void skip_token(char *str, int *i);
-// void check_expand(t_command *node, char *const envp[]);
-// char *ft_expand(char *str,char *const envp[], char *argv[]);
 char *remove_dq(char *str);
 t_command *split_space(char **cmds);
 void free_lines(char **cmds);
@@ -106,24 +92,7 @@ int compare_redrections(char *str);
 int ft_errno(int code);
 int ft_checkredrections(t_command *head);
 void ft_numberofnode(t_cmdfinal *head);
-//int ft_counterspace_back(char *ptr);
-//void add_space(char *str, int *i);
+int cheak_pipes(char *str);
+int cheak_redrections(char *str);
+
 #endif
-
-// cmd{
-    
-// // name_cmd
-// // options
-// // args
-    
-// }
-
-// //this struct is especially for parsing 
-// typedef struct s_cmdfinal t_cmdfinal;
-// struct s_cmdfinal{
-//     // char **fdi;
-//     // char **fdout;
-//     t_files *file;//will contains all names IN/OUT files and heredoc !!! 
-//     char **tab;//will contains name of cmd and its args 
-//     t_cmdfinal *next;
-// };
