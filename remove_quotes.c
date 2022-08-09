@@ -6,14 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 20:24:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 12:49:09 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:57:43 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft/libft.h"
 
-//all fcts have less or equal to 25 lines !!!!
 void put_flag(int *flag, int *i,int *start, char c)
 {
     if(!*flag && (c == '\'' || c == '"'))
@@ -29,8 +28,6 @@ void put_flag(int *flag, int *i,int *start, char c)
     
 }
 
-//25 lines
-//I'm working with it
 char *handle_quotes(char *str)
 {
     char *new;
@@ -44,16 +41,6 @@ char *handle_quotes(char *str)
     while (str[i] != '\0')
     {
         start = i;
-        // if(!flag && (str[i] == '\'' || str[i] == '"'))
-        // {
-        //     flag = str[i];
-        //     start = ++i;
-        // }
-        // else if(flag && flag == str[i])
-        // {
-        //     flag = 0;
-        //     start = ++i;
-        // }
         put_flag(&flag, &i, &start, str[i]);
         if (flag)
         {
@@ -113,17 +100,6 @@ int check_spacecmd(char *str)
     
     cmd = *tab;
     i = 0;
-    //I don't rembeber this fct what it did !!!!
-    //==> khas doubleq and sq yt7ydo ghi fash makykonsh 3andi space 
-    //f name cmd ya3ni first elm f tab d cmd and +++ ila kant haka "ls" khashom yt7yedo ila kan haka 
-    //"ls -la" makhshomsh yt7ydo !!! .. kanden khashom yt7eydooo !!!
-    // if (check_quotes(cmd[0]) != '\0')
-    // {
-    //     if (check_spacecmd(cmd[0]) == 0)
-    //        {
-    //             cmd[0] = handle_quotes(cmd[0]);
-    //        }
-    // }
     while (cmd[i])
     {
         if (check_quotes(cmd[i]) != '\0')

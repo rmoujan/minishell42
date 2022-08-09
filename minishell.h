@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 13:16:03 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:17:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,8 @@ int ft_checkredrections(t_command *head);
 void ft_numberofnode(t_cmdfinal *head);
 int cheak_pipes(char *str);
 int cheak_redrections(char *str);
+t_cmdfinal *create_node_final(t_command *node);
+int	is_redirect(char *str);
+t_files *create_file(char *str, int id);
 
 #endif

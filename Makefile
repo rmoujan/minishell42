@@ -20,6 +20,7 @@ SRC=minishell.c\
 	ft_errorpipes.c\
 	ft_errorredrections.c\
 	number_nodefinal.c\
+	ft_parser_complement.c 
 	libft/ft_strjoin.c\
 	libft/ft_itoa.c\
 	libft/ft_strlen.c\
