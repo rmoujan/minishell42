@@ -1,8 +1,4 @@
-files that still have fct more than 25 lines :
-new_expand.c still !!
 ==> still need check syntaxe error nezid tab 
-
-
 
 *** norm of files ::
 check_syntaxe.c: OK!
@@ -19,13 +15,10 @@ split_pipe.c: OK!
 number_nodefinal.c: OK!
 remove_quotes.c: OK!
 
-
 *** FILES that I still do for them norm ::
 new_expand.c 
 minishell.c
 minishell.h
-
-
 
 NOTE : case must be handles : cmd | space. done 
                             : cat -e |    | cat -e done 

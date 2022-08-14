@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 14:40:02 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/14 16:05:34 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	ft_red(char *str1, char *str2)
 	{
 		if (compare_redrections(str2) == 1)
 			return (1);
+	}
+	if (strcmp(str1, "<>") == 0 || strcmp(str1, "><") == 0)
+	{
+		return (1);
 	}
 	return (0);
 }
