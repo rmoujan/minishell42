@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 14:58:27 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 19:05:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
+
 
 void	free_node(t_command *head)
 {
@@ -50,10 +51,12 @@ void	free_cmdfinal(t_cmdfinal *cmd)
 {
 	t_files		*tmp;
 	t_cmdfinal	*pointer;
-
+	t_cmdfinal	*fr;
+	
 	while (cmd != NULL)
 	{
 		pointer = cmd;
+		fr = cmd;
 		free_lines(cmd->tab);
 		while (cmd->file)
 		{
@@ -62,7 +65,8 @@ void	free_cmdfinal(t_cmdfinal *cmd)
 			free(cmd->file);
 			cmd->file = tmp;
 		}
-		free(cmd);
 		cmd = pointer->next;
+		free(fr);
 	}
 }
+

@@ -1,43 +1,47 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror #-lreadline -L
+CFLAGS= -Wall -Wextra -Werror #-fsanitize=address -g#-lreadline -L
 RM = rm -f
-
-SRC=minishell.c\
-	ft_output.c\
-	ft_parser.c\
-	check_syntaxe.c\
-	split_space.c\
-	free_all.c\
-	split_pipe.c\
-	create_tokens.c\
-	bring_data.c\
-	add_space.c\
-	new_expand.c\
-	remove_quotes.c\
-	edit_cmd.c\
-	check_redrectionserror.c\
-	ft_errorpipes.c\
-	ft_errorredrections.c\
-	number_nodefinal.c\
-	ft_parser_complement.c\
-	libft/ft_strjoin.c\
-	libft/ft_itoa.c\
-	libft/ft_strlen.c\
-	libft/ft_strdup.c\
-	libft/ft_strcmp.c\
-	libft/ft_strncmp.c\
-	libft/ft_substr.c\
-	libft/ft_isdigit.c\
-	libft/ft_split.c\
-	libft/ft_isalnum.c\
+lib = libft/libft.a
+SRC=parsing/minishell.c\
+	parsing/ft_output.c\
+	parsing/ft_parser.c\
+	parsing/check_syntaxe.c\
+	parsing/split_space.c\
+	parsing/free_all.c\
+	parsing/split_pipe.c\
+	parsing/create_tokens.c\
+	parsing/bring_data.c\
+	parsing/add_space.c\
+	parsing/new_expand.c\
+	parsing/remove_quotes.c\
+	parsing/edit_cmd.c\
+	parsing/check_redrectionserror.c\
+	parsing/ft_errorpipes.c\
+	parsing/ft_errorredrections.c\
+	parsing/number_nodefinal.c\
+	parsing/ft_parser_complement.c\
+	execution/function.c\
+	execution/ft_error.c\
+	execution/exec.c\
+	execution/builtin.c\
+	builtins/echo_cmd.c\
+	builtins/pwd_cmd.c\
+	builtins/env_cmd.c\
+	builtins/export_cmd.c\
+	builtins/exit_cmd.c\
+	signals/signal.c\
+	builtins/get_envp.c\
+	builtins/unset_cmd.c\
+	builtins/cd_cmd.c\
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC)  -lreadline $(CFLAGS) $(OBJ) $(lib) -o $(NAME)
+	stty -echoctl
+	@$(CC)  -lreadline $(CFLAGS) $(OBJ) $(lib) -g -o $(NAME)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@

@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:43:24 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 14:53:55 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 17:26:04 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
+
 
 // check is the tab of cmd contains -1 or not
 int	ft_check_null(char **tab)

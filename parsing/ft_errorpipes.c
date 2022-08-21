@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:06:09 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 13:33:30 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 17:26:14 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
+
 
 int	check_spacepipe(char *str)
 {

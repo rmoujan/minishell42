@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 19:01:23 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/05 11:27:39 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 17:26:24 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
+
 
 void ft_output(t_command *data)
 {

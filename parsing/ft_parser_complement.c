@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:13:05 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 17:13:02 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 17:26:30 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
+
 
 int	is_redirect(char *str)
 {

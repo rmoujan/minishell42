@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/07 12:46:03 by lelbakna          #+#    #+#             */
+/*   Updated: 2022/08/21 16:43:27 by lelbakna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+#include "../libft/libft.h"
+
+int	is_builtin(char *value)
+{
+	if (!value)
+		return (1);
+	if (!(ft_strcmp(value, "pwd")) || !(ft_strcmp(value, "export")))
+		return (0);
+	if (!(ft_strcmp(value, "unset")) || !(ft_strcmp(value, "env")))
+		return (0);
+	if (!(ft_strcmp(value, "echo\0")) || !(ft_strcmp(value, "cd\0")))
+		return (0);
+	if (!(ft_strcmp(value, "exit")))
+		return (0);
+	return (1);
+}
+
+void	execute_builtin(t_cmdfinal **cmd_final)
+{
+	if (!(ft_strcmp((*cmd_final)->tab[0], "echo")))//echo\0
+		my_echo(cmd_final);
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "cd")))//cd\0
+		my_cd(cmd_final);
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "pwd")))
+		my_pwd(cmd_final);
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "export")))
+		my_export(cmd_final);
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "unset")))
+		my_unset(cmd_final);
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "env")))
+		my_env(cmd_final);
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "exit")))
+		my_exit(cmd_final);
+}
+
+void	exec_builtin(t_cmdfinal **cmd_final)
+{
+	ft_check_heredoc(*cmd_final);
+	// exit(0);
+	if ((*cmd_final)->next == NULL && is_builtin((*cmd_final)->tab[0]) == 0)
+		execute_builtin(cmd_final);
+	else
+		exec_cmd(cmd_final);
+}

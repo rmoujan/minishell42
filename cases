@@ -66,3 +66,8 @@ cases are "" is different l empty string !!!
 1 : >< ><|cat ==> is done
 2 : ><|cat ==> is done
 3 : """'''"''""''"'"'"""' ls ==> is done
+
+
+//this test case is error :  cat -e Makefile > > outf
+//echo 'dhhbhv $USER njkndv'
+// "" "'''" '' "" '' "'" '"""' ::  not working in check syntaxe error !!!!

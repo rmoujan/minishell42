@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:13:31 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/09 17:52:04 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 17:26:49 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
+
 
 void	ft_numberofnode(t_cmdfinal *head)
 {
