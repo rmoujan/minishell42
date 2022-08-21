@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 19:21:56 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 20:34:26 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void ft_initializeexpand(int *i, int *flag, int *start, char **new)
 //> 54 lines
 //all cases of dollar !! leaks kaynin heennnnnnnnnnna !!!!!
 //I am now custmizing this !!!!
-char *expand_dollar(char *str, char *const envp[], char *argv[])
+char *expand_dollar(char *str, char **envp, char *argv[])
 {
     char *ptr;
     char *new;
@@ -206,7 +206,7 @@ char *change_emptystr(char **str)
 
 
 //22 lines
-void expand_cmd(char ***tab, char *const envp[], char *argv[])
+void expand_cmd(char ***tab, char **envp, char *argv[])
 {
     char **cmd;
     char *ptr;
@@ -247,7 +247,7 @@ void expand_cmd(char ***tab, char *const envp[], char *argv[])
 //starting new version of expand!!
 //u have 3 cases that any token must be start : soit $ or " or ' 
 //23 lines
-void  ft_expand(t_cmdfinal *cmd, char *const envp[], char *argv[])
+void  ft_expand(t_cmdfinal *cmd, char **envp, char *argv[])
 {
        t_cmdfinal *tmp;
        t_files *save;

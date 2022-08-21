@@ -71,3 +71,12 @@ cases are "" is different l empty string !!!
 //this test case is error :  cat -e Makefile > > outf
 //echo 'dhhbhv $USER njkndv'
 // "" "'''" '' "" '' "'" '"""' ::  not working in check syntaxe error !!!!
+
+
+NOTE ::!!! mochkil f free !!
+$ minishell ls
+Makefile        cases           execution       kj              minishell       parsing         tools
+builtins        dsnv            files_norm      libft           minishell.h     signals
+$ minishell ls
+execve: Bad address
+$ minishell 

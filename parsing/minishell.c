@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 19:20:02 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 20:29:01 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,20 @@ int main(int argc, char *argv[], char *envp[])
                 tmp = tmp->next;
               }
               ft_env(cmd_final);// fill tab of env
-            //   ft_checkk(cmd_final);
-              ft_expand(cmd_final, envp, argv);
+              //ft_checkk(cmd_final);
+              ft_expand(cmd_final, cmd_final->env, argv);
               ft_remove(cmd_final);
               edit_cmd(cmd_final);
               ft_numberofnode(cmd_final);
-            cmd_final->save[1] = dup(1);
-            cmd_final->save[0] = dup(0);
-            exec_builtin(&cmd_final);
-            free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
+              cmd_final->save[1] = dup(1);
+              cmd_final->save[0] = dup(0);
+              exec_builtin(&cmd_final);
+              free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             }
             free(str);
             free_node(data);
-    // dup2(cmd_final->save[1], 1);// check
-    // dup2(cmd_final->save[0], 0);
+    dup2(cmd_final->save[1], 1);// check
+    dup2(cmd_final->save[0], 0);
       }
     }
     free(input_user);

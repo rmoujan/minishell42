@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 19:10:38 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/21 20:32:56 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ struct s_cmdfinal{
 	char **tab;
 	int number_node;
 	t_cmdfinal *next;
-	 char		**env;
+	char		**env;
 	char		**cmd;
 	t_node		*envp;
 	int			flag1;
@@ -116,7 +116,7 @@ void		return_space_double(char **str1);
 void		replace_pipe_double(char **ptr);
 void		free_cmdfinal(t_cmdfinal *cmd);
 void		return_space_single(char **str1);
-void		ft_expand(t_cmdfinal *cmd,char *const envp[], char *argv[]);
+void		ft_expand(t_cmdfinal *cmd,char **envp, char *argv[]);
 void		ft_remove(t_cmdfinal *cmd);
 void		check_emptystr(t_command *data);
 void		edit_cmd(t_cmdfinal *cmd);
