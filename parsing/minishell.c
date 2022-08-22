@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 20:29:01 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:24:24 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int main(int argc, char *argv[], char *envp[])
               }
               ft_env(cmd_final);// fill tab of env
               //ft_checkk(cmd_final);
+              // cmd_final->env = envp;
               ft_expand(cmd_final, cmd_final->env, argv);
               ft_remove(cmd_final);
               edit_cmd(cmd_final);
@@ -65,7 +66,7 @@ int main(int argc, char *argv[], char *envp[])
               cmd_final->save[1] = dup(1);
               cmd_final->save[0] = dup(0);
               exec_builtin(&cmd_final);
-              free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
+              //free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             }
             free(str);
             free_node(data);

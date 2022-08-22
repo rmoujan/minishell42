@@ -21,6 +21,8 @@ SRC=parsing/minishell.c\
 	parsing/ft_errorredrections.c\
 	parsing/number_nodefinal.c\
 	parsing/ft_parser_complement.c\
+	parsing/expand_chunks2.c\
+	parsing/expand_chunks1.c\
 	execution/function.c\
 	execution/ft_error.c\
 	execution/exec.c\

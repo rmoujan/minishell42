@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 20:32:56 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:04:39 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@
 # include <sys/types.h>
 /*global variable */
 unsigned long g_state;
+
+
+//I using this on expand !!!
+typedef struct s_expand t_expand;
+struct s_expand{
+	char *new;
+	char *ptr;
+	char *str;
+	char **env;
+	char *av;
+	int i;
+	int start;
+};
 
 typedef struct s_token t_token;
 struct s_token{
@@ -122,8 +135,16 @@ void		check_emptystr(t_command *data);
 void		edit_cmd(t_cmdfinal *cmd);
 void		put_flagquotes(int *flag, int *i,int *start, char c);
 void		ft_numberofnode(t_cmdfinal *head);
+void		chunk0_expand(t_expand *all);
+void		chunk1_expand(t_expand *all);
+void		chunk2_expand(t_expand *all);
+void		chunk3_expand(t_expand *all);
+void		chunk4_expand(t_expand *all);
+void		initial_expand(t_expand *d, char *s, char **en, char **av);
+void		flag_expand(char *str, int i, int *flag);
 char		*ft_addspace(char *ptr);
 char		*remove_dq(char *str);
+char		*get_value(char *ptr, char **envp);
 int			check_del(char c);
 int			ft_check(char *input_user);
 int			ft_counterspace_back(char *ptr);

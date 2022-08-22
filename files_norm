@@ -14,9 +14,11 @@ split_space.c: OK!
 split_pipe.c: OK!
 number_nodefinal.c: OK!
 remove_quotes.c: OK!
+new_expand.c: OK!
+expand_chunks1.c: OK!
+expand_chunks2.c: OK!
 
 *** FILES that I still do for them norm ::
-new_expand.c 
 minishell.c
 minishell.h
 

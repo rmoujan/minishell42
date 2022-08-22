@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:28:21 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/21 20:18:14 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/22 11:27:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,9 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec)
 			exec->path = ft_check_path(exec->s, exec->cmd[0]);
 			if (execve(exec->path, exec->cmd, tmp->env) == -1) // check env
 			{
-				// fprintf(stderr,"%s", exec->path);
-				// fprintf(stderr,"%s", tmp->cmd[0]);
-				// fprintf(stderr,"%s", tmp->env[0]);
+				fprintf(stderr,"cmd %s\n", tmp->cmd[0]);
+				fprintf(stderr,"env %s\n", tmp->env[0]);
+				fprintf(stderr,"path %s\n", exec->path);
 				error_exe();
 			}
 			
