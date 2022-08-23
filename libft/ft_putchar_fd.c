@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmoujan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 14:18:20 by rmoujan           #+#    #+#             */
-/*   Updated: 2021/11/22 18:25:04 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/23 11:53:14 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	write(fd, c, 1);
 }

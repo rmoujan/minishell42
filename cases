@@ -80,3 +80,10 @@ builtins        dsnv            files_norm      libft           minishell.h     
 $ minishell ls
 execve: Bad address
 $ minishell 
+//Note : rl_on_new_line : Tell the update functions that we have 
+//moved onto a new (empty) line, usually after outputting a newline.
+# /////***
+# 	//rl_on_new_line();
+# 	//rl_replace_line("", 0);
+# 	//rl_redisplay();
+#     ===> in case makhdmsh liik ctrl + c b old functions , u must this tree functions

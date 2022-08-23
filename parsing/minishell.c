@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/22 11:24:24 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/23 16:32:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void ft_add_history(char *input_user)
 	return ;
 }
 
+void ini_global()
+{
+  t_global.here = 0;
+  t_global.other = 0;
+}
+
 int main(int argc, char *argv[], char *envp[])
 {
   char *input_user;
@@ -33,12 +39,15 @@ int main(int argc, char *argv[], char *envp[])
   head = get_envp(envp);
   argc = 1;
   g_state = 0;
+  ini_global();
   while (argc)
   {
     ft_i_signals();
-   printf("\033[32;1m");
+  //  printf("\033[32;1m");
     input_user = readline("$ minishell ");
-    printf("\033[0m");
+    // if(!input_user)
+    //     exit(1);
+    // printf("\033[0m");
     end_of_file(input_user);
     ft_add_history(input_user);
     if(input_user[0] != '\0')
@@ -75,7 +84,7 @@ int main(int argc, char *argv[], char *envp[])
       }
     }
     free(input_user);
-            // system("leaks minishell");
+    // system("leaks minishell");
 }
 	return (0);
 }

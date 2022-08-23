@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/22 11:04:39 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/23 16:35:27 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # include <sys/types.h>
 /*global variable */
 unsigned long g_state;
+//global struct
+struct s_global{
+	int here;
+	int other;
+} t_global;
+
 
 
 //I using this on expand !!!
@@ -204,4 +210,6 @@ void	ft_check_heredoc(t_cmdfinal *cmd_final);
 
 
 void ft_checkk(t_cmdfinal *cmd_final);
+
+void		rl_replace_line(char *str, int d);
 #endif

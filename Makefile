@@ -3,6 +3,7 @@ CC=gcc
 CFLAGS= -Wall -Wextra -Werror #-fsanitize=address -g#-lreadline -L
 RM = rm -f
 lib = libft/libft.a
+RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include
 SRC=parsing/minishell.c\
 	parsing/ft_output.c\
 	parsing/ft_parser.c\
@@ -42,8 +43,8 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@$(CC)  $(RDF) $(CFLAGS) $(OBJ) $(lib)  -o $(NAME)
 	stty -echoctl
-	@$(CC)  -lreadline $(CFLAGS) $(OBJ) $(lib) -g -o $(NAME)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
