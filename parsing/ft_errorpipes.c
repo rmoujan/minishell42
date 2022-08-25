@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:06:09 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/23 16:43:24 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/23 16:45:38 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_spacepipe(char *str)
 	}
 	return (1);
 }
-//must recode this 7it hiya li katl3 liya error when i wrote echo "|||"
+//must recode this 7it hiya li katl3 liya error when i wrote echo "|||" ==> done 
 int	check_spaceafterpipe(char *str)
 {
 	int	i;

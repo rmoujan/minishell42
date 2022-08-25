@@ -24,6 +24,7 @@ SRC=parsing/minishell.c\
 	parsing/ft_parser_complement.c\
 	parsing/expand_chunks2.c\
 	parsing/expand_chunks1.c\
+	parsing/check_specialchar.c\
 	execution/function.c\
 	execution/ft_error.c\
 	execution/exec.c\

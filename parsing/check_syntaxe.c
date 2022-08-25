@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 17:25:53 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:04:41 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ int	ft_errno(int code)
 	if (code == 3)
 	{
 		output_error("syntax error near unexpected token 'newline'");
+		return (0);
+	}
+	if (code == 6)
+	{
+		output_error("syntax error near unexpected token ;");
 		return (0);
 	}
 	if (code == 4)
@@ -98,5 +103,7 @@ int	ft_check(char *str)
 		return (ft_errno(1));
 	if (cheak_space(str) == 0)
 		return (ft_errno(4));
+	if (check_specialchar(str) == 6)
+		return (ft_errno(6));
 	return (1);
 }

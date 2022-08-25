@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:36:22 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/23 16:29:39 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/25 12:42:57 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	int_handler()
 	}
 	else
 	{
+		// t.global.exit = 2;
 		//when u are in heredoc and wanted to exit from herdoc
 		//handling heredoc, should change the value of flag (t_global.here) and close all pipes of heredoc
 	}
