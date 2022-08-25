@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:58:03 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/22 11:51:44 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:29:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*get_value(char *ptr, char **envp)
 {
 	char	**tab;
 	char	*new;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -29,8 +30,10 @@ char	*get_value(char *ptr, char **envp)
 			free(tab[0]);
 			free(ptr);
 			free(new);
+			tmp = ft_strdup(tab[1]);
+			free(tab[1]);
 			free(tab);
-			return (tab[1]);
+			return (tmp);
 		}
 		i++;
 	}
