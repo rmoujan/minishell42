@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 08:56:04 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/21 14:25:49 by lelbakna         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:48:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ int	my_echo(t_cmdfinal **cmd_final)
 	 	ft_putchar_fd('\n', 1);
 		// system("leaks minishell");
 		// while (1);
+	// int i;
+	i = 0;
+	while ((*cmd_final)->tab[i] != '\0')
+	{
+		free((*cmd_final)->tab[i]);
+		i++;
+	}
+	free((*cmd_final)->tab);
 	return (0);
 }
 // can you handle case of echo --- --- :)?

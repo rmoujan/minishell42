@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:22:19 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/21 19:19:14 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 18:53:49 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	creat_node(t_node **head, char *data)
 		}
 				last_node->next = new;
 	}
+	// free(new);//**
 }
 
 t_node	*get_envp(char **envp)
@@ -57,48 +58,45 @@ int	ft_lssize(t_node *lst)
 	int	i;
 
 	i = 0;
-	while (lst && lst != NULL)// segfault
+	while (lst != NULL)// segfault
 	{
 		i++;
 		lst = lst->next;
 	}
+	// if (i == 0)
+	// 	perror("env");
 	return (i);
 }
 
-void ft_env(t_cmdfinal *cmd_final)
+void ft_env(t_cmdfinal **cmd_final)
 {
 	t_node	*tmp;
 	t_cmdfinal *list;
 	int		j;
 	int		i;
 	i = 0;
-	list = cmd_final;
-	tmp = cmd_final->envp;//lk
+	list = (*cmd_final);
+	tmp = *(*cmd_final)->envp;//lk
+	// if (tmp == NULL)
+	// {
+	// 	printf("all is done ");
+	// 	exit(1);
+	// }
 	j = ft_lssize(tmp);
-	cmd_final->env = (char **)malloc((sizeof(char*) * j));// check + 1 if not segfault
+	(*cmd_final)->env = (char **)malloc((sizeof(char*) * (j + 1)));// check + 1 if not segfault// here
+	if (!(*cmd_final)->env)
+		return;
 	while (tmp)
 	{
-		cmd_final->env[i] = ft_strdup(tmp->data);
+		(*cmd_final)->env[i] = tmp->data; //remove strdup ==>(*cmd_final)->env[i] = ft_strdup(tmp->data);
 		i++;
 		tmp = tmp->next;
 	}
-	// cmd_final->env[i] = NULL;
+	(*cmd_final)->env[i] = NULL;
 	while (list)
 	{
-		list->env = cmd_final->env;
+		list->env = (*cmd_final)->env;
 		list = list->next;
 	}
-	
 	return;
-}
-void ft_checkk(t_cmdfinal *cmd_final)
-{
-	int i;
-	i = 0;
-	while (cmd_final->env[i])
-	{
-		fprintf(stderr,"***%s\n", cmd_final->env[i]);
-		i++;
-	}
-	
 }

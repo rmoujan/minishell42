@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:36:22 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 16:00:50 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 18:37:22 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	int_handler()
 //quit 
 void	quit_handler()
 {
-	t_global.state = 131;
+	// t_global.state = 131;
 	ft_putstr_fd("Quit\n", 1);
 	// write(1, "minishell>\n", ft_strlen("minishell>\n"));
 }
@@ -50,7 +50,7 @@ void	quit_handler()
 void	interrupt_process(int signal)
 {
 	(void)signal;
-	t_global.state = 130;
+	// t_global.state = 130;
 	write(1, "\n", 1);
 }
 

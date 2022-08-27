@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/27 16:00:06 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 19:12:37 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ struct s_global{
 	int signal_s;
 	int			fd[2];
 	unsigned long state;
+	char *g_pwd;
 } t_global;
 
 
@@ -91,7 +92,7 @@ struct s_cmdfinal{
 	t_cmdfinal *next;
 	char		**env;
 	char		**cmd;
-	t_node		*envp;
+	t_node		**envp;
 	int			flag1;
 	int			flag2;
 	int			save[2];
@@ -169,6 +170,8 @@ int			check_specialchar(char *str);
 int			check_reds(char c);
 int			countfront(char *ptr);
 int			countback(char *ptr);
+char	*expand_dollar(char *s, char **en, char *av[]);
+int		check_dollar(char *str);
  
 /*signal*/ //check
 void	int_handler();
@@ -189,13 +192,15 @@ int     my_exit(t_cmdfinal **cmd_final);
 int     my_export(t_cmdfinal **cmd_final);
 int     my_unset(t_cmdfinal **cmd_final);
 int     my_env(t_cmdfinal **cmd_final);
-void	ft_env(t_cmdfinal *cmd_final);
+void	ft_env(t_cmdfinal **cmd_final);
 void	creat_node(t_node **head, char *data);
 void	print_list(t_node *head);
 int     builtin(t_cmdfinal **cmd_final);
 void	printlist(t_node *head);
 int     is_builtin(char *value);
 void	execute_builtin(t_cmdfinal **cmd_final);
+int	ft_search(char *str);
+void	ft_pwd(t_cmdfinal **cmd_final);
 
 /*execution*/
 
@@ -212,10 +217,12 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec);
 void	ft_pipe(t_cmdfinal *cmd_final, t_var *x);
 void	ft_openfile(t_cmdfinal *cmd_final);
 void	exec_cmd(t_cmdfinal **cmd_final);
-int		exec_builtin(t_cmdfinal **cmd_final);
+int    exec_builtin(t_cmdfinal **cmd_final, char **av);
 void	ft_dup_file(t_cmdfinal *cmd_final);
-int		ft_check_heredoc(t_cmdfinal *cmd_final);
+int		ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
 
+/*free*/
+void	free_tab(t_cmdfinal **cmd_final);
 
 void ft_checkk(t_cmdfinal *cmd_final);
 

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 19:38:20 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 19:08:53 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,33 @@ int	ft_errno(int code)
 	if (code == 1)
 	{
 		output_error("syntax error near unexpected token '");
+		t_global.state = 258;
 		return (0);
 	}
 	if (code == 2)
 	{
 		output_error("syntax error near unexpected token '|'");
+		t_global.state = 258;
 		return (0);
 	}
 	if (code == 3)
 	{
 		output_error("syntax error near unexpected token 'newline'");
+		t_global.state = 258;
 		return (0);
 	}
 	if (code == 6)
 	{
 		output_error("syntax error near unexpected token ;");
+		t_global.state = 258;
 		return (0);
 	}
 	if (code == 4)
-		return (0);
+	{
+		t_global.state = 258;
+		return (0);///check ret
+	}
+	
 	return (1);
 }
 

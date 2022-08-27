@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/27 16:12:36 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 19:12:52 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int main(int argc, char *argv[], char *envp[])
               tmp = cmd_final;
               while (tmp)
               {
-                tmp->envp = head;
+                tmp->envp = &head;
                 tmp = tmp->next;
               }
-              ft_env(cmd_final);// fill tab of env
+              ft_env(&cmd_final);// fill tab of env
               //ft_checkk(cmd_final);
               // cmd_final->env = envp;
               ft_expand(cmd_final, cmd_final->env, argv);
@@ -79,7 +79,7 @@ int main(int argc, char *argv[], char *envp[])
               ft_numberofnode(cmd_final);
               // cmd_final->save[1] = dup(1);new commented
               // cmd_final->save[0] = dup(0);new commented
-              exec_builtin(&cmd_final);
+              exec_builtin(&cmd_final, argv);
               //free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             }
             free(str);

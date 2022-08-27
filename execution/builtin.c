@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:46:03 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 15:58:40 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 18:58:00 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void	execute_builtin(t_cmdfinal **cmd_final)
 		my_exit(cmd_final);
 }
 
-int	exec_builtin(t_cmdfinal **cmd_final)
+int	exec_builtin(t_cmdfinal **cmd_final, char **av)
 {
-	if(!ft_check_heredoc(*cmd_final))
+	if(!ft_check_heredoc(*cmd_final, av))
 		return (0);
 	if ((*cmd_final)->next == NULL && is_builtin((*cmd_final)->tab[0]) == 0)
+	{
+		ft_dup_file((*cmd_final));
 		execute_builtin(cmd_final);
+	}
 	else
 		exec_cmd(cmd_final);
 	return (1);

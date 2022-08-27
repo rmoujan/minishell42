@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:28:21 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 16:10:26 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 19:06:44 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_openfile(t_cmdfinal *tmp)
 			cmd_final->flag2 = 1;
 			if (dup2(t_global.fd[0], 0) < 0)// check  return dup2
 				ft_str_error("Failed to redirect stdin\n", NULL);
+			t_global.state = 0;
 			// close(cmd_final->fd[0]);
 			// close(cmd_final->fd[1]);
 		}
@@ -43,6 +44,7 @@ void	ft_openfile(t_cmdfinal *tmp)
 				cmd_final->flag2 = 1;
 			if (dup2(cmd_final->infile, 0) < 0)
 				ft_str_error("Failed to redirect stdin.\n", NULL);
+			t_global.state = 0;	
 			close(cmd_final->infile);
 		}
 		else if (file->id == 2)
@@ -53,6 +55,7 @@ void	ft_openfile(t_cmdfinal *tmp)
 				cmd_final->flag1 = 1;
 			if (dup2(cmd_final->outfile, 1) < 0)
 				ft_str_error("Failed to redirect stdout.\n", NULL);
+			t_global.state = 0;
 			close(cmd_final->outfile);
 		}
 		else if (file->id == 4)
@@ -63,13 +66,14 @@ void	ft_openfile(t_cmdfinal *tmp)
 			cmd_final->flag1 = 1;
 			if (dup2(cmd_final->outfile, 1) < 0)
 				ft_str_error("Failed to redirect stdout", NULL);
+			t_global.state = 0;
 			close(cmd_final->outfile);
 		}
 		file = file->next;
 	}
 }
 
-int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name)
+int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av)
 {
 	char *read_in;
 	(void)tmp;
@@ -80,6 +84,8 @@ int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name)
 			return (0);
 		if(check_herdoc(read_in) == 1 || !ft_strcmp(read_in, name))
 			break;
+		if (check_dollar(read_in) != 0)
+			read_in = expand_dollar(read_in, tmp->env, av);
 		ft_putendl_fd(read_in, t_global.fd[1]);
 		free(read_in);
 	}
@@ -91,7 +97,7 @@ int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name)
 	return (1);
 }
 
-int	ft_check_heredoc(t_cmdfinal *cmd_final)
+int	ft_check_heredoc(t_cmdfinal *cmd_final, char **av)
 {
 	t_cmdfinal	*tmp;
 	t_files *file;
@@ -107,7 +113,7 @@ int	ft_check_heredoc(t_cmdfinal *cmd_final)
 				t_global.herdoc = 1;
 				if (pipe(t_global.fd) < 0)
 					perror("pipe");
-				if(!ft_read_from_heredoc(tmp, file->name))
+				if(!ft_read_from_heredoc(tmp, file->name, av))
 					return (0);
 			}
 			t_global.herdoc = 0;
@@ -133,7 +139,6 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec)
 	tmp = *cmd_final;
 	last_fd = -1;
 	i = 0;
-	exec->s = ft_split(serach_path(*cmd_final), ':');
 	exec->child_pids = malloc(sizeof(int) * (*cmd_final)->number_node);
 	while (tmp)
 	{
@@ -143,9 +148,13 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec)
 		exec->child = fork();
 		exec->child_pids[i] = exec->child;
 		if (exec->child < 0)
-			ft_str_error("Failed Fork", NULL);
+		{
+			write(2, "$ minishell: fork: Resource temporarily unavailable\n", 52);
+				return;
+		}
 		if (exec->child == 0)
 		{
+			exec->s = ft_split(serach_path(*cmd_final), ':');
 			ft_e_signals();
 			ft_dup_file(tmp);
 			if (last_fd != -1 && tmp->flag2 != 1)
@@ -188,10 +197,24 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec)
 			last_fd = exec->fd[0];
 			// if (tmp->next != NULL)
 			// 	close(exec->fd[0]);
+			int h = 0;
+			while (tmp->tab[h])
+			{
+				free(tmp->tab[h]);
+				h++;
+			}
+			free(tmp->tab);
 		}
 		i++;
 		tmp = tmp->next;
 	}
+	// int h = 0; 
+	// 	while (exec->s[h] != '\0')//**free
+	// 	{
+	// 		free(exec->s[h]);
+	// 		h++;
+	// 	}
+	// 	free(exec->s);copy to function
 }
 
 void	exec_cmd(t_cmdfinal **cmd_final)
@@ -208,8 +231,15 @@ void	exec_cmd(t_cmdfinal **cmd_final)
 		waitpid(exec.child_pids[i], &status, 0);
 				if (WIFEXITED(status))
 					t_global.state = WEXITSTATUS(status);
+		if (status == 2)
+			t_global.state = 128 + status;
+		else if (status == 3)
+		{
+			printf("Quit: %d\n", status);
+			t_global.state = 128 + status;
+		}
 		i++;
 	}
-	
+	free(exec.child_pids);
 	return ;
 }
