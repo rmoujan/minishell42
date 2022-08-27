@@ -6,14 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:19:21 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 17:25:59 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/26 19:38:40 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
-
+//new norm
 t_token	*create_token(char *str)
 {
 	t_token	*node_token;

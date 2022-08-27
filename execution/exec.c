@@ -6,13 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:28:21 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/22 11:27:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:10:26 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
 
+int check_herdoc(char *str);
 void	ft_openfile(t_cmdfinal *tmp)
 {
 	t_cmdfinal	*cmd_final;
@@ -29,7 +30,7 @@ void	ft_openfile(t_cmdfinal *tmp)
 		if (file->id == 3)
 		{
 			cmd_final->flag2 = 1;
-			if (dup2(cmd_final->fd[0], 0) < 0)// check  return dup2
+			if (dup2(t_global.fd[0], 0) < 0)// check  return dup2
 				ft_str_error("Failed to redirect stdin\n", NULL);
 			// close(cmd_final->fd[0]);
 			// close(cmd_final->fd[1]);
@@ -68,25 +69,29 @@ void	ft_openfile(t_cmdfinal *tmp)
 	}
 }
 
-void	ft_read_from_heredoc(t_cmdfinal *tmp, char *name)
+int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name)
 {
 	char *read_in;
+	(void)tmp;
 	while (1)
 	{
 		read_in = readline("> ");
-		if (read_in == NULL || ft_strcmp(read_in, name) == 0)
-			break;	
-		ft_putendl_fd(read_in, tmp->fd[1]);
- 
+		if (!check_herdoc(read_in))
+			return (0);
+		if(check_herdoc(read_in) == 1 || !ft_strcmp(read_in, name))
+			break;
+		ft_putendl_fd(read_in, t_global.fd[1]);
 		free(read_in);
 	}
-	close(tmp->fd[1]);
-	dup2(tmp->save[1], 1);
+	close(t_global.fd[1]);
+	//close(t_global.fd[0]);
+	//dup2(tmp->save[1], 1);
 	// dup2(cmd_final->save[0], 0);
 	free(read_in);
+	return (1);
 }
 
-void	ft_check_heredoc(t_cmdfinal *cmd_final)
+int	ft_check_heredoc(t_cmdfinal *cmd_final)
 {
 	t_cmdfinal	*tmp;
 	t_files *file;
@@ -99,14 +104,18 @@ void	ft_check_heredoc(t_cmdfinal *cmd_final)
 		{
 			if (file->id == 3)
 			{
-				if (pipe(tmp->fd) < 0)
+				t_global.herdoc = 1;
+				if (pipe(t_global.fd) < 0)
 					perror("pipe");
-				ft_read_from_heredoc(tmp, file->name);
+				if(!ft_read_from_heredoc(tmp, file->name))
+					return (0);
 			}
+			t_global.herdoc = 0;
 			file = file->next;
 		}
 		tmp = tmp->next;
 	}
+	return (1);
 }
 
 void	ft_dup_file(t_cmdfinal *cmd_final)
@@ -163,9 +172,9 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec)
 			exec->path = ft_check_path(exec->s, exec->cmd[0]);
 			if (execve(exec->path, exec->cmd, tmp->env) == -1) // check env
 			{
-				fprintf(stderr,"cmd %s\n", tmp->cmd[0]);
-				fprintf(stderr,"env %s\n", tmp->env[0]);
-				fprintf(stderr,"path %s\n", exec->path);
+				// fprintf(stderr,"cmd %s\n", tmp->cmd[0]);
+				// fprintf(stderr,"env %s\n", tmp->env[0]);
+				// fprintf(stderr,"path %s\n", exec->path);
 				error_exe();
 			}
 			
@@ -198,8 +207,9 @@ void	exec_cmd(t_cmdfinal **cmd_final)
 	{
 		waitpid(exec.child_pids[i], &status, 0);
 				if (WIFEXITED(status))
-					g_state = WEXITSTATUS(status);
+					t_global.state = WEXITSTATUS(status);
 		i++;
 	}
+	
 	return ;
 }

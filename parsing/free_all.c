@@ -6,14 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 19:05:32 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/26 19:39:42 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
-
+//new norm
 void	free_node(t_command *head)
 {
 	t_command	*tmp;
@@ -52,7 +51,7 @@ void	free_cmdfinal(t_cmdfinal *cmd)
 	t_files		*tmp;
 	t_cmdfinal	*pointer;
 	t_cmdfinal	*fr;
-	
+
 	while (cmd != NULL)
 	{
 		pointer = cmd;
@@ -69,4 +68,3 @@ void	free_cmdfinal(t_cmdfinal *cmd)
 		free(fr);
 	}
 }
-

@@ -6,14 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:06:09 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/23 16:45:38 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/26 19:42:15 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
-
+//new norm
 int	check_spacepipe(char *str)
 {
 	int	i;
@@ -36,22 +35,27 @@ int	check_spacepipe(char *str)
 	}
 	return (1);
 }
-//must recode this 7it hiya li katl3 liya error when i wrote echo "|||" ==> done 
+
+void	flag_pipe(int *flag, char c)
+{
+	if (!*flag && (c == '\'' || c == '"'))
+		*flag = c;
+	else if (*flag && c == *flag)
+		*flag = 0;
+}
+
 int	check_spaceafterpipe(char *str)
 {
 	int	i;
 	int	flag;
-	int pi;
+	int	pi;
 
 	i = 0;
 	flag = 0;
 	pi = 0;
 	while (str[i] != '\0')
 	{
-		if (!flag && (str[i] == '\'' || str[i] == '"'))
-			flag = str[i];
-		else if (flag && str[i] == flag)
-			flag = 0;
+		flag_pipe(&flag, str[i]);
 		if (str[i++] == '|' && flag == 0)
 		{
 			pi = 0;

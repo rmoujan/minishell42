@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/25 09:40:04 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:00:06 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@
 #include <fcntl.h>
 # include <sys/types.h>
 /*global variable */
-unsigned long g_state;
 //global struct
 struct s_global{
 	int here;
-	int other;
+	int herdoc;
+	int dup_input;
+	int signal_s;
+	int			fd[2];
+	unsigned long state;
 } t_global;
 
 
@@ -151,6 +154,7 @@ void		flag_expand(char *str, int i, int *flag);
 char		*ft_addspace(char *ptr);
 char		*remove_dq(char *str);
 char		*get_value(char *ptr, char **envp);
+char		*ft_copy1(char *p);
 int			check_del(char c);
 int			ft_check(char *input_user);
 int			ft_counterspace_back(char *ptr);
@@ -162,6 +166,9 @@ int			cheak_pipes(char *str);
 int			cheak_redrections(char *str);
 int			is_redirect(char *str);
 int			check_specialchar(char *str);
+int			check_reds(char c);
+int			countfront(char *ptr);
+int			countback(char *ptr);
  
 /*signal*/ //check
 void	int_handler();
@@ -205,9 +212,9 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec);
 void	ft_pipe(t_cmdfinal *cmd_final, t_var *x);
 void	ft_openfile(t_cmdfinal *cmd_final);
 void	exec_cmd(t_cmdfinal **cmd_final);
-void	exec_builtin(t_cmdfinal **cmd_final);
+int		exec_builtin(t_cmdfinal **cmd_final);
 void	ft_dup_file(t_cmdfinal *cmd_final);
-void	ft_check_heredoc(t_cmdfinal *cmd_final);
+int		ft_check_heredoc(t_cmdfinal *cmd_final);
 
 
 void ft_checkk(t_cmdfinal *cmd_final);

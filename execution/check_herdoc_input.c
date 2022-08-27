@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bring_data.c                                       :+:      :+:    :+:   */
+/*   check_herdoc_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 12:11:11 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 19:37:06 by rmoujan          ###   ########.fr       */
+/*   Created: 2022/08/27 15:00:02 by rmoujan           #+#    #+#             */
+/*   Updated: 2022/08/27 15:01:59 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-//new norm
-char	**split_pipe(char *input_user)
+
+int check_herdoc(char *str)
 {
-	char	**cmds;
-
-	replace_pipe_double(&input_user);
-	cmds = ft_split(input_user, '|');
-	return_pipes(&cmds);
-	return (cmds);
-}
-
-t_command	*ft_bring_data(char *input_user)
-{
-	t_command	*data;
-	char		**cmds;
-
-	cmds = split_pipe(input_user);
-	data = split_space(cmds);
-	free_lines(cmds);
-	return (data);
+    if (!str)
+	{
+		t_global.herdoc = 0;
+		if (t_global.signal_s == 2)
+		{
+			dup(t_global.dup_input);
+			t_global.signal_s = 0;
+			free(str);
+			return (0);
+		}
+		else
+		{
+			free(str);
+			return (1);
+		}
+	}
+	return (2);
 }

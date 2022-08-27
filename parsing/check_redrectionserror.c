@@ -6,13 +6,12 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/25 09:33:51 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 15:44:00 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
 
 int	compare_redrections(char *str)
 {
@@ -47,6 +46,7 @@ int	chunk_checkredrections(t_token *save, t_command *tmp)
 		{
 			tmp->data = save;
 			ft_errno(3);
+			printf("11\n");
 			return (-1);
 		}
 	}
@@ -72,7 +72,9 @@ int	ft_checkredrections(t_command *head)
 		while (tmp->data)
 		{
 			if (chunk_checkredrections(save, tmp) == -1)
+			{
 				return (-1);
+			}
 			tmp->data = tmp->data->next;
 		}
 		tmp->data = save;

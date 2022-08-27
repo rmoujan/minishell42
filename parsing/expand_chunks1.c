@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:55:45 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/22 11:56:02 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:13:07 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	chunk3_expand(t_expand *all)
 {
 	char	*ptr;
 
-	ptr = ft_itoa(g_state);
+	ptr = ft_itoa(t_global.state);
 	all->new = ft_strjoin(all->new, ptr);
 	all->start += 2;
 	all->i += 2;

@@ -6,35 +6,40 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 09:34:04 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/25 14:21:29 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 12:14:11 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-//parfois had specail char rah ila jaw m3a ls kat executa so I cant assume that theses special are error !!!!!
-int special_char(char c)
+//new norm !!
+int	special_char(char c)
 {
-    if (c == ';' || c == '/')
-        return 1;
-    return 0;
+	if (c == ';' || c == '/')
+		return (1);
+	return (0);
+}
+
+void	flag_semicolon(int *flag, char c)
+{
+	if (!*flag && (c == '\'' || c == '"'))
+		*flag = c;
+	else if (*flag && c == *flag)
+		*flag = 0;
 }
 
 int	check_spaceaftersemicolon(char *str)
 {
 	int	i;
 	int	flag;
-	int pi;
+	int	pi;
 
 	i = 0;
 	flag = 0;
 	pi = 0;
 	while (str[i] != '\0')
 	{
-		if (!flag && (str[i] == '\'' || str[i] == '"'))
-			flag = str[i];
-		else if (flag && str[i] == flag)
-			flag = 0;
+		flag_semicolon(&flag, str[i]);
 		if (str[i++] == ';' && flag == 0)
 		{
 			pi = 0;
@@ -51,12 +56,11 @@ int	check_spaceaftersemicolon(char *str)
 	return (1);
 }
 
-
-//check any special char that is maybe cause an error syntaxe like ; \ ... 
-int check_specialchar(char *str)
+int	check_specialchar(char *str)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
+
 	i = 0;
 	flag = 0;
 	if (str[0] == ';')
@@ -69,13 +73,11 @@ int check_specialchar(char *str)
 			flag = str[i];
 		else if (flag && str[i] == flag)
 			flag = 0;
-		// if (special_char(str[i]) && !flag)
-		// {
-		// 	return (6);
-		// }
 		if (str[i] == ';' && str[i + 1] != '\0' && str[i + 1] == ';' && !flag)
 			return (6);
 		i++;
 	}
+	// if (str[ft_strlen(str) - 1] == ';')
+	// 	return (6);
 	return (1);
 }

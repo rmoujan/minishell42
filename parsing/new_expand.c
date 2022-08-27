@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/22 11:46:35 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/26 18:31:23 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char	*expand_dollar(char *s, char **en, char *av[])
 			chunk2_expand(d);
 		else if (s[d->i] == '$' && s[d->i + 1] == '?' && flag != '\'')
 			chunk3_expand(d);
-		else if (s[d->i] == '$' && (s[d->i + 1] == '\'' || s[d->i + 1] == '"'))
-			d->start = ++d->i;
+		// else if (s[d->i] == '$' && (s[d->i + 1] == '\'' || s[d->i + 1] == '"'))new deleted
+		// 	d->start = ++d->i;
 		else if (s[d->i + 1] == '\0')
 			chunk4_expand(d);
 		else

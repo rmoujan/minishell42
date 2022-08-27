@@ -6,14 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:13:31 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 17:26:49 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/26 19:46:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
-
+//new norm
 void	ft_numberofnode(t_cmdfinal *head)
 {
 	t_cmdfinal	*cmd;
@@ -34,17 +33,16 @@ void	ft_numberofnode(t_cmdfinal *head)
 	}
 }
 
-void put_flagquotes(int *flag, int *i,int *start, char c)
+void	put_flagquotes(int *flag, int *i, int *start, char c)
 {
-    if(!*flag && (c == '\'' || c == '"'))
-    {
-        *flag = c;
-        *start = ++(*i);
-    }
-    else if(*flag && *flag == c)
-    {
-        *flag = 0;
-        *start = ++(*i);
-    }
-    
+	if (!*flag && (c == '\'' || c == '"'))
+	{
+		*flag = c;
+		*start = ++(*i);
+	}
+	else if (*flag && *flag == c)
+	{
+		*flag = 0;
+		*start = ++(*i);
+	}
 }

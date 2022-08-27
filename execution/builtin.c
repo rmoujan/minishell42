@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:46:03 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/21 16:43:27 by lelbakna         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:58:40 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ void	execute_builtin(t_cmdfinal **cmd_final)
 		my_exit(cmd_final);
 }
 
-void	exec_builtin(t_cmdfinal **cmd_final)
+int	exec_builtin(t_cmdfinal **cmd_final)
 {
-	ft_check_heredoc(*cmd_final);
-	// exit(0);
+	if(!ft_check_heredoc(*cmd_final))
+		return (0);
 	if ((*cmd_final)->next == NULL && is_builtin((*cmd_final)->tab[0]) == 0)
 		execute_builtin(cmd_final);
 	else
 		exec_cmd(cmd_final);
+	return (1);
 }

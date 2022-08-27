@@ -6,14 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/25 14:04:41 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/26 19:38:20 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
-
+//new norm
 void	output_error(char *str)
 {
 	printf("\033[0;31m");
@@ -64,7 +63,6 @@ int	cheak_space(char *str)
 	return (counter);
 }
 
-//23 lines
 int	cheak_quotes(char *str)
 {
 	int	i;

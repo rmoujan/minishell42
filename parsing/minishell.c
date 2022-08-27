@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/23 16:32:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:12:36 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void ft_add_history(char *input_user)
 void ini_global()
 {
   t_global.here = 0;
-  t_global.other = 0;
+  t_global.herdoc = 0;
+  t_global.dup_input = dup(0);//for save the input standard 
+  t_global.signal_s = 0;
+  t_global.state = 0;
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -38,7 +41,6 @@ int main(int argc, char *argv[], char *envp[])
   t_cmdfinal  *tmp;
   head = get_envp(envp);
   argc = 1;
-  g_state = 0;
   ini_global();
   while (argc)
   {
@@ -56,8 +58,11 @@ int main(int argc, char *argv[], char *envp[])
       {
             str = ft_addspace(input_user);
             data = ft_bring_data(str);
+            //printf("befor check red \n");
+            //ft_output(data);
             if (ft_checkredrections(data) != -1)
             {
+            //  printf("after check red \n");
               cmd_final = ft_parser(data);
               tmp = cmd_final;
               while (tmp)
@@ -72,15 +77,17 @@ int main(int argc, char *argv[], char *envp[])
               ft_remove(cmd_final);
               edit_cmd(cmd_final);
               ft_numberofnode(cmd_final);
-              cmd_final->save[1] = dup(1);
-              cmd_final->save[0] = dup(0);
+              // cmd_final->save[1] = dup(1);new commented
+              // cmd_final->save[0] = dup(0);new commented
               exec_builtin(&cmd_final);
               //free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
             }
             free(str);
+           // printf("test 2\n");
             free_node(data);
-    dup2(cmd_final->save[1], 1);// check
-    dup2(cmd_final->save[0], 0);
+           // printf("test 1\n");
+            // dup2(cmd_final->save[1], 1);// new commented
+            // dup2(cmd_final->save[0], 0);//new commented
       }
     }
     free(input_user);

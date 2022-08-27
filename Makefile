@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror #-fsanitize=address -g#-lreadline -L
+CFLAGS= -Wall -Wextra -Werror -fsanitize=address -g#-lreadline -L
 RM = rm -f
 lib = libft/libft.a
 RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include
@@ -25,8 +25,10 @@ SRC=parsing/minishell.c\
 	parsing/expand_chunks2.c\
 	parsing/expand_chunks1.c\
 	parsing/check_specialchar.c\
+	parsing/addspace_complement.c\
 	execution/function.c\
 	execution/ft_error.c\
+	execution/check_herdoc_input.c\
 	execution/exec.c\
 	execution/builtin.c\
 	builtins/echo_cmd.c\

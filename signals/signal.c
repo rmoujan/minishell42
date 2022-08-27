@@ -6,41 +6,43 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:36:22 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/25 12:42:57 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:00:50 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
+//new changed by reshe !!
 //ctrl + c
 void	int_handler()
 {
-	g_state = 130;
-	if (t_global.here == 0)
+	if (t_global.herdoc == 0)
 	{
 		//when you are not in heredoc
+		t_global.state = 130;
 		ft_putchar_fd('\n',1);// check stdout or std_error
-		//rl_on_new_line();
-		//rl_replace_line("", 0);
-		//rl_redisplay();
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 		//ft_putstr_fd("\033[32;1m", 1);
-		ft_putstr_fd("$ minishell \033[0;37m", 1);
+		//ft_putstr_fd("$ minishell \033[0;37m", 1);
 		//ft_putstr_fd("$ minishell ", 1);
 		//ft_putstr_fd("\033[0;37m", 1);		
 	}
-	else
+	else if (t_global.herdoc == 1)
 	{
-		// t.global.exit = 2;
-		//when u are in heredoc and wanted to exit from herdoc
-		//handling heredoc, should change the value of flag (t_global.here) and close all pipes of heredoc
+		t_global.signal_s = 2;
+		t_global.state = 1;	
+		close(t_global.fd[0]);
+		close(t_global.fd[1]);
+		close(0);
 	}
 }
 
 //quit 
 void	quit_handler()
 {
-	g_state = 131;
+	t_global.state = 131;
 	ft_putstr_fd("Quit\n", 1);
 	// write(1, "minishell>\n", ft_strlen("minishell>\n"));
 }
@@ -48,7 +50,7 @@ void	quit_handler()
 void	interrupt_process(int signal)
 {
 	(void)signal;
-	g_state = 130;
+	t_global.state = 130;
 	write(1, "\n", 1);
 }
 
