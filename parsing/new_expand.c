@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/29 01:45:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:26:36 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 char	*expand_dollar(char *s, char **en, char *av[])
 {
 	t_expand	*d;
-	char *new;
 	int			flag;
 
 	flag = 0;
@@ -38,9 +37,7 @@ char	*expand_dollar(char *s, char **en, char *av[])
 		else
 			d->i++;
 	}
-	new = d->new;
-	free(d);
-	return (new);
+	return (chunk5_expand(d));
 }
 
 int	check_dollar(char *str)

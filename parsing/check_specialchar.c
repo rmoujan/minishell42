@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 09:34:04 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/27 12:14:11 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:37:31 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,5 @@ int	check_specialchar(char *str)
 			return (6);
 		i++;
 	}
-	// if (str[ft_strlen(str) - 1] == ';')
-	// 	return (6);
 	return (1);
 }

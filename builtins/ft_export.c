@@ -6,14 +6,14 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:09:06 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/29 19:49:48 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 02:40:37 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../minishell.h"
 #include "../libft/libft.h"
 
-char	*ft_ret_var(char *str) // check if return segfault
+char	*ft_ret_var(char *str)
 {
 	int		i;
 	int		cmp;
@@ -21,25 +21,8 @@ char	*ft_ret_var(char *str) // check if return segfault
 	char	*tmp;
 
 	i = 0;
-	cmp = 1;
-	while (str[i])
-	{
-		if (ft_search_pluse(str) == 0)
-		{
-			if (str[i + 1] == '+')
-			{
-				break ;
-			}
-		}
-		if (str[i + 1] == '=')
-		{
-			break ;
-		}
-			cmp++;
-		i++;
-	}
+	cmp = ft_cmp(str);
 	ptr = malloc(sizeof(char) * cmp + 1);
-	i = 0;
 	while (cmp > 0)
 	{
 		ptr[i] = str[i];
@@ -48,7 +31,6 @@ char	*ft_ret_var(char *str) // check if return segfault
 	}
 	ptr[i] = '\0';
 	tmp = ptr;
-	// free(ptr);
 	return (ptr);
 }
 

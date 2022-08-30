@@ -6,13 +6,12 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:53:15 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 17:26:59 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:32:53 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
 
 //I replace each | that inside " " or ' ' with -2 !!!!!
 void	replace_pipe_double(char **ptr)

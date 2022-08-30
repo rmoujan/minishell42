@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:22:19 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/29 01:19:12 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 02:38:46 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	creat_node(t_node **head, char *data)
 		}
 				last_node->next = new;
 	}
-	// free(new);//**
 }
 
 t_node	*get_envp(char **envp)
@@ -57,7 +56,7 @@ int	ft_lssize(t_node *lst)
 	int	i;
 
 	i = 0;
-	while (lst != NULL)// segfault
+	while (lst != NULL)
 	{
 		i++;
 		lst = lst->next;
@@ -76,12 +75,12 @@ void	ft_env(t_cmdfinal **cmd_final)
 	list = (*cmd_final);
 	tmp = *(*cmd_final)->envp;
 	j = ft_lssize(tmp);
-	(*cmd_final)->env = (char **)malloc((sizeof(char *) * (j + 1)));//leaks malloc
+	(*cmd_final)->env = (char **)malloc((sizeof(char *) * (j + 1)));
 	if (!(*cmd_final)->env)
 		return ;
 	while (tmp)
 	{
-		(*cmd_final)->env[i] = tmp->data; // ft_strdup(tmp->data);
+		(*cmd_final)->env[i] = tmp->data;
 		i++;
 		tmp = tmp->next;
 	}

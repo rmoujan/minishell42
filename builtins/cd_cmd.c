@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:29:24 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 01:24:55 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:43:49 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_change_to_home(t_cmdfinal **cmd_final)
 	x.ptr = getcwd(buff, sizeof(buff));
 	while ((*cmd_final)->env[x.i])
 	{
-		if (strncmp((*cmd_final)->env[x.i], "HOME", 4) == 0)
+		if (strncmp((*cmd_final)->env[x.i], "HOME=", 5) == 0)
 			x.k = 1;
 		x.i++;
 	}

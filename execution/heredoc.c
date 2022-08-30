@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:07:55 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/29 23:52:39 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:26:09 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av)
 {
 	char	*read_in;
 
-	// (void)tmp;
-	// t_global.fd[0] = dup(tmp->fdhere[0]);
-	// t_global.fd[1] = dup(tmp->fdhere[1]);
 	while (1)
 	{
 		read_in = readline("> ");

@@ -6,117 +6,91 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 01:07:07 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:22:41 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//0 < > << >> space |
+// < > << >> space |
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void ft_add_history(char *input_user)
+void	ft_add_history(char *input_user)
 {
-	  if (input_user[0] != '\0')
-      	add_history(input_user);
+	if (input_user[0] != '\0')
+		add_history(input_user);
 	return ;
 }
 
-void ini_global()
+void	ini_global(int *argc)
 {
-  t_global.here = 0;
-  t_global.herdoc = 0;
-  t_global.dup_input = dup(0);//for save the input standard 
-  t_global.signal_s = 0;
-  t_global.state = 0;
-}
-void	free_arr(char		**env)
-{
-	int i;
-	i = 0;
-	while (env[i] != '\0')
-	{
-		free(env[i]);
-		i++;;
-	}
-	free(env);
+	t_global.here = 0;
+	t_global.herdoc = 0;
+	t_global.dup_input = dup(0);
+	t_global.signal_s = 0;
+	t_global.state = 0;
+	*argc = 1;
 }
 
-void	free_file(t_cmdfinal **cmd_final)
+void	chunk0_minishell(t_command *data, t_node *head, char *argv[])
 {
-	int i;
-  t_files *file;
-	i = 0;
-  file = (*cmd_final)->file;
-	while (file)
+	t_cmdfinal	*cmd_final;
+	t_cmdfinal	*tmp;
+
+	cmd_final = ft_parser(data);
+	tmp = cmd_final;
+	while (tmp)
 	{
-		free(file->name);
-		file = file->next;
+		tmp->envp = &head;
+		tmp = tmp->next;
 	}
-	free(file);
+	ft_env(&cmd_final);
+	ft_expand(cmd_final, cmd_final->env, argv);
+	ft_remove(cmd_final);
+	edit_cmd(cmd_final);
+	ft_numberofnode(cmd_final);
+	cmd_final->save[1] = dup(1);
+	cmd_final->save[0] = dup(0);
+	exec_builtin(&cmd_final, argv);
+	dup2(cmd_final->save[1], 1);
+	dup2(cmd_final->save[0], 0);
+	free_cmdfinal(cmd_final);
 }
-int main(int argc, char *argv[], char *envp[])
+
+void	chunk1_minishell(char *input_user, t_node	*head, char *argv[])
 {
-  char *input_user;
-  char *str;
-  t_node	*head;
-  t_command *data;
-  t_cmdfinal *cmd_final;
-  t_cmdfinal  *tmp;
-  
-  head = get_envp(envp);
-  argc = 1;
-  ini_global();
-  while (argc)
-  {
-    ft_i_signals();
-    input_user = readline("$ minishell ");
-    end_of_file(input_user);
-    ft_add_history(input_user);
-    if(input_user[0] != '\0')
-    {
-      if (ft_check(input_user))
-      {
-            str = ft_addspace(input_user);
-            data = ft_bring_data(str);
-            if (ft_checkredrections(data) != -1)
-            {
-              cmd_final = ft_parser(data);
-              tmp = cmd_final;
-              while (tmp)
-              {
-                tmp->envp = &head;
-                tmp = tmp->next;
-              }
-              ft_env(&cmd_final);// fill tab of env
-              ft_expand(cmd_final, cmd_final->env, argv);
-              ft_remove(cmd_final);
-              edit_cmd(cmd_final);
-              ft_numberofnode(cmd_final);
-              cmd_final->save[1] = dup(1);//new commented
-              cmd_final->save[0] = dup(0);//new commented
-              exec_builtin(&cmd_final, argv);
-              // fprintf(stderr, "got here\n");
-              dup2(cmd_final->save[1], 1);// new commented
-              dup2(cmd_final->save[0], 0);//new commented
-            // free_tab(&cmd_final);//me delete from ft_cmd
-            // free_file(&cmd_final);//me
-            // free(cmd_final->env);
-            free_cmdfinal(cmd_final);//===> IMPORTAANT  !!!00
-            }
-            free(str);
-            free_node(data);
-            // free(cmd_final->env);
-      }
-    }
-    // while (cmd_final != NULL)
-    // {
-    //   final = cmd_final->next;
-    // if (input_user && cmd_final)
-    //   free(cmd_final);
-    //   cmd_final = final;
-    // }
-    free(input_user);
-    // system("leaks minishell");
+	char		*str;
+	t_command	*data;
+
+	str = ft_addspace(input_user);
+	data = ft_bring_data(str);
+	if (ft_checkredrections(data) != -1)
+		chunk0_minishell(data, head, argv);
+	free(str);
+	free_node(data);
 }
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	char	*input_user;
+	t_node	*head;
+
+	head = get_envp(envp);
+	ini_global(&argc);
+	while (argc)
+	{
+		ft_i_signals();
+		input_user = readline("$ minishell ");
+		end_of_file(input_user);
+		ft_add_history(input_user);
+		if (input_user[0] != '\0')
+		{
+			if (ft_check(input_user))
+			{
+				chunk1_minishell(input_user, head, argv);
+			}
+		}
+		free(input_user);
+		system("leaks minishell");
+	}
 	return (0);
 }

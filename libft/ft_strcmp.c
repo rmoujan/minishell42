@@ -6,12 +6,12 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 08:02:30 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/01 16:09:40 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:34:23 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	compteur;

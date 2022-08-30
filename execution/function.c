@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   function.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 23:06:31 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/29 11:12:45 by lelbakna         ###   ########.fr       */
+/*   Updated: 2022/08/30 02:38:01 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../minishell.h"
+
 static size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -22,26 +23,6 @@ static size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i ;
-
-	if (!s)
-		return ((char *)ft_strlen(s));
-	if (c == '\0')
-		return ((char *)(&s[ft_strlen(s)]));
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-		{
-			return ((char *)&s[i]);
-		}
-		i++;
-	}
-	return (NULL);
-}
-
 
 static int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -108,7 +89,6 @@ char	*serach_path(t_cmdfinal *cmd_final)
 		}
 		i++;
 	}
-		// exit(1);
 	return (NULL);
 }
 

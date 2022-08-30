@@ -43,6 +43,7 @@ SRC=parsing/minishell.c\
 	builtins/ft_export.c\
 	execution/openfile.c\
 	execution/heredoc.c\
+	builtins/export.c\
 
 OBJ = $(SRC:.c=.o)
 

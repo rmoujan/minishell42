@@ -6,21 +6,21 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/29 23:49:56 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:32:00 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <string.h>
-#include <fcntl.h>
+# define MINISHELL_H 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <string.h>
+# include <fcntl.h>
 # include <sys/types.h>
 
 /*global struct*/
@@ -37,7 +37,7 @@ struct s_global{
 
 /*I using this on expand !!!*/
 
-typedef struct s_expand	t_expand;
+typedef struct s_expand		t_expand;
 struct s_expand{
 	char	*new;
 	char	*ptr;
@@ -48,7 +48,7 @@ struct s_expand{
 	int		start;
 };
 
-typedef struct s_token	t_token;
+typedef struct s_token		t_token;
 struct s_token{
 	char	*token;
 	int		id;
@@ -63,7 +63,7 @@ struct s_command{
 
 /*this struct contains all files include heredoc*/
 
-typedef struct s_files	t_files;
+typedef struct s_files		t_files;
 struct s_files{
 	char	*name;
 	int		id;
@@ -82,7 +82,7 @@ typedef struct s_node
 
 typedef struct s_cmdfinal	t_cmdfinal;
 struct s_cmdfinal{
-	t_files		*file; 
+	t_files		*file;
 	t_cmdfinal	*next;
 	t_node		**envp;
 	char		**tab;
@@ -121,6 +121,8 @@ typedef struct s_vars
 	int		j;
 	int		k;
 	char	*ptr;
+	char	*str1;
+	char	*str2;
 }				t_vars;
 
 /*parsing*/
@@ -164,6 +166,7 @@ char		*ft_addspace(char *ptr);
 char		*remove_dq(char *str);
 char		*get_value(char *ptr, char **envp);
 char		*ft_copy1(char *p);
+char		*chunk5_expand(t_expand *all);
 int			check_del(char c);
 int			ft_check(char *input_user);
 int			ft_counterspace_back(char *ptr);
@@ -183,72 +186,73 @@ int			check_dollar(char *str);
 
 /*signal*/ //check
 
-void	int_handler();
-void	quit_handler();
-void	ft_i_signals(void);
-void	ft_e_signals(void);
-void	end_of_file(char *str);
+void		int_handler(void);
+void		quit_handler(void);
+void		ft_i_signals(void);
+void		ft_e_signals(void);
+void		end_of_file(char *str);
 
 /*builtins*/
 
-t_node	*get_envp(char **env);
-t_node	*get_env(t_cmdfinal *cmd_final);
-int		my_cd(t_cmdfinal **cmd_final);
-int		my_echo(t_cmdfinal **cmd_final);
-int		my_pwd(t_cmdfinal **cmd_final);
-int		my_exit(t_cmdfinal **cmd_final);
-int		my_export(t_cmdfinal **cmd_final);
-int		my_unset(t_cmdfinal **cmd_final);
-int		my_env(t_cmdfinal **cmd_final);
-void	ft_env(t_cmdfinal **cmd_final);
-void	creat_node(t_node **head, char *data);
-void	print_list(t_node *head);
-int		builtin(t_cmdfinal **cmd_final);
-void	printlist(t_node *head);
-int		is_builtin(char *value);
-void	execute_builtin(t_cmdfinal **cmd_final);
-int		ft_search(char *str);
-void	ft_pwd(t_cmdfinal **cmd_final);
-char	*ft_ret_var(char *str);
-int		ft_search_pluse(char *str);
-void	ft_quote(char *str);
-void	printlist(t_node *head);
-char	*my_strchr(char *s, int c);
+t_node		*get_envp(char **env);
+t_node		*get_env(t_cmdfinal *cmd_final);
+int			my_cd(t_cmdfinal **cmd_final);
+int			my_echo(t_cmdfinal **cmd_final);
+int			my_pwd(t_cmdfinal **cmd_final);
+int			my_exit(t_cmdfinal **cmd_final);
+int			my_export(t_cmdfinal **cmd_final);
+int			my_unset(t_cmdfinal **cmd_final);
+int			my_env(t_cmdfinal **cmd_final);
+void		ft_env(t_cmdfinal **cmd_final);
+void		creat_node(t_node **head, char *data);
+void		print_list(t_node *head);
+int			builtin(t_cmdfinal **cmd_final);
+void		printlist(t_node *head);
+int			is_builtin(char *value);
+void		execute_builtin(t_cmdfinal **cmd_final);
+int			ft_search(char *str);
+void		ft_pwd(t_cmdfinal **cmd_final);
+char		*ft_ret_var(char *str);
+int			ft_search_pluse(char *str);
+void		ft_quote(char *str);
+void		printlist(t_node *head);
+char		*my_strchr(char *s, int c);
+int			ft_cmp(char *str);
+void		ft_sort_env(t_node **head, t_cmdfinal **cmd_final);
 
 /*execution*/
 
 // void	ft_chek_cmd_p1(char *str, t_chek *v);
 
-char	*ft_chek_cmd(char *str);
-void	does_file_exist(char *filename);
-char	*serach_path(t_cmdfinal *cmd_final);
-char	*ft_check_path(char **path, char *cmd);
-void	error(void);
-void	error_exe(void);
-void	error_file(void);
-void	ft_str_error(char *str, char *s);
-void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec);
-int		ft_pipe(t_cmdfinal *cmd_final, t_var *x, int i);
-int		ft_openfile(t_cmdfinal *cmd_final);
-void	exec_cmd(t_cmdfinal **cmd_final);
-int		exec_builtin(t_cmdfinal **cmd_final, char **av);
-int		ft_dup_file(t_cmdfinal *cmd_final);
-int		ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
-int		check_herdoc(char *str);
-int		ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av);
-int		ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
-int		ft_dup_file(t_cmdfinal *cmd_final);
-// int		ft_pipe(t_cmdfinal *tmp, t_var *exec, int i);
-void	ft_heredoc(t_cmdfinal *cmd_final);
-int		infile(t_cmdfinal *cmd_final, t_files *file);
-int		outfile(t_cmdfinal *cmd_final, t_files *file);
-int		ft_append(t_cmdfinal *cmd_final, t_files *file);
-int		ft_openfile(t_cmdfinal *tmp);
-void	ft_errors_red(char *str, char *s);
+char		*ft_chek_cmd(char *str);
+void		does_file_exist(char *filename);
+char		*serach_path(t_cmdfinal *cmd_final);
+char		*ft_check_path(char **path, char *cmd);
+void		error(void);
+void		error_exe(void);
+void		error_file(void);
+void		ft_str_error(char *str, char *s);
+void		ft_cmd(t_cmdfinal **cmd_final, t_var *exec);
+int			ft_pipe(t_cmdfinal *cmd_final, t_var *x, int i);
+int			ft_openfile(t_cmdfinal *cmd_final);
+void		exec_cmd(t_cmdfinal **cmd_final);
+int			exec_builtin(t_cmdfinal **cmd_final, char **av);
+int			ft_dup_file(t_cmdfinal *cmd_final);
+int			ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
+int			check_herdoc(char *str);
+int			ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av);
+int			ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
+int			ft_dup_file(t_cmdfinal *cmd_final);
+void		ft_heredoc(t_cmdfinal *cmd_final);
+int			infile(t_cmdfinal *cmd_final, t_files *file);
+int			outfile(t_cmdfinal *cmd_final, t_files *file);
+int			ft_append(t_cmdfinal *cmd_final, t_files *file);
+int			ft_openfile(t_cmdfinal *tmp);
+void		ft_errors_red(char *str, char *s);
 
 /*free*/
 
-void	free_tab(t_cmdfinal **cmd_final);
-void	ft_checkk(t_cmdfinal *cmd_final);
-void	rl_replace_line(char *str, int d);
+void		free_tab(t_cmdfinal **cmd_final);
+void		ft_checkk(t_cmdfinal *cmd_final);
+void		rl_replace_line(char *str, int d);
 #endif

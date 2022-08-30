@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 10:42:32 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/04 17:02:12 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:34:37 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	int				j;
 	char			*p;
 
-	// if (!s1 || !s2)
-	// return (NULL);
 	if (!s2)
 		return (NULL);
 	total = 0;

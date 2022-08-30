@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:58:03 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/25 17:29:32 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:38:39 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ void	initial_expand(t_expand *d, char *s, char **en, char **av)
 	d->str = s;
 	d->env = en;
 	d->av = av[0];
+}
+
+char	*chunk5_expand(t_expand *all)
+{
+	char	*new;
+
+	new = all->new;
+	free(all);
+	return (new);
 }

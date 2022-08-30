@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:05:27 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/29 11:44:48 by lelbakna         ###   ########.fr       */
+/*   Updated: 2022/08/30 02:38:37 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	search_first(t_cmdfinal **cmd_final, int i)
 	if (ft_strncmp(tmp->data, (*cmd_final)->tab[i], size_env(tmp->data)) == 0)
 	{
 		temp = tmp;
-		// free(temp);
 		tmp = tmp->next;
 		*(*cmd_final)->envp = tmp;
-		// temp = tmp;
 	}
 }
 
@@ -58,7 +56,7 @@ void	search(t_cmdfinal **cmd_final)
 					size_env(tmp->next->data)) == 0)
 			{
 				temp = tmp->next->next;
-				free(tmp->next->data);//me
+				free(tmp->next->data);
 				free(tmp->next);
 				tmp->next = temp;
 			}

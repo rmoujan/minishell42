@@ -6,13 +6,12 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:08:09 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/21 17:27:04 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 15:29:45 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
 
 //I replace each space that inside " " with -2 !!!!!
 void	replace_space_double(char **ptr)
