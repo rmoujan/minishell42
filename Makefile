@@ -5,7 +5,6 @@ RM = rm -f
 lib = libft/libft.a
 RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include
 SRC=parsing/minishell.c\
-	parsing/ft_output.c\
 	parsing/ft_parser.c\
 	parsing/check_syntaxe.c\
 	parsing/split_space.c\

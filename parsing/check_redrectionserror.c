@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:25:35 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/27 15:44:00 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 20:34:35 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	chunk_checkredrections(t_token *save, t_command *tmp)
 		{
 			tmp->data = save;
 			ft_errno(3);
-			printf("11\n");
 			return (-1);
 		}
 	}

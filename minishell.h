@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 18:32:00 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 18:41:47 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,8 @@ int			check_dollar(char *str);
 
 /*signal*/ //check
 
-void		int_handler(void);
-void		quit_handler(void);
+void		int_handler();
+void		quit_handler();
 void		ft_i_signals(void);
 void		ft_e_signals(void);
 void		end_of_file(char *str);

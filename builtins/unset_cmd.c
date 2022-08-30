@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:05:27 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 02:38:37 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 20:56:38 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ void	search_first(t_cmdfinal **cmd_final, int i)
 	}
 }
 
+int	check_empty_str(char *str)
+{
+	if (str[0] == '\0')
+	{
+		printf("bash: unset: `': not a valid identifier\n");
+		t_global.state = 1;
+		return (1);
+	}
+	return (0);
+}
+
 void	search(t_cmdfinal **cmd_final)
 {
 	int		i;
@@ -48,6 +59,8 @@ void	search(t_cmdfinal **cmd_final)
 	i = 1;
 	while ((*cmd_final)->tab[i])
 	{
+		if (check_empty_str((*cmd_final)->tab[i]))
+			return ;
 		search_first(cmd_final, i);
 		tmp = *(*cmd_final)->envp;
 		while (tmp && tmp->next != NULL)

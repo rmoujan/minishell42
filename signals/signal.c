@@ -6,18 +6,18 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:36:22 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 18:27:34 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 19:34:53 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void	int_handler(void)
+void	int_handler()
 {
 	if (t_global.herdoc == 0)
 	{
-		t_global.state = 130;
+		t_global.state = 1;
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -26,14 +26,14 @@ void	int_handler(void)
 	else if (t_global.herdoc == 1)
 	{
 		t_global.signal_s = 2;
-		t_global.state = 1;
+		t_global.state = 1;	
 		close(t_global.fd[0]);
 		close(t_global.fd[1]);
 		close(0);
 	}
 }
 
-void	quit_handler(void)
+void	quit_handler()
 {
 	ft_putstr_fd("Quit\n", 1);
 }
