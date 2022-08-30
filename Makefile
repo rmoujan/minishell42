@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -fsanitize=address -g#-lreadline -L
+CFLAGS= -Wall -Wextra -Werror -g #-fsanitize=address -g#-lreadline -L
 RM = rm -f
 lib = libft/libft.a
 RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include
@@ -40,6 +40,9 @@ SRC=parsing/minishell.c\
 	builtins/get_envp.c\
 	builtins/unset_cmd.c\
 	builtins/cd_cmd.c\
+	builtins/ft_export.c\
+	execution/openfile.c\
+	execution/heredoc.c\
 
 OBJ = $(SRC:.c=.o)
 

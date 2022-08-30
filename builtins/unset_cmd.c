@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:05:27 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 18:54:24 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:44:48 by lelbakna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ void	search_first(t_cmdfinal **cmd_final, int i)
 	t_node	*tmp;
 
 	tmp = *(*cmd_final)->envp;
-	if (tmp == NULL) // check ret
-		return;
-	if (ft_strncmp(tmp->data, (*cmd_final)->tab[i], size_env(tmp->data)) == 0) // first node dose not delete
+	if (tmp == NULL)
+		return ;
+	if (ft_strncmp(tmp->data, (*cmd_final)->tab[i], size_env(tmp->data)) == 0)
 	{
-		// printf("[%s]\n", tmp->data);
 		temp = tmp;
+		// free(temp);
 		tmp = tmp->next;
 		*(*cmd_final)->envp = tmp;
 		// temp = tmp;
-		// free(temp);
 	}
 }
 
@@ -59,6 +58,7 @@ void	search(t_cmdfinal **cmd_final)
 					size_env(tmp->next->data)) == 0)
 			{
 				temp = tmp->next->next;
+				free(tmp->next->data);//me
 				free(tmp->next);
 				tmp->next = temp;
 			}
@@ -71,10 +71,6 @@ void	search(t_cmdfinal **cmd_final)
 int	my_unset(t_cmdfinal **cmd_final)
 {
 	search(cmd_final);
-	// printf("\n\n%s\n\n", (*cmd_final)->envp->data);
-	// print_list((*cmd_final)->envp);
+	t_global.state = 0;
 	return (0);
 }
-//handle case of lowercase
-//exit(1); {if (!av[2])}
-// //exit(1); {if (!av[2])}

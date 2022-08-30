@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 08:56:04 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 18:48:48 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 01:27:24 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_char(char *str)
 
 	i = 1;
 	if (str[1] != 'n')
-		return(1);
+		return (1);
 	while (str[i + 1] != '\0')
 	{
 		if (str[i] != str[i + 1])
@@ -29,43 +29,37 @@ int	ft_check_char(char *str)
 	return (0);
 }
 
+void	ft_new_line(void)
+{
+	ft_putchar_fd('\n', 1);
+	t_global.state = 0;
+}
+
 int	my_echo(t_cmdfinal **cmd_final)
 {
-	int	i;
-	int	j;
-	int k;
+	t_vars	x;
 
-	i = 1;
-	j = 0;
-	k = 0;
-	if ((*cmd_final)->tab[j + 1] != NULL)
+	x.i = 1;
+	x.j = 0;
+	x.k = 0;
+	if ((*cmd_final)->tab[x.j + 1] != NULL)
 	{
-		while ((*cmd_final)->tab[i] && ft_check_char((*cmd_final)->tab[i]) == 0)
+		while ((*cmd_final)->tab[x.i]
+			&& ft_check_char((*cmd_final)->tab[x.i]) == 0)
 		{
-			k++;
-			i++;
+			x.k++;
+			x.i++;
 		}
-		while ((*cmd_final)->tab[i])
+		while ((*cmd_final)->tab[x.i])
 		{
-			ft_putstr_fd((*cmd_final)->tab[i], 1);
-			if((*cmd_final)->tab[i + 1] && (*cmd_final)->tab[i][0] != '\0')
+			ft_putstr_fd((*cmd_final)->tab[x.i], 1);
+			if ((*cmd_final)->tab[x.i + 1] && (*cmd_final)->tab[x.i][0] != '\0')
 				ft_putchar_fd(' ', 1);
-			i++;
+			x.i++;
 		}
-		j++;
+		x.j++;
 	}
-	if (k == 0)
-	 	ft_putchar_fd('\n', 1);
-		// system("leaks minishell");
-		// while (1);
-	// int i;
-	i = 0;
-	while ((*cmd_final)->tab[i] != '\0')
-	{
-		free((*cmd_final)->tab[i]);
-		i++;
-	}
-	free((*cmd_final)->tab);
+	if (x.k == 0)
+		ft_new_line();
 	return (0);
 }
-// can you handle case of echo --- --- :)?

@@ -6,12 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 23:47:59 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 16:14:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 19:42:41 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../minishell.h"
 #include "../libft/libft.h"
+
 void	error(void)
 {
 	write(1, "Error\n", 6);
@@ -25,6 +26,15 @@ void	ft_str_error(char *str, char *s)
 		fprintf(stderr, "$ minishell: %s :", s);
 	write(2, str, ft_strlen(str));
 	exit(t_global.state);
+}
+
+void	ft_errors_red(char *str, char *s)
+{
+	t_global.state = 1;
+	if (str != NULL)
+		fprintf(stderr, "$ minishell: %s :", s);
+	write(2, str, ft_strlen(str));
+	return ;
 }
 
 void	error_exe(void)

@@ -6,14 +6,12 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/27 19:12:37 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 23:49:56 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 #define MINISHELL_H 
-
-
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -24,54 +22,52 @@
 #include <string.h>
 #include <fcntl.h>
 # include <sys/types.h>
-/*global variable */
-//global struct
+
+/*global struct*/
+
 struct s_global{
-	int here;
-	int herdoc;
-	int dup_input;
-	int signal_s;
-	int			fd[2];
-	unsigned long state;
-	char *g_pwd;
+	int				here;
+	int				herdoc;
+	int				dup_input;
+	int				signal_s;
+	int				fd[2];
+	unsigned long	state;
+	char			*g_pwd;
 } t_global;
 
+/*I using this on expand !!!*/
 
-
-//I using this on expand !!!
-typedef struct s_expand t_expand;
+typedef struct s_expand	t_expand;
 struct s_expand{
-	char *new;
-	char *ptr;
-	char *str;
-	char **env;
-	char *av;
-	int i;
-	int start;
+	char	*new;
+	char	*ptr;
+	char	*str;
+	char	**env;
+	char	*av;
+	int		i;
+	int		start;
 };
 
-typedef struct s_token t_token;
+typedef struct s_token	t_token;
 struct s_token{
-
-	char *token;
-	int     id;
-	t_token *next;
+	char	*token;
+	int		id;
+	t_token	*next;
 };
 
-typedef struct s_command t_command;
+typedef struct s_command	t_command;
 struct s_command{
-
-	t_token *data;
-	t_command *next;
+	t_token		*data;
+	t_command	*next;
 };
 
 /*this struct contains all files include heredoc*/
 
-typedef struct s_files t_files;
+typedef struct s_files	t_files;
 struct s_files{
-	char *name;
-	int id;
-	t_files *next;
+	char	*name;
+	int		id;
+	t_files	*next;
 };
 
 /*this struct is especially for linked liste env*/
@@ -84,21 +80,22 @@ typedef struct s_node
 
 /*this struct is especially for parsing*/
 
-typedef struct s_cmdfinal t_cmdfinal;
+typedef struct s_cmdfinal	t_cmdfinal;
 struct s_cmdfinal{
-	t_files *file; 
-	char **tab;
-	int number_node;
-	t_cmdfinal *next;
+	t_files		*file; 
+	t_cmdfinal	*next;
+	t_node		**envp;
+	char		**tab;
 	char		**env;
 	char		**cmd;
-	t_node		**envp;
 	int			flag1;
 	int			flag2;
-	int			save[2];
 	int			fd[2];
-	int infile;
-	int outfile;
+	int			fdhere[2];
+	int			save[2];
+	int			infile;
+	int			outfile;
+	int			number_node;
 };
 
 /*this structs is especially for execution*/
@@ -115,8 +112,19 @@ typedef struct s_var
 	int		i;
 	int		n_cmd;
 }				t_var;
- /*parsing*/
- 
+
+/*this structs is especially for variables*/
+
+typedef struct s_vars
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*ptr;
+}				t_vars;
+
+/*parsing*/
+
 t_command	*split_space(char **cmds);
 t_command	*ft_lexer(t_command *data, char *const envp[], char *argv[]);
 t_command	*create_cmd(char **data);
@@ -139,11 +147,11 @@ void		return_space_double(char **str1);
 void		replace_pipe_double(char **ptr);
 void		free_cmdfinal(t_cmdfinal *cmd);
 void		return_space_single(char **str1);
-void		ft_expand(t_cmdfinal *cmd,char **envp, char *argv[]);
+void		ft_expand(t_cmdfinal *cmd, char **envp, char *argv[]);
 void		ft_remove(t_cmdfinal *cmd);
 void		check_emptystr(t_command *data);
 void		edit_cmd(t_cmdfinal *cmd);
-void		put_flagquotes(int *flag, int *i,int *start, char c);
+void		put_flagquotes(int *flag, int *i, int *start, char c);
 void		ft_numberofnode(t_cmdfinal *head);
 void		chunk0_expand(t_expand *all);
 void		chunk1_expand(t_expand *all);
@@ -170,41 +178,47 @@ int			check_specialchar(char *str);
 int			check_reds(char c);
 int			countfront(char *ptr);
 int			countback(char *ptr);
-char	*expand_dollar(char *s, char **en, char *av[]);
-int		check_dollar(char *str);
- 
+char		*expand_dollar(char *s, char **en, char *av[]);
+int			check_dollar(char *str);
+
 /*signal*/ //check
+
 void	int_handler();
 void	quit_handler();
-void	end_of_file(char *str);
-
 void	ft_i_signals(void);
 void	ft_e_signals(void);
+void	end_of_file(char *str);
 
 /*builtins*/
 
 t_node	*get_envp(char **env);
 t_node	*get_env(t_cmdfinal *cmd_final);
-int     my_cd(t_cmdfinal **cmd_final);
-int     my_echo(t_cmdfinal **cmd_final);
-int     my_pwd(t_cmdfinal **cmd_final);
-int     my_exit(t_cmdfinal **cmd_final);
-int     my_export(t_cmdfinal **cmd_final);
-int     my_unset(t_cmdfinal **cmd_final);
-int     my_env(t_cmdfinal **cmd_final);
+int		my_cd(t_cmdfinal **cmd_final);
+int		my_echo(t_cmdfinal **cmd_final);
+int		my_pwd(t_cmdfinal **cmd_final);
+int		my_exit(t_cmdfinal **cmd_final);
+int		my_export(t_cmdfinal **cmd_final);
+int		my_unset(t_cmdfinal **cmd_final);
+int		my_env(t_cmdfinal **cmd_final);
 void	ft_env(t_cmdfinal **cmd_final);
 void	creat_node(t_node **head, char *data);
 void	print_list(t_node *head);
-int     builtin(t_cmdfinal **cmd_final);
+int		builtin(t_cmdfinal **cmd_final);
 void	printlist(t_node *head);
-int     is_builtin(char *value);
+int		is_builtin(char *value);
 void	execute_builtin(t_cmdfinal **cmd_final);
-int	ft_search(char *str);
+int		ft_search(char *str);
 void	ft_pwd(t_cmdfinal **cmd_final);
+char	*ft_ret_var(char *str);
+int		ft_search_pluse(char *str);
+void	ft_quote(char *str);
+void	printlist(t_node *head);
+char	*my_strchr(char *s, int c);
 
 /*execution*/
 
 // void	ft_chek_cmd_p1(char *str, t_chek *v);
+
 char	*ft_chek_cmd(char *str);
 void	does_file_exist(char *filename);
 char	*serach_path(t_cmdfinal *cmd_final);
@@ -214,17 +228,27 @@ void	error_exe(void);
 void	error_file(void);
 void	ft_str_error(char *str, char *s);
 void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec);
-void	ft_pipe(t_cmdfinal *cmd_final, t_var *x);
-void	ft_openfile(t_cmdfinal *cmd_final);
+int		ft_pipe(t_cmdfinal *cmd_final, t_var *x, int i);
+int		ft_openfile(t_cmdfinal *cmd_final);
 void	exec_cmd(t_cmdfinal **cmd_final);
-int    exec_builtin(t_cmdfinal **cmd_final, char **av);
-void	ft_dup_file(t_cmdfinal *cmd_final);
+int		exec_builtin(t_cmdfinal **cmd_final, char **av);
+int		ft_dup_file(t_cmdfinal *cmd_final);
 int		ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
+int		check_herdoc(char *str);
+int		ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av);
+int		ft_check_heredoc(t_cmdfinal *cmd_final, char **av);
+int		ft_dup_file(t_cmdfinal *cmd_final);
+// int		ft_pipe(t_cmdfinal *tmp, t_var *exec, int i);
+void	ft_heredoc(t_cmdfinal *cmd_final);
+int		infile(t_cmdfinal *cmd_final, t_files *file);
+int		outfile(t_cmdfinal *cmd_final, t_files *file);
+int		ft_append(t_cmdfinal *cmd_final, t_files *file);
+int		ft_openfile(t_cmdfinal *tmp);
+void	ft_errors_red(char *str, char *s);
 
 /*free*/
+
 void	free_tab(t_cmdfinal **cmd_final);
-
-void ft_checkk(t_cmdfinal *cmd_final);
-
-void		rl_replace_line(char *str, int d);
+void	ft_checkk(t_cmdfinal *cmd_final);
+void	rl_replace_line(char *str, int d);
 #endif

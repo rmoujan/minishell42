@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:46:03 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 18:58:00 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 19:16:20 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	is_builtin(char *value)
 
 void	execute_builtin(t_cmdfinal **cmd_final)
 {
-	if (!(ft_strcmp((*cmd_final)->tab[0], "echo")))//echo\0
+	if (!(ft_strcmp((*cmd_final)->tab[0], "echo")))
 		my_echo(cmd_final);
-	else if (!(ft_strcmp((*cmd_final)->tab[0], "cd")))//cd\0
+	else if (!(ft_strcmp((*cmd_final)->tab[0], "cd")))
 		my_cd(cmd_final);
 	else if (!(ft_strcmp((*cmd_final)->tab[0], "pwd")))
 		my_pwd(cmd_final);
@@ -48,14 +48,17 @@ void	execute_builtin(t_cmdfinal **cmd_final)
 
 int	exec_builtin(t_cmdfinal **cmd_final, char **av)
 {
-	if(!ft_check_heredoc(*cmd_final, av))
+	if (!ft_check_heredoc(*cmd_final, av))
 		return (0);
 	if ((*cmd_final)->next == NULL && is_builtin((*cmd_final)->tab[0]) == 0)
 	{
-		ft_dup_file((*cmd_final));
+		if (ft_dup_file((*cmd_final)) == 1)
+			return (1);
 		execute_builtin(cmd_final);
 	}
 	else
+	{
 		exec_cmd(cmd_final);
+	}
 	return (1);
 }

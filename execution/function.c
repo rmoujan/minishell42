@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 23:06:31 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 19:07:11 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 11:12:45 by lelbakna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,7 @@ char	*serach_path(t_cmdfinal *cmd_final)
 		}
 		i++;
 	}
-	fprintf(stderr, "$ minishell: %s : No such file or directory\n", (cmd_final)->tab[0]);
-	exit(1);
+		// exit(1);
 	return (NULL);
 }
 

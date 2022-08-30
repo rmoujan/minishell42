@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 19:39:42 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 01:21:48 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_lines(char **cmds)
 	int	i;
 
 	i = 0;
-	while (cmds[i] != '\0')
+	while (cmds[i])
 	{
 		free(cmds[i]);
 		i++;
@@ -52,6 +52,8 @@ void	free_cmdfinal(t_cmdfinal *cmd)
 	t_cmdfinal	*pointer;
 	t_cmdfinal	*fr;
 
+	if (cmd->env)
+		free(cmd->env);
 	while (cmd != NULL)
 	{
 		pointer = cmd;

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:22:19 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 18:53:49 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 01:19:12 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_node	*get_envp(char **envp)
 		creat_node(&head, envp[i]);
 		i++;
 	}
-	// cmd_final->envp = head;
 	return (head);
 }
 
@@ -63,32 +62,26 @@ int	ft_lssize(t_node *lst)
 		i++;
 		lst = lst->next;
 	}
-	// if (i == 0)
-	// 	perror("env");
 	return (i);
 }
 
-void ft_env(t_cmdfinal **cmd_final)
+void	ft_env(t_cmdfinal **cmd_final)
 {
-	t_node	*tmp;
-	t_cmdfinal *list;
-	int		j;
-	int		i;
+	t_node		*tmp;
+	t_cmdfinal	*list;
+	int			j;
+	int			i;
+
 	i = 0;
 	list = (*cmd_final);
-	tmp = *(*cmd_final)->envp;//lk
-	// if (tmp == NULL)
-	// {
-	// 	printf("all is done ");
-	// 	exit(1);
-	// }
+	tmp = *(*cmd_final)->envp;
 	j = ft_lssize(tmp);
-	(*cmd_final)->env = (char **)malloc((sizeof(char*) * (j + 1)));// check + 1 if not segfault// here
+	(*cmd_final)->env = (char **)malloc((sizeof(char *) * (j + 1)));//leaks malloc
 	if (!(*cmd_final)->env)
-		return;
+		return ;
 	while (tmp)
 	{
-		(*cmd_final)->env[i] = tmp->data; //remove strdup ==>(*cmd_final)->env[i] = ft_strdup(tmp->data);
+		(*cmd_final)->env[i] = tmp->data; // ft_strdup(tmp->data);
 		i++;
 		tmp = tmp->next;
 	}
@@ -98,5 +91,5 @@ void ft_env(t_cmdfinal **cmd_final)
 		list->env = (*cmd_final)->env;
 		list = list->next;
 	}
-	return;
+	return ;
 }

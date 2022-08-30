@@ -6,16 +6,17 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 18:31:23 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 01:45:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
+//still need norm 29/08/20222
 char	*expand_dollar(char *s, char **en, char *av[])
 {
 	t_expand	*d;
+	char *new;
 	int			flag;
 
 	flag = 0;
@@ -32,14 +33,14 @@ char	*expand_dollar(char *s, char **en, char *av[])
 			chunk2_expand(d);
 		else if (s[d->i] == '$' && s[d->i + 1] == '?' && flag != '\'')
 			chunk3_expand(d);
-		// else if (s[d->i] == '$' && (s[d->i + 1] == '\'' || s[d->i + 1] == '"'))new deleted
-		// 	d->start = ++d->i;
 		else if (s[d->i + 1] == '\0')
 			chunk4_expand(d);
 		else
 			d->i++;
 	}
-	return (d->new);
+	new = d->new;
+	free(d);
+	return (new);
 }
 
 int	check_dollar(char *str)

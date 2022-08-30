@@ -6,28 +6,22 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:36:22 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/27 18:37:22 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/29 23:05:23 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-//new changed by reshe !!
-//ctrl + c
+
 void	int_handler()
 {
 	if (t_global.herdoc == 0)
 	{
-		//when you are not in heredoc
 		t_global.state = 130;
-		ft_putchar_fd('\n',1);// check stdout or std_error
+		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		//ft_putstr_fd("\033[32;1m", 1);
-		//ft_putstr_fd("$ minishell \033[0;37m", 1);
-		//ft_putstr_fd("$ minishell ", 1);
-		//ft_putstr_fd("\033[0;37m", 1);		
 	}
 	else if (t_global.herdoc == 1)
 	{
@@ -39,22 +33,17 @@ void	int_handler()
 	}
 }
 
-//quit 
 void	quit_handler()
 {
-	// t_global.state = 131;
 	ft_putstr_fd("Quit\n", 1);
-	// write(1, "minishell>\n", ft_strlen("minishell>\n"));
 }
 
 void	interrupt_process(int signal)
 {
 	(void)signal;
-	// t_global.state = 130;
 	write(1, "\n", 1);
 }
 
-//ctrl + D
 void	end_of_file(char *str)
 {
 	if (str == NULL)
