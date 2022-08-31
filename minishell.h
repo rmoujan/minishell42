@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 18:41:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 00:29:45 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,8 @@ int			check_dollar(char *str);
 
 /*signal*/ //check
 
-void		int_handler();
-void		quit_handler();
+void		int_handler(int sig);
+void		quit_handler(int sig);
 void		ft_i_signals(void);
 void		ft_e_signals(void);
 void		end_of_file(char *str);
@@ -229,7 +229,7 @@ void		does_file_exist(char *filename);
 char		*serach_path(t_cmdfinal *cmd_final);
 char		*ft_check_path(char **path, char *cmd);
 void		error(void);
-void		error_exe(void);
+void		error_exe(char *str);
 void		error_file(void);
 void		ft_str_error(char *str, char *s);
 void		ft_cmd(t_cmdfinal **cmd_final, t_var *exec);

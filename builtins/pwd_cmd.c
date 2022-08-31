@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:36:33 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/29 11:44:42 by lelbakna         ###   ########.fr       */
+/*   Updated: 2022/08/31 03:29:26 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	my_pwd(t_cmdfinal **cmd_final)
 	if (!str)
 	{
 		printf("%s\n", t_global.g_pwd);
-		free(t_global.g_pwd);
+		// free(t_global.g_pwd); !!
 	}
 	else
 	{

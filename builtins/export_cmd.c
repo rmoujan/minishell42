@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 10:12:23 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 20:51:37 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 04:32:17 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ void	ft_exist_var(t_cmdfinal **cmd_final, char *str)
 		x.str1 = ft_ret_var(head->data);
 		x.str2 = ft_ret_var(str);
 		if (ft_is_exist(head, str, &x) == 1)
+		{
+			free(x.str1);
+			free(x.str2);
 			break ;
+		}
 		head = head->next;
 		free(x.str1);
 		free(x.str2);

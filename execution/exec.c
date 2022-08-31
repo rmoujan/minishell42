@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:28:21 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 02:38:19 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 00:30:26 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_dup(t_cmdfinal *tmp, t_var *exec, int last_fd)
 	}
 	exec->path = ft_check_path(exec->s, tmp->tab[0]);
 	if (execve(exec->path, tmp->tab, tmp->env) == -1)
-		error_exe();
+		error_exe( tmp->tab[0]);
 }
 
 void	ft_path(t_cmdfinal *tmp, t_var *exec)
@@ -45,7 +45,7 @@ void	ft_path(t_cmdfinal *tmp, t_var *exec)
 	if (exec->s == NULL && tmp->tab[0][0] == '/')
 	{
 		if (execve(tmp->tab[0], tmp->tab, tmp->env) == -1)
-			error_exe();
+			error_exe( tmp->tab[0]);
 	}
 	else if (exec->s == NULL)
 		fprintf(stderr, "$ minishell: %s : No such file or directory\n",
@@ -59,7 +59,7 @@ void	ft_save(t_cmdfinal *tmp, t_var *exec, int last_fd,
 	if (exec->s == NULL && tmp->tab[0][0] == '/')
 	{
 		if (execve(tmp->tab[0], tmp->tab, tmp->env) == -1)
-			error_exe();
+			error_exe(tmp->tab[0]);
 	}
 	else if (exec->s == NULL)
 		fprintf(stderr, "$ minishell: %s : No such file or directory\n",
@@ -81,7 +81,10 @@ void	ft_cmd(t_cmdfinal **cmd_final, t_var *exec)
 		if (ft_pipe(tmp, exec, i) == 1)
 			return ;
 		if (exec->child == 0)
+		{
+			signal(SIGINT, SIG_DFL);
 			ft_save(tmp, exec, last_fd, cmd_final);
+		}
 		else
 		{
 			if (tmp->next != NULL)
@@ -103,6 +106,7 @@ void	exec_cmd(t_cmdfinal **cmd_final)
 
 	exec.child_pids = malloc(sizeof(int) * (*cmd_final)->number_node);
 	ft_cmd(cmd_final, &exec);
+	signal(SIGINT, SIG_IGN);
 	i = 0;
 	while (i < (*cmd_final)->number_node)
 	{

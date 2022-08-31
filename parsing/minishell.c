@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 20:32:47 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 03:59:16 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ini_global(int *argc)
 	*argc = 1;
 }
 
-void	chunk0_minishell(t_command *data, t_node *head, char *argv[])
+void	chunk0_minishell(t_command *data, t_node **head, char *argv[])
 {
 	t_cmdfinal	*cmd_final;
 	t_cmdfinal	*tmp;
@@ -40,7 +40,7 @@ void	chunk0_minishell(t_command *data, t_node *head, char *argv[])
 	tmp = cmd_final;
 	while (tmp)
 	{
-		tmp->envp = &head;
+		tmp->envp = head;
 		tmp = tmp->next;
 	}
 	ft_env(&cmd_final);
@@ -56,7 +56,7 @@ void	chunk0_minishell(t_command *data, t_node *head, char *argv[])
 	free_cmdfinal(cmd_final);
 }
 
-void	chunk1_minishell(char *input_user, t_node	*head, char *argv[])
+void	chunk1_minishell(char *input_user, t_node	**head, char *argv[])
 {
 	char		*str;
 	t_command	*data;
@@ -86,7 +86,7 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			if (ft_check(input_user))
 			{
-				chunk1_minishell(input_user, head, argv);
+				chunk1_minishell(input_user, &head, argv);
 			}
 		}
 		free(input_user);

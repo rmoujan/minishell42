@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 18:43:24 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 19:38:44 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 23:33:17 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**allocate_cmd(int len, char **cmd)
 	j = 0;
 	tab = (char **)malloc(sizeof(char *) * (len + 1));
 	if (tab == NULL)
-		printf("NULL\n");
+		return (NULL);
 	while (cmd[i])
 	{
 		if (strcmp(cmd[i], "-1") != 0)

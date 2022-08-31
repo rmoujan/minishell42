@@ -6,15 +6,16 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 15:36:22 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 19:34:53 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 23:50:55 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-void	int_handler()
+void	int_handler(int sig)
 {
+	(void) sig;
 	if (t_global.herdoc == 0)
 	{
 		t_global.state = 1;
@@ -26,31 +27,17 @@ void	int_handler()
 	else if (t_global.herdoc == 1)
 	{
 		t_global.signal_s = 2;
-		t_global.state = 1;	
+		t_global.state = 1;
 		close(t_global.fd[0]);
 		close(t_global.fd[1]);
 		close(0);
 	}
 }
 
-void	quit_handler()
-{
-	ft_putstr_fd("Quit\n", 1);
-}
-
 void	interrupt_process(int signal)
 {
 	(void)signal;
 	write(1, "\n", 1);
-}
-
-void	end_of_file(char *str)
-{
-	if (str == NULL)
-	{
-		printf("exit");
-		exit(0);
-	}
 }
 
 void	ft_e_signals(void)

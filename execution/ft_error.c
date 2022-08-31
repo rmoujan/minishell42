@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 23:47:59 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 18:26:01 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 00:31:35 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ void	ft_errors_red(char *str, char *s)
 	return ;
 }
 
-void	error_exe(void)
+void	error_exe(char *str)
 {
 	t_global.state = 127;
-	perror("execve");
+	ft_putstr_fd("$ minishell: ", 2);
+	write(2, str, ft_strlen(str));
+	ft_putstr_fd(": command not found\n", 2);
+	// perror("execve");
 	exit(t_global.state);
 }
 

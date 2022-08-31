@@ -36,6 +36,7 @@ SRC=parsing/minishell.c\
 	builtins/export_cmd.c\
 	builtins/exit_cmd.c\
 	signals/signal.c\
+	signals/signal_utils.c\
 	builtins/get_envp.c\
 	builtins/unset_cmd.c\
 	builtins/cd_cmd.c\

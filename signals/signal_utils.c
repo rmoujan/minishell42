@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:18:20 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 03:46:34 by rmoujan          ###   ########.fr       */
+/*   Created: 2022/08/30 23:47:12 by rmoujan           #+#    #+#             */
+/*   Updated: 2022/08/31 00:40:14 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <unistd.h>
-#include "libft.h"
+#include "../libft/libft.h"
+#include "../minishell.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	quit_handler(int sig)
 {
-	write(fd, &c, 1);
+	(void)sig;
+	ft_putstr_fd("Quit\n", 1);
+}
+
+void	end_of_file(char *str)
+{
+	if (str == NULL)
+	{
+		printf("exit\n");
+		exit(0);
+	}
 }

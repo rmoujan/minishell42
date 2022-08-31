@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:06:17 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 01:28:57 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/30 23:37:38 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_list(t_node *head)
 
 	temp = head;
 	if (temp == NULL)
-		printf("empty");
+		printf("empty");//**
 	while (temp)
 	{
 		if (ft_search(temp->data) == 0)
