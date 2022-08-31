@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 10:12:23 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 04:41:56 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 06:48:27 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_exist_var(t_cmdfinal **cmd_final, char *str)
 		x.str2 = ft_ret_var(str);
 		if (ft_is_exist(head, str, &x) == 1)
 		{
-			free(x.str1);
+			free(x.str1);//check leaks
 			free(x.str2);
 			break ;
 		}

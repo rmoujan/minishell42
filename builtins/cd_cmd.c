@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:29:24 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 23:35:39 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:40:19 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int	ft_change_directory(t_cmdfinal **cmd_final)
 	str = getcwd(buff, sizeof(buff));
 	if (chdir("..") != 0)
 	{
-		fprintf(stderr, "$ minishell: cd: %s :", (*cmd_final)->tab[1]);
-		ft_putendl_fd("No such file or directory", 2);
+		ft_putstr_fd("$ minishell: cd: ", 2);
+		write(2, (*cmd_final)->tab[1], ft_strlen((*cmd_final)->tab[1]));
+		ft_putendl_fd("No such file or directory\n", 2);
 		t_global.state = 1;
 		return (1);
 	}
@@ -104,8 +105,9 @@ int	change_directory(t_cmdfinal **cmd_final)
 	str = getcwd(buff, sizeof(buff));
 	if (chdir((*cmd_final)->tab[1]) != 0)
 	{
-		fprintf(stderr, "$ minishell: cd: %s :", (*cmd_final)->tab[1]);
-		ft_putendl_fd("No such file or directory", 2);
+		ft_putstr_fd("$ minishell: cd: ", 2);
+		write(2, (*cmd_final)->tab[1], ft_strlen((*cmd_final)->tab[1]));
+		ft_putendl_fd("No such file or directory\n", 2);
 		t_global.state = 1;
 		return (1);
 	}

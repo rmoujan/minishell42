@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 15:26:36 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:50:37 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*expand_dollar(char *s, char **en, char *av[])
 
 	flag = 0;
 	d = (t_expand *) malloc(sizeof(t_expand));
+	if (d == NULL)
+		return (NULL);
 	initial_expand(d, s, en, av);
 	while (s[d->i] != '\0')
 	{

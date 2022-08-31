@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:06:17 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 05:18:11 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:37:11 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int	my_env(t_cmdfinal **cmd_final)
 	if (!(*cmd_final)->tab[1])
 		print_list(out);
 	else
-		fprintf(stderr, "$ minishell: %s : No such file or directory\n",
-			(*cmd_final)->tab[1]);
+		print(cmd_final);
 	t_global.state = 0;
 	return (0);
 }

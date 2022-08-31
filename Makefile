@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -g #-fsanitize=address -g#-lreadline -L
+CFLAGS= -Wall -Wextra -Werror -g
 RM = rm -f
 lib = libft/libft.a
 RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include

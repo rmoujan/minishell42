@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:28:21 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 05:23:22 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:47:46 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	ft_path(t_cmdfinal *tmp, t_var *exec)
 			error_exe(tmp->tab[0]);
 	}
 	else if (exec->s == NULL)
-		fprintf(stderr, "$ minishell: %s : No such file or directory\n",
-			(tmp)->tab[0]);
+	{
+		ft_putstr_fd("$ minishell: ", 2);
+		write(2, (tmp)->tab[0], ft_strlen((tmp)->tab[0]));
+		ft_putstr_fd(" : No such file or directory\n", 2);
+	}
 }
 
 void	ft_save(t_cmdfinal *tmp, t_var *exec, int last_fd,
@@ -63,8 +66,11 @@ void	ft_save(t_cmdfinal *tmp, t_var *exec, int last_fd,
 			error_exe(tmp->tab[0]);
 	}
 	else if (exec->s == NULL)
-		fprintf(stderr, "$ minishell: %s : No such file or directory\n",
-			(tmp)->tab[0]);
+	{
+		ft_putstr_fd("$ minishell: ", 2);
+		write(2, (tmp)->tab[0], ft_strlen((tmp)->tab[0]));
+		ft_putstr_fd(" : No such file or directory\n", 2);
+	}
 	ft_dup(tmp, exec, last_fd);
 }
 

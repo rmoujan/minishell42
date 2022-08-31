@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:42:59 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 20:06:50 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 06:02:41 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ char	*ft_addspace(char *ptr)
 	{
 		len = countfront(ptr) + countback(ptr);
 		new = (char *)malloc(sizeof(char) * (ft_strlen(ptr) + len + 1));
+		if (!new)
+			return (NULL);
 		str = ft_copy1(ptr);
 		ft_copy2(&new, str);
 		free(str);

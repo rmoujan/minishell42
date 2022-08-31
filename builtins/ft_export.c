@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:09:06 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 05:18:39 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:46:56 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*ft_ret_var(char *str)
 	i = 0;
 	cmp = ft_cmp(str);
 	ptr = malloc(sizeof(char) * cmp + 1);
+	if (!ptr)
+		return (NULL);
 	while (cmp > 0)
 	{
 		ptr[i] = str[i];

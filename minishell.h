@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 00:29:45 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:37:05 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ int			ft_openfile(t_cmdfinal *tmp);
 void		ft_errors_red(char *str, char *s);
 
 /*free*/
-
+void		print(t_cmdfinal **cmd_final);
 void		free_tab(t_cmdfinal **cmd_final);
 void		ft_checkk(t_cmdfinal *cmd_final);
 void		rl_replace_line(char *str, int d);

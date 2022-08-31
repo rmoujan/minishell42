@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:19:21 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 19:38:40 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:51:17 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_token	*create_token(char *str)
 	t_token	*node_token;
 
 	node_token = (t_token *) malloc(sizeof(t_token));
+	if (node_token == NULL)
+		return (NULL);
 	return_space_double (&str);
 	node_token->token = ft_strdup (str);
 	return (node_token);
