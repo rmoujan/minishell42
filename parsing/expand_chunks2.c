@@ -6,13 +6,12 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 10:58:03 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 04:07:51 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:24:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-
 
 char	*strchr_value(char *s, int c)
 {
@@ -45,7 +44,6 @@ char	*get_value(char *ptr, char **envp)
 	int		i;
 
 	i = 0;
-	printf("hallo from expand \n");
 	new = ft_strdup("");
 	while (envp[i])
 	{

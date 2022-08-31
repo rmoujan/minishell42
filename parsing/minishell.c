@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 03:59:16 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 04:42:33 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char *argv[], char *envp[])
 			}
 		}
 		free(input_user);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }

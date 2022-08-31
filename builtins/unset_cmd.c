@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:05:27 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 21:03:31 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:19:00 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	search_first(t_cmdfinal **cmd_final, int i)
 		*(*cmd_final)->envp = tmp;
 	}
 }
- 
+
 int	check_empty_str(char *str)
 {
 	if (str[0] == '\0')

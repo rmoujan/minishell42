@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:09:06 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 23:38:01 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/08/31 05:18:39 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	printlist(t_node *head)
 
 	temp = head;
 	if (temp == NULL)
-		printf("empty");//**
+		return ;
 	while (temp != NULL)
 	{
 		ft_quote(temp->data);
