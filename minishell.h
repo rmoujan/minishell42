@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 05:37:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 18:46:21 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_vars
 	char	*ptr;
 	char	*str1;
 	char	*str2;
+	char	*str3;
 }				t_vars;
 
 /*parsing*/
@@ -211,7 +212,7 @@ void		printlist(t_node *head);
 int			is_builtin(char *value);
 void		execute_builtin(t_cmdfinal **cmd_final);
 int			ft_search(char *str);
-void		ft_pwd(t_cmdfinal **cmd_final);
+int			ft_pwd(t_cmdfinal **cmd_final);
 char		*ft_ret_var(char *str);
 int			ft_search_pluse(char *str);
 void		ft_quote(char *str);
@@ -219,7 +220,9 @@ void		printlist(t_node *head);
 char		*my_strchr(char *s, int c);
 int			ft_cmp(char *str);
 void		ft_sort_env(t_node **head, t_cmdfinal **cmd_final);
-
+int			ft_home(t_vars *x, t_cmdfinal **cmd_final);
+char		*ft_get_pwd(t_cmdfinal **cmd_final);
+void		msg_error(void);
 /*execution*/
 
 // void	ft_chek_cmd_p1(char *str, t_chek *v);

@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:43:06 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 18:28:18 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 18:24:28 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_msg_bash(t_cmdfinal **cmd_final)
 void	ft_exit(t_cmdfinal **cmd_final)
 {
 	t_global.state = ft_atoi((*cmd_final)->tab[1]);
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	if (t_global.state > 255)
 	t_global.state = t_global.state % 256;
 	exit(t_global.state);

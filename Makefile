@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -g
+CFLAGS= -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
 lib = libft/libft.a
 RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include
@@ -23,7 +23,6 @@ SRC=parsing/minishell.c\
 	parsing/ft_parser_complement.c\
 	parsing/expand_chunks2.c\
 	parsing/expand_chunks1.c\
-	parsing/check_specialchar.c\
 	parsing/addspace_complement.c\
 	execution/function.c\
 	execution/ft_error.c\
@@ -44,25 +43,47 @@ SRC=parsing/minishell.c\
 	execution/openfile.c\
 	execution/heredoc.c\
 	builtins/export.c\
+	builtins/cdcmd_complement.c\
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(subst .c,.o,$(SRC))
+lib = ./libft/libft.a
+libobj = ./libft/*.o
 
-all: $(NAME)
+all : $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):${OBJ}
+	@make -C libft
 	@$(CC)  $(RDF) $(CFLAGS) $(OBJ) $(lib)  -o $(NAME)
-	stty -echoctl
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+%.o : %.c
+	@${CC} -c ${CFLAGS} $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(libobj)
 
 fclean:clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(lib)
 
 re: fclean all
+
+# OBJ = $(SRC:.c=.o)
+
+# all: $(NAME)
+
+# $(NAME): $(OBJ)
+# 	@$(CC)  $(RDF) $(CFLAGS) $(OBJ) $(lib)  -o $(NAME)
+# 	stty -echoctl
+
+# %.o: %.c
+# 	$(CC) -c $(CFLAGS) $< -o $@
+
+# clean:
+# 	$(RM) $(OBJ)
+
+# fclean:clean
+# 	$(RM) $(NAME)
+
+# re: fclean all
 
 # # 000
 # $(NAME):$(OBJ)

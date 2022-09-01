@@ -6,12 +6,24 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:07:55 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 18:26:09 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 18:55:45 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
+
+void	heredoc_expand(char **read_in, t_cmdfinal *tmp, char **av)
+{
+	char	*ptr;
+
+	if (check_dollar(*read_in) != 0)
+	{
+		ptr = *read_in;
+		*read_in = expand_dollar(*read_in, tmp->env, av);
+		free(ptr);
+	}
+}
 
 int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av)
 {
@@ -30,8 +42,7 @@ int	ft_read_from_heredoc(t_cmdfinal *tmp, char *name, char **av)
 			free(read_in);
 			break ;
 		}
-		if (check_dollar(read_in) != 0)
-			read_in = expand_dollar(read_in, tmp->env, av);
+		heredoc_expand(&read_in, tmp, av);
 		ft_putendl_fd(read_in, tmp->fdhere[1]);
 		free(read_in);
 	}

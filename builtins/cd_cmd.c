@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:29:24 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 05:40:19 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 18:46:32 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_change_pwd(t_cmdfinal **cmd_final, char *path, char *oldpath)
 
 void	ft_change_to_home(t_cmdfinal **cmd_final)
 {
-	char	*path;
-	char	*oldpath;
-	char	buff[1024];
-	t_vars	x;
+	char		*path;
+	char		*oldpath;
+	char		buff[1024];
+	t_vars		x;
 
 	x.i = 0;
 	x.k = 0;
@@ -54,14 +54,10 @@ void	ft_change_to_home(t_cmdfinal **cmd_final)
 			x.k = 1;
 		x.i++;
 	}
-	if (chdir(getenv("HOME")) != 0 || x.k == 0)
-	{
-		t_global.state = 1;
-		ft_putendl_fd("$ minishell: cd: HOME not set", 2);
+	if (ft_home(&x, cmd_final) == 0)
 		return ;
-	}
-		oldpath = ft_strdup(x.ptr);
-		path = ft_strdup(getenv("HOME"));
+	oldpath = ft_strdup(x.ptr);
+	path = ft_strdup(getenv("HOME"));
 	ft_change_pwd(cmd_final, path, oldpath);
 	t_global.state = 0;
 }
@@ -76,16 +72,14 @@ int	ft_change_directory(t_cmdfinal **cmd_final)
 	str = getcwd(buff, sizeof(buff));
 	if (chdir("..") != 0)
 	{
-		ft_putstr_fd("$ minishell: cd: ", 2);
-		write(2, (*cmd_final)->tab[1], ft_strlen((*cmd_final)->tab[1]));
-		ft_putendl_fd("No such file or directory\n", 2);
+		fprintf(stderr, "$ minishell: cd: %s :", (*cmd_final)->tab[1]);
+		ft_putendl_fd("No such file or directory", 2);
 		t_global.state = 1;
 		return (1);
 	}
 	if (str == NULL)
 	{
-		write(2, "cd: error retrieving current directory: getcwd: cannot", 54);
-		write(2, " access parent directories: No such file or directory\n", 55);
+		msg_error();
 		return (1);
 	}
 	oldpath = ft_strdup(str);
@@ -105,16 +99,14 @@ int	change_directory(t_cmdfinal **cmd_final)
 	str = getcwd(buff, sizeof(buff));
 	if (chdir((*cmd_final)->tab[1]) != 0)
 	{
-		ft_putstr_fd("$ minishell: cd: ", 2);
-		write(2, (*cmd_final)->tab[1], ft_strlen((*cmd_final)->tab[1]));
-		ft_putendl_fd("No such file or directory\n", 2);
+		fprintf(stderr, "$ minishell: cd: %s :", (*cmd_final)->tab[1]);
+		ft_putendl_fd("No such file or directory", 2);
 		t_global.state = 1;
 		return (1);
 	}
 	if (str == NULL)
 	{
-		write(2, "cd: error retrieving current directory: getcwd: cannot", 54);
-		write(2, " access parent directories: No such file or directory\n", 55);
+		msg_error();
 		return (1);
 	}
 	oldpath = ft_strdup(str);

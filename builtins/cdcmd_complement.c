@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_cmd.c                                          :+:      :+:    :+:   */
+/*   cdcmd_complement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 11:36:33 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/09/01 18:30:57 by rmoujan          ###   ########.fr       */
+/*   Created: 2022/09/01 18:43:24 by rmoujan           #+#    #+#             */
+/*   Updated: 2022/09/01 18:49:26 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../minishell.h"
 #include "../libft/libft.h"
 
-int	ft_pwd(t_cmdfinal **cmd_final)
+char	*ft_get_pwd(t_cmdfinal **cmd_final)
 {
 	t_cmdfinal	*tmp;
 	char		*ptr;
@@ -28,39 +28,34 @@ int	ft_pwd(t_cmdfinal **cmd_final)
 		{
 			ptr = ft_strdup(ft_strchr(tmp->env[i], '='));
 				ptr = ft_strtrim(ptr, "PWD=");
-			t_global.g_pwd = ptr;
-			return (0);
+			return (ptr);
 		}
 		i++;
-		if (ptr != NULL)
-		{
+		if (ptr)
 			free(ptr);
-		}
+	}
+	return (NULL);
+}
+
+int	ft_home(t_vars *x, t_cmdfinal **cmd_final)
+{
+	if (chdir(getenv("HOME")) != 0 || x->k == 0)
+	{
+		t_global.state = 1;
+		ft_putendl_fd("$ minishell: cd: HOME not set", 2);
+		return (0);
+	}
+	if (x->ptr == NULL)
+	{
+		x->str3 = ft_get_pwd(cmd_final);
+		x->ptr = x->str3;
+		free(x->str3);
 	}
 	return (1);
 }
 
-int	my_pwd(t_cmdfinal **cmd_final)
+void	msg_error(void)
 {
-	char	pwd[1024];
-	char	*str;
-
-	ft_pwd(cmd_final);
-	str = getcwd(pwd, sizeof(pwd));
-	if (!str)
-	{
-		printf("%s\n", t_global.g_pwd);
-		if (t_global.g_pwd != NULL)
-		{
-			free (t_global.g_pwd);
-			t_global.g_pwd = NULL;
-		}
-	}
-	else
-	{
-		printf("%s\n", str);
-		free (t_global.g_pwd);
-	}
-	t_global.state = 0;
-	return (1);
+	write(2, "cd: error retrieving current directory: getcwd: cannot", 54);
+	write(2, " access parent directories: No such file or directory\n", 55);
 }

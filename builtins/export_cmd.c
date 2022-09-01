@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 10:12:23 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 06:48:27 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 18:31:19 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,12 @@ int	ft_is_exist(t_node *head, char *str, t_vars *x)
 			x->ptr = ft_strdup(my_strchr(str, '='));
 			head->data = ft_strjoin(head->data, x->ptr);
 			x->k = 1;
-			free(x->str1);
-			free(x->str2);
 			return (1);
 		}
 		if (ft_search(str) == 0)
 		{
 			free(head->data);
 			head->data = ft_strdup(str);
-			free(x->str1);
-			free(x->str2);
 		}
 		x->k = 1;
 		return (1);
@@ -79,7 +75,7 @@ void	ft_exist_var(t_cmdfinal **cmd_final, char *str)
 		x.str2 = ft_ret_var(str);
 		if (ft_is_exist(head, str, &x) == 1)
 		{
-			free(x.str1);//check leaks
+			free(x.str1);
 			free(x.str2);
 			break ;
 		}

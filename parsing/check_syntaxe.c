@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:01:57 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 15:31:51 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 18:51:02 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,5 @@ int	ft_check(char *str)
 		return (ft_errno(1));
 	if (cheak_space(str) == 0)
 		return (ft_errno(4));
-	if (check_specialchar(str) == 6)
-		return (ft_errno(6));
 	return (1);
 }
