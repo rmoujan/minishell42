@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:58 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/09/01 18:46:21 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 10:40:21 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_var
 	int		fd[2];
 	int		i;
 	int		n_cmd;
+	int		flag;
 }				t_var;
 
 /*this structs is especially for variables*/
@@ -124,6 +125,8 @@ typedef struct s_vars
 	char	*str1;
 	char	*str2;
 	char	*str3;
+	int		flag1;
+	int		flag2;
 }				t_vars;
 
 /*parsing*/
@@ -168,6 +171,7 @@ char		*remove_dq(char *str);
 char		*get_value(char *ptr, char **envp);
 char		*ft_copy1(char *p);
 char		*chunk5_expand(t_expand *all);
+char		*expand_dollar_heredoc(char *s, char **en, char *av[]);
 int			check_del(char c);
 int			ft_check(char *input_user);
 int			ft_counterspace_back(char *ptr);
@@ -223,6 +227,7 @@ void		ft_sort_env(t_node **head, t_cmdfinal **cmd_final);
 int			ft_home(t_vars *x, t_cmdfinal **cmd_final);
 char		*ft_get_pwd(t_cmdfinal **cmd_final);
 void		msg_error(void);
+void		ft_close(t_vars *x, t_cmdfinal *tmp);
 /*execution*/
 
 // void	ft_chek_cmd_p1(char *str, t_chek *v);
@@ -252,10 +257,13 @@ int			outfile(t_cmdfinal *cmd_final, t_files *file);
 int			ft_append(t_cmdfinal *cmd_final, t_files *file);
 int			ft_openfile(t_cmdfinal *tmp);
 void		ft_errors_red(char *str, char *s);
+void		ret_fork(t_var	*exec);
 
 /*free*/
 void		print(t_cmdfinal **cmd_final);
 void		free_tab(t_cmdfinal **cmd_final);
 void		ft_checkk(t_cmdfinal *cmd_final);
 void		rl_replace_line(char *str, int d);
+void		free_flag_cmd(t_vars *x, char *path, char *oldpath);
+void		free_pwd(char *oldpath, char *path);
 #endif

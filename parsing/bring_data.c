@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 12:11:11 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/26 19:37:06 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 10:22:46 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-//new norm
+
 char	**split_pipe(char *input_user)
 {
 	char	**cmds;

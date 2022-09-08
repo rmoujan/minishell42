@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 23:47:59 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 05:45:04 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/03 17:46:31 by lelbakna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_str_error(char *str, char *s)
 	{
 		ft_putstr_fd("$ minishell: ", 2);
 		write(2, s, ft_strlen(s));
+		ft_putstr_fd(" : ", 2);
 	}
 	write(2, str, ft_strlen(str));
 	exit(t_global.state);
@@ -45,6 +46,7 @@ void	ft_errors_red(char *str, char *s)
 	{
 		ft_putstr_fd("$ minishell: ", 2);
 		write(2, s, ft_strlen(s));
+		ft_putstr_fd(" :", 2);
 	}
 	write(2, str, ft_strlen(str));
 	return ;

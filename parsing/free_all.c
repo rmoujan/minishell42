@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:13:34 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 04:16:55 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 10:21:57 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-//new norm
+
 void	free_node(t_command *head)
 {
 	t_command	*tmp;

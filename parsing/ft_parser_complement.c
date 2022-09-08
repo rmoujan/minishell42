@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:13:05 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/30 17:39:20 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/01 22:20:44 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ t_cmdfinal	*create_node_final(t_command *node)
 	if (head == NULL)
 	{
 		printf("the pointer does not allocated properly\n");
-		exit(1);
+		return (NULL);
 	}
 	len = counte_linecmd(node);
 	head->tab = (char **) malloc(sizeof (char *) * (len + 1));
 	if (head->tab == NULL)
 	{
 		printf("the pointer does not allocated properly\n");
-		exit(1);
+		return (NULL);
 	}
 	return (head);
 }
@@ -82,7 +82,7 @@ t_files	*create_file(char *str, int id)
 	if (node == NULL)
 	{
 		printf("the pointer does not allocated properly\n");
-		exit(1);
+		return (NULL);
 	}
 	node->name = ft_strdup(str);
 	node->id = id;

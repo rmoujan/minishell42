@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:28:21 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/31 05:47:46 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 09:04:45 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_save(t_cmdfinal *tmp, t_var *exec, int last_fd,
 		ft_putstr_fd("$ minishell: ", 2);
 		write(2, (tmp)->tab[0], ft_strlen((tmp)->tab[0]));
 		ft_putstr_fd(" : No such file or directory\n", 2);
+		exit(127);
 	}
 	ft_dup(tmp, exec, last_fd);
 }
@@ -108,9 +109,10 @@ void	exec_cmd(t_cmdfinal **cmd_final)
 	int		i;
 	int		status;
 
+	exec.flag = 0;
 	exec.child_pids = malloc(sizeof(int) * (*cmd_final)->number_node);
-	ft_cmd(cmd_final, &exec);
 	signal(SIGINT, SIG_IGN);
+	ft_cmd(cmd_final, &exec);
 	i = 0;
 	while (i < (*cmd_final)->number_node)
 	{
@@ -126,6 +128,6 @@ void	exec_cmd(t_cmdfinal **cmd_final)
 		}
 		i++;
 	}
-	free(exec.child_pids);
+	ret_fork(&exec);
 	return ;
 }

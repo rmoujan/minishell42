@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:29:24 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/09/01 18:46:32 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 10:39:36 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,30 @@
 void	ft_change_pwd(t_cmdfinal **cmd_final, char *path, char *oldpath)
 {
 	t_node		*tmp;
-	char		*ptr1;
-	char		*ptr2;
+	t_vars		x;
 
+	x.flag1 = 0;
+	x.flag2 = 0;
 	tmp = *(*cmd_final)->envp;
-	ptr1 = ft_strdup("PWD=");
-	ptr2 = ft_strdup("OLDPWD=");
+	x.str1 = ft_strdup("PWD=");
+	x.str2 = ft_strdup("OLDPWD=");
 	while (tmp)
 	{
 		if (ft_strncmp((tmp)->data, "OLDPWD=", 7) == 0)
 		{
 			free((tmp)->data);
-			(tmp)->data = (ft_strjoin(ptr2, oldpath));
+			(tmp)->data = (ft_strjoin(x.str2, oldpath));
+			x.flag1 = 1;
 		}
 		if (ft_strncmp((tmp)->data, "PWD=", 4) == 0)
 		{
 			free((tmp)->data);
-			(tmp)->data = (ft_strjoin(ptr1, path));
+			(tmp)->data = (ft_strjoin(x.str1, path));
+			x.flag2 = 1;
 		}
 		tmp = (tmp)->next;
 	}
+	free_flag_cmd(&x, path, oldpath);
 }
 
 void	ft_change_to_home(t_cmdfinal **cmd_final)
@@ -72,16 +76,14 @@ int	ft_change_directory(t_cmdfinal **cmd_final)
 	str = getcwd(buff, sizeof(buff));
 	if (chdir("..") != 0)
 	{
-		fprintf(stderr, "$ minishell: cd: %s :", (*cmd_final)->tab[1]);
+		ft_putstr_fd("$ minishell: cd: ", 2);
+		write(2, (*cmd_final)->tab[1], ft_strlen((*cmd_final)->tab[1]));
 		ft_putendl_fd("No such file or directory", 2);
 		t_global.state = 1;
 		return (1);
 	}
 	if (str == NULL)
-	{
-		msg_error();
 		return (1);
-	}
 	oldpath = ft_strdup(str);
 	path = ft_strdup(getcwd(buff, sizeof(buff)));
 	ft_change_pwd(cmd_final, path, oldpath);
@@ -99,7 +101,8 @@ int	change_directory(t_cmdfinal **cmd_final)
 	str = getcwd(buff, sizeof(buff));
 	if (chdir((*cmd_final)->tab[1]) != 0)
 	{
-		fprintf(stderr, "$ minishell: cd: %s :", (*cmd_final)->tab[1]);
+		ft_putstr_fd("$ minishell: cd: ", 2);
+		write(2, (*cmd_final)->tab[1], ft_strlen((*cmd_final)->tab[1]));
 		ft_putendl_fd("No such file or directory", 2);
 		t_global.state = 1;
 		return (1);

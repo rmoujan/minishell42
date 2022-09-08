@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lelbakna <lelbakna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:22:54 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/09/01 15:39:05 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/03 16:33:23 by lelbakna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	chunk0_minishell(t_command *data, t_node **head, char *argv[])
 	cmd_final->save[1] = dup(1);
 	cmd_final->save[0] = dup(0);
 	exec_builtin(&cmd_final, argv);
+	close(cmd_final->fdhere[0]);
 	dup2(cmd_final->save[1], 1);
 	dup2(cmd_final->save[0], 0);
 	free_cmdfinal(cmd_final);
@@ -90,7 +91,6 @@ int	main(int argc, char *argv[], char *envp[])
 			}
 		}
 		free(input_user);
-		system("leaks minishell");
 	}
 	return (0);
 }

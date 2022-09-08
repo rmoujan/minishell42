@@ -1,6 +1,6 @@
 NAME=minishell
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS= -Wall -Wextra -Werror
 RM = rm -f
 lib = libft/libft.a
 RDF	= -g -lreadline -L /Users/rmoujan/Desktop/brew/opt/readline/lib -I /Users/rmoujan/Desktop/brew/readline/include
@@ -24,6 +24,7 @@ SRC=parsing/minishell.c\
 	parsing/expand_chunks2.c\
 	parsing/expand_chunks1.c\
 	parsing/addspace_complement.c\
+	parsing/expand_heredoc.c\
 	execution/function.c\
 	execution/ft_error.c\
 	execution/check_herdoc_input.c\
@@ -51,42 +52,22 @@ libobj = ./libft/*.o
 
 all : $(NAME)
 
-$(NAME):${OBJ}
-	@make -C libft
-	@$(CC)  $(RDF) $(CFLAGS) $(OBJ) $(lib)  -o $(NAME)
+$(lib):
+	make -C libft
+
+$(NAME): $(lib) ${OBJ} 
+	
+	$(CC)  $(RDF) $(CFLAGS) $(OBJ) $(lib)  -o $(NAME)
 
 %.o : %.c
-	@${CC} -c ${CFLAGS} $< -o $@
+	${CC} -c ${CFLAGS} $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(libobj)
+	$(RM) $(OBJ)
+	make clean -C libft
 
 fclean:clean
 	$(RM) $(NAME) $(lib)
+	make fclean -C libft
 
 re: fclean all
-
-# OBJ = $(SRC:.c=.o)
-
-# all: $(NAME)
-
-# $(NAME): $(OBJ)
-# 	@$(CC)  $(RDF) $(CFLAGS) $(OBJ) $(lib)  -o $(NAME)
-# 	stty -echoctl
-
-# %.o: %.c
-# 	$(CC) -c $(CFLAGS) $< -o $@
-
-# clean:
-# 	$(RM) $(OBJ)
-
-# fclean:clean
-# 	$(RM) $(NAME)
-
-# re: fclean all
-
-# # 000
-# $(NAME):$(OBJ)
-# 	@make -C libft
-# 	@$(CC) -fsanitize=address -lreadline $(OBJ) $(lib) -o $(NAME)
-# tools/ft_isdel.c

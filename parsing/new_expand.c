@@ -6,13 +6,13 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 23:01:07 by rmoujan           #+#    #+#             */
-/*   Updated: 2022/08/31 05:50:37 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 10:21:28 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../libft/libft.h"
-//still need norm 29/08/20222
+
 char	*expand_dollar(char *s, char **en, char *av[])
 {
 	t_expand	*d;

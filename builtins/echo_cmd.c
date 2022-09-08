@@ -6,7 +6,7 @@
 /*   By: rmoujan <rmoujan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 08:56:04 by lelbakna          #+#    #+#             */
-/*   Updated: 2022/08/30 01:27:24 by rmoujan          ###   ########.fr       */
+/*   Updated: 2022/09/04 10:52:22 by rmoujan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ int	ft_check_char(char *str)
 	int	i;
 
 	i = 1;
+	if (str[0] == '\0')
+		return (1);
 	if (str[1] != 'n')
 		return (1);
-	while (str[i + 1] != '\0')
+	while (i < (int)ft_strlen(str) && str[i + 1] != '\0')
 	{
 		if (str[i] != str[i + 1])
 			return (1);
